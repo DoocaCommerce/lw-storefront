@@ -1,0 +1,25 @@
+{
+  "name": "@tray-storefront/vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "source": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "socket.io-client": "^4.2.0",
+    "webfontloader": "^1.6.28"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoocaCommerce/tray-storefront-vue.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DoocaCommerce/tray-storefront-vue/issues"
+  },
+  "homepage": "https://github.com/DoocaCommerce/tray-storefront-vue#readme"
+}
