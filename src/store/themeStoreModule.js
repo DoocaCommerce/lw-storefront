@@ -1,4 +1,4 @@
-import SectionService from '../core/services/SectionService'
+import SectionService from '../../core/dist/services/SectionService'
 
 const state = {
   settingsData: {},

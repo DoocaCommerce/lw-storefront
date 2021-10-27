@@ -4,11 +4,11 @@ const client = createClient({
   url: 'http://localhost:4000/'
 })
 
-export async function query(query, variables) {
+export async function query(query, variables?) {
   try {
     const { data, error } = await client.query(query, variables).toPromise()
 
-    if (error) throw new Error(error)
+    if (error) throw new Error(error.message)
 
     return data
   } catch (error) {

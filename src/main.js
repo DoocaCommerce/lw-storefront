@@ -1,9 +1,7 @@
-import createSocket from './core/socket/createSocket'
-import updateSettingsData from './core/socket/updateSettingsData'
-import focusSection from './core/socket/focusSection'
-import stringHelper from './core/helpers/stringHelper'
-import styleHelper from './core/helpers/styleHelper'
-import viewportHelper from './core/helpers/viewportHelper'
+import { socket } from '../core/dist'
+import stringHelper from '../core/dist/helpers/stringHelper'
+import styleHelper from '../core/dist/helpers/styleHelper'
+import viewportHelper from '../core/dist/helpers/viewportHelper'
 
 import Sections from './components/Sections.vue'
 import SectionLoader from './components/SectionLoader.vue'
@@ -11,7 +9,7 @@ import RootVars from './components/RootVars.vue'
 
 import themeStoreModule from './store/themeStoreModule'
 
-import BrandService from './core/services/BrandService'
+import BrandService from '../core/dist/services/BrandService'
 
 export default {
   install: app => {
@@ -23,11 +21,10 @@ export default {
     app.component('Sections', Sections)
     app.component('SectionLoader', SectionLoader)
     app.component('RootVars', RootVars)
-    // HttpInstall(store)
     store.dispatch('theme/getSettingsData')
 
     if (hashPreview) {
-      createSocket(hashPreview, updateSettingsData(store), focusSection)
+      socket.create(hashPreview, store)
     }
 
     console.log('service ==>', BrandService.get())
