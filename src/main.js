@@ -1,4 +1,4 @@
-import { socket } from '../core/dist'
+import socket from '../core/dist/socket'
 import stringHelper from '../core/dist/helpers/stringHelper'
 import styleHelper from '../core/dist/helpers/styleHelper'
 import viewportHelper from '../core/dist/helpers/viewportHelper'
@@ -8,8 +8,7 @@ import SectionLoader from './components/SectionLoader.vue'
 import RootVars from './components/RootVars.vue'
 
 import themeStoreModule from './store/themeStoreModule'
-
-import BrandService from '../core/dist/services/BrandService'
+import brand from '../core/dist/modules/brand/BrandService'
 
 export default {
   install: app => {
@@ -27,8 +26,9 @@ export default {
       socket.create(hashPreview, store)
     }
 
-    console.log('service ==>', BrandService.get())
-    BrandService.getById(32992)
+    brand.getById(32992).then(result => {
+      console.log(result)
+    })
   }
 }
 

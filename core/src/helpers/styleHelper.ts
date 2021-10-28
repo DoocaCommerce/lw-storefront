@@ -18,8 +18,6 @@ function fontLoader(font) {
 
   if (fonts[fontLoad]) return fontFamily
 
-  console.log('opaaaaa', WebFont)
-
   WebFont.load({
     google: {
       families: [fontLoad]

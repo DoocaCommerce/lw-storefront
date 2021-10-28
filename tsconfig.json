@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -8,8 +9,12 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "declaration": false,
-    "outDir": "dist/",
-    "lib": ["es2018", "dom"]
+    "outDir": "core/dist/",
+    "lib": ["es2018", "dom"],
+    "sourceMap": true,
+    "paths": {
+      "core/*": ["./core/src/*"]
+    }
   },
-  "include": ["src/"]
+  "include": ["core/src/"]
 }
