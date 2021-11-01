@@ -1,4 +1,4 @@
-import { gql, query } from 'core/services/GraphqlService'
+import { gql, query } from '../../services/GraphqlService'
 
 export async function getAllSettings(): Promise<Object> {
   const settingsQuery = gql`

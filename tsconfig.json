@@ -10,11 +10,7 @@
     "resolveJsonModule": true,
     "declaration": false,
     "outDir": "core/dist/",
-    "lib": ["es2018", "dom"],
-    "sourceMap": true,
-    "paths": {
-      "core/*": ["./core/src/*"]
-    }
+    "lib": ["es2018", "dom"]
   },
   "include": ["core/src/"]
 }

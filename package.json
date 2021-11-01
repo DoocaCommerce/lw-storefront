@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "source": "src/main.js",
   "scripts": {
-    "dev": "tsc --watch",
+    "dev": "tsc --watch --sourcemap",
     "build": "tsc"
   },
   "dependencies": {
