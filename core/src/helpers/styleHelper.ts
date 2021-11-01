@@ -1,15 +1,15 @@
-import Webfont from 'webfontloader'
+import * as WebFont from 'webfontloader'
 import { formatKebabCase } from './stringHelper'
 const fonts = {}
 
-export function parseRootVars(variables) {
+function parseRootVars(variables) {
   const varList = Object.entries(variables)
   const rootVars = varList.reduce((root, [key, value]) => `${root} --theme-${formatKebabCase(key)}: ${value};`, '')
 
   return `:root{ ${rootVars} }`
 }
 
-export function fontLoader(font) {
+function fontLoader(font) {
   if (!font) return ''
 
   const { family, category, font_weight } = font
@@ -18,7 +18,7 @@ export function fontLoader(font) {
 
   if (fonts[fontLoad]) return fontFamily
 
-  Webfont.load({
+  WebFont.load({
     google: {
       families: [fontLoad]
     }

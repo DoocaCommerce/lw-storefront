@@ -3,14 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
-  "source": "src/index.js",
+  "source": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsc --watch --sourcemap",
+    "build": "tsc"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "@urql/core": "^2.3.3",
+    "graphql": "^15.6.1",
     "socket.io-client": "^4.2.0",
     "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "@types/webfontloader": "^1.6.33",
+    "typescript": "^4.4.4"
   },
   "repository": {
     "type": "git",

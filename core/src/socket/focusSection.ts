@@ -1,5 +1,5 @@
 function focusSection({ data }) {
-  const element = document.querySelector(`[data-section-id="${data}"]`)
+  const element = document.querySelector<HTMLElement>(`[data-section-id="${data}"]`)
   let timerSectionFocused = null
 
   if (element) {

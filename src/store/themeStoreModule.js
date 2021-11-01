@@ -1,4 +1,4 @@
-import SectionService from '../services/SectionService'
+import SectionService from '../../core/dist/services/SectionService'
 
 const state = {
   settingsData: {},
@@ -20,11 +20,11 @@ const getters = {
 }
 
 const mutations = {
-  SET_SETTINGS_DATA: (state, data) => state.settings = data,
-  SET_SETTINGS: (state, data) => state.settings = data,
-  SET_SECTIONS: (state, data) => state.sections = data,
-  SET_LOADING: (state, data) => state.loading = data,
-  SET_CONTENT_FOR_INDEX: (state, data) => state.contentForIndex = data
+  SET_SETTINGS_DATA: (state, data) => (state.settings = data),
+  SET_SETTINGS: (state, data) => (state.settings = data),
+  SET_SECTIONS: (state, data) => (state.sections = data),
+  SET_LOADING: (state, data) => (state.loading = data),
+  SET_CONTENT_FOR_INDEX: (state, data) => (state.contentForIndex = data)
 }
 
 const actions = {
