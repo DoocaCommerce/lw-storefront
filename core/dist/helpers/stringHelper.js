@@ -6,3 +6,4 @@ function formatKebabCase(string) {
 }
 exports.formatKebabCase = formatKebabCase;
 exports.default = { formatKebabCase };
+//# sourceMappingURL=stringHelper.js.map

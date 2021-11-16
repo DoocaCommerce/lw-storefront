@@ -8,3 +8,4 @@ exports.default = {
         (0, createSocket_1.default)(hashPreview, (0, updateSettingsData_1.default)(store), focusSection_1.default);
     }
 };
+//# sourceMappingURL=index.js.map

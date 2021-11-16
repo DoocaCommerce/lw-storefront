@@ -13,3 +13,4 @@ function createSocket(hash, onUpdate, onFocus) {
     });
 }
 exports.default = createSocket;
+//# sourceMappingURL=createSocket.js.map

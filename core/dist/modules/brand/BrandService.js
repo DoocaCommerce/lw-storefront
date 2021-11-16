@@ -26,3 +26,4 @@ exports.default = {
     get,
     getById
 };
+//# sourceMappingURL=BrandService.js.map

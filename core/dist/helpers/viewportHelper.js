@@ -22,3 +22,4 @@ function isMobile() {
     return regexMobile.test(navigator.userAgent) && widthLessThan(1024);
 }
 exports.default = { getSize, widthGreaterThan, widthLessThan, heightGreaterhan, heightLessThan, isMobile };
+//# sourceMappingURL=viewportHelper.js.map

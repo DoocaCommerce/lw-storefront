@@ -2,8 +2,8 @@
   "name": "@tray-storefront/vue",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.js",
-  "source": "src/main.js",
+  "main": "./",
+  "source": "./",
   "scripts": {
     "dev": "tsc --watch --sourcemap",
     "build": "tsc"
