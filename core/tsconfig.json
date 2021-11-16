@@ -9,8 +9,9 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "outDir": "core/dist/",
-    "lib": ["es2018", "dom"],
+    "outDir": "dist/",
+    "declarationDir": "./dist/types",
+    "lib": ["es2018", "dom"]
   },
-  "include": ["core/src/"]
+  "include": ["src/"]
 }
