@@ -1,0 +1,1 @@
+{"version":3,"file":"updateSettingsData.js","sourceRoot":"","sources":["../../src/socket/updateSettingsData.ts"],"names":[],"mappings":";;AAAA,SAAS,kBAAkB,CAAC,KAAK;IAC/B,OAAO,CAAC,EAAE,IAAI,EAAE,EAAE,EAAE;QAClB,KAAK,CAAC,QAAQ,CAAC,uBAAuB,EAAE,IAAI,CAAC,CAAA;IAC/C,CAAC,CAAA;AACH,CAAC;AAED,kBAAe,kBAAkB,CAAA"}

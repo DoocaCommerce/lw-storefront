@@ -17,3 +17,4 @@ function focusSection({ data }) {
     }
 }
 exports.default = focusSection;
+//# sourceMappingURL=focusSection.js.map

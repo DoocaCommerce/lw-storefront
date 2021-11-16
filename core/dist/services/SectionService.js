@@ -5,3 +5,4 @@ exports.default = {
         return require('@/config/settings-data.json');
     }
 };
+//# sourceMappingURL=SectionService.js.map
