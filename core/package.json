@@ -1,9 +1,10 @@
 {
-  "name": "tray-storefront",
+  "name": "@tray-storefront/core",
   "version": "1.0.0",
   "description": "",
-  "main": "./",
-  "source": "./",
+  "main": "./dist",
+  "source": "./dist",
+  "types": "./dist/types",
   "scripts": {
     "dev": "tsc --watch --sourcemap",
     "build": "tsc"
