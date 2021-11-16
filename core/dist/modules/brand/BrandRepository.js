@@ -42,3 +42,4 @@ function getBrandByID(id, options) {
     });
 }
 exports.getBrandByID = getBrandByID;
+//# sourceMappingURL=BrandRepository.js.map

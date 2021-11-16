@@ -25,3 +25,4 @@ function fontLoader(font) {
     return fontFamily;
 }
 exports.default = { parseRootVars, fontLoader };
+//# sourceMappingURL=styleHelper.js.map

@@ -29,3 +29,4 @@ function query(query, variables) {
     });
 }
 exports.query = query;
+//# sourceMappingURL=GraphqlService.js.map
