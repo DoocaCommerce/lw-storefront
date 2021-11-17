@@ -6,10 +6,8 @@ export interface SectionLoaderProps {
   blocks?: Object[]
 }
 
-const SectionLoader = (props: SectionLoaderProps): JSX.Element => {
-  const DynamicComponent = lazy(() => import(/* @vite-ignore */ `/src/components/sections/${props.schema}/`))
-
-  console.log(props)
+export function SectionLoader(props: SectionLoaderProps): JSX.Element {
+  const DynamicComponent = lazy(() => import(`/src/components/sections/${props.schema}/`))
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -17,5 +15,3 @@ const SectionLoader = (props: SectionLoaderProps): JSX.Element => {
     </Suspense>
   )
 }
-
-export default SectionLoader

@@ -4,5 +4,4 @@ export interface SectionLoaderProps {
     settings?: Object;
     blocks?: Object[];
 }
-declare const SectionLoader: (props: SectionLoaderProps) => JSX.Element;
-export default SectionLoader;
+export declare function SectionLoader(props: SectionLoaderProps): JSX.Element;

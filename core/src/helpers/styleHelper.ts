@@ -1,15 +1,15 @@
 import * as WebFont from 'webfontloader'
-import { formatKebabCase } from './stringHelper'
+import { slugify } from './stringHelper'
 const fonts = {}
 
 function parseRootVars(variables) {
   const varList = Object.entries(variables)
-  const rootVars = varList.reduce((root, [key, value]) => `${root} --theme-${formatKebabCase(key)}: ${value};`, '')
+  const rootVars = varList.reduce((root, [key, value]) => `${root} --theme-${slugify(key)}: ${value};`, '')
 
   return `:root{ ${rootVars} }`
 }
 
-function fontLoader(font) {
+export function fontLoader(font: any) {
   if (!font) return ''
 
   const { family, category, font_weight } = font

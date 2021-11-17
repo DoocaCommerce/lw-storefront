@@ -1,19 +1,20 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const WebFont = require("webfontloader");
-const stringHelper_1 = require("./stringHelper");
-const fonts = {};
+import * as WebFont from 'webfontloader';
+import { slugify } from './stringHelper';
+var fonts = {};
 function parseRootVars(variables) {
-    const varList = Object.entries(variables);
-    const rootVars = varList.reduce((root, [key, value]) => `${root} --theme-${(0, stringHelper_1.formatKebabCase)(key)}: ${value};`, '');
-    return `:root{ ${rootVars} }`;
+    var varList = Object.entries(variables);
+    var rootVars = varList.reduce(function (root, _a) {
+        var key = _a[0], value = _a[1];
+        return root + " --theme-" + slugify(key) + ": " + value + ";";
+    }, '');
+    return ":root{ " + rootVars + " }";
 }
-function fontLoader(font) {
+export function fontLoader(font) {
     if (!font)
         return '';
-    const { family, category, font_weight } = font;
-    const fontLoad = `${family}:${font_weight}`;
-    const fontFamily = `${family}, ${category}`;
+    var family = font.family, category = font.category, font_weight = font.font_weight;
+    var fontLoad = family + ":" + font_weight;
+    var fontFamily = family + ", " + category;
     if (fonts[fontLoad])
         return fontFamily;
     WebFont.load({
@@ -24,5 +25,5 @@ function fontLoader(font) {
     fonts[fontLoad] = true;
     return fontFamily;
 }
-exports.default = { parseRootVars, fontLoader };
+export default { parseRootVars: parseRootVars, fontLoader: fontLoader };
 //# sourceMappingURL=styleHelper.js.map

@@ -2,9 +2,8 @@
   "name": "@tray-storefront/react",
   "version": "1.0.0",
   "description": "",
-  "main": "./src",
-  "source": "./src",
-  "types": "./dist/types/",
+  "main": "./dist/",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsc --watch --sourcemap",
     "build": "tsc"
