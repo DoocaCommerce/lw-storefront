@@ -1,13 +1,19 @@
 import { slugify } from '@tray-storefront/core/dist/helpers/stringHelper.js'
+import { useCallback, useRef } from 'react'
 
-export default function useVariable(ref?: any) {
-  const element = ref?.current || document.documentElement
+export function useVariable() {
+  const ref = useRef(null)
 
-  function setVariables(variables: object) {
+  const setVariables = (variables: object) => {
+    const element = ref?.current || document.documentElement
     Object.entries(variables).map(([name, value]) => {
       element.style.setProperty(`--${slugify(name)}`, value)
     })
   }
 
-  return { setVariables }
+  const setRef = useCallback(element => {
+    ref.current = element
+  }, [])
+
+  return { setVariables, setRef }
 }

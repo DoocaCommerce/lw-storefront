@@ -10,7 +10,7 @@
     "declaration": true,
     "outDir": "dist/",
     "lib": ["dom", "esnext"],
-    "jsx": "react-jsx"
+    "jsx": "react"
   },
   "include": ["src/"]
 }

@@ -1,7 +1,3 @@
 /// <reference types="react" />
-export interface SectionLoaderProps {
-    schema: String;
-    settings?: Object;
-    blocks?: Object[];
-}
+import { SectionLoaderProps } from './types';
 export declare function SectionLoader(props: SectionLoaderProps): JSX.Element;
