@@ -1,5 +1,14 @@
-export function formatKebabCase(string) {
-  return string.replace(/\.?([A-Z]+)/g, m => `-${m.toLowerCase()}`)
+function normalizeText(text: string) {
+  return text.replace(/\.?([A-Z]+)/g, m => ` ${m.toLowerCase()}`).trim()
 }
 
-export default { formatKebabCase }
+export function slugify(text: string): string {
+  const textNormal = normalizeText(text)
+  return textNormal
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9 ]/g, '')
+    .replace(/\s+/g, '-')
+}

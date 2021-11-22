@@ -1,19 +1,19 @@
-import SectionLoader from '../section-loader'
+import * as React from 'react'
+import { SectionLoader } from '../section-loader'
 
 export interface SectionsPropsType {
   sections: Object
+  path?: string
 }
 
-const Sections = (props: SectionsPropsType): JSX.Element => {
+export function Sections({ sections, path = 'sections' }: SectionsPropsType): JSX.Element {
   const renderSections = () => {
-    return Object.keys(props.sections).map((index): JSX.Element => {
-      console.log(index)
+    return Object.keys(sections).map((index): JSX.Element => {
+      const { schema, blocks, settings } = sections[index]
 
-      return <SectionLoader schema={index} />
+      return <SectionLoader path={path} schema={schema} settings={settings} blocks={blocks} key={index} />
     })
   }
 
   return <>{renderSections()}</>
 }
-
-export default Sections

@@ -1,11 +1,17 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("react");
-const SectionLoader = (props) => {
-    const DynamicComponent = (0, react_1.lazy)(() => Promise.resolve().then(() => require(/* @vite-ignore */ `/src/components/sections/${props.schema}/`)));
-    console.log(props);
-    return ((0, jsx_runtime_1.jsx)(react_1.Suspense, Object.assign({ fallback: (0, jsx_runtime_1.jsx)("div", { children: "Loading..." }, void 0) }, { children: (0, jsx_runtime_1.jsx)(DynamicComponent, { settings: props.settings, blocks: props.blocks }, void 0) }), void 0));
-};
-exports.default = SectionLoader;
+import * as React from 'react';
+import { Suspense } from 'react';
+function importComponent(schema, path) {
+    if (path === void 0) { path = 'sections'; }
+    return React.lazy(function () {
+        return import(
+        /* webpackChunkName: "components" */
+        /* webpackMode: "lazy-once" */
+        /* webpackExports: ["default", "named"] */ "@components/".concat(path, "/").concat(schema))["catch"](console.log);
+    });
+}
+export function SectionLoader(props) {
+    var DynamicComponent = importComponent(props.schema, props.path);
+    return (React.createElement(Suspense, { fallback: React.createElement("div", null, "Loading...") },
+        React.createElement(DynamicComponent, { settings: props.settings, blocks: props.blocks })));
+}
 //# sourceMappingURL=index.js.map

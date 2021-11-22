@@ -1,9 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 function updateSettingsData(store) {
-    return ({ data }) => {
+    return function (_a) {
+        var data = _a.data;
         store.dispatch('theme/getSettingsData', data);
     };
 }
-exports.default = updateSettingsData;
+export default updateSettingsData;
 //# sourceMappingURL=updateSettingsData.js.map

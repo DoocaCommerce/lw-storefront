@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const regexMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+var regexMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 function getSize() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    return { width, height };
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    return { width: width, height: height };
 }
 function widthGreaterThan(width) {
     return getSize().width >= width;
@@ -21,5 +19,5 @@ function heightLessThan(height) {
 function isMobile() {
     return regexMobile.test(navigator.userAgent) && widthLessThan(1024);
 }
-exports.default = { getSize, widthGreaterThan, widthLessThan, heightGreaterhan, heightLessThan, isMobile };
+export default { getSize: getSize, widthGreaterThan: widthGreaterThan, widthLessThan: widthLessThan, heightGreaterhan: heightGreaterhan, heightLessThan: heightLessThan, isMobile: isMobile };
 //# sourceMappingURL=viewportHelper.js.map

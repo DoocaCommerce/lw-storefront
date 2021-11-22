@@ -1,15 +1,19 @@
-import { lazy, Suspense } from 'react'
+import * as React from 'react'
+import { Suspense } from 'react'
+import { SectionLoaderProps } from './types'
 
-export interface SectionLoaderProps {
-  schema: String
-  settings?: Object
-  blocks?: Object[]
+function importComponent(schema: string, path = 'sections') {
+  return React.lazy(() =>
+    import(
+      /* webpackChunkName: "components" */
+      /* webpackMode: "lazy-once" */
+      /* webpackExports: ["default", "named"] */ `@components/${path}/${schema}`
+    ).catch(console.log)
+  )
 }
 
-const SectionLoader = (props: SectionLoaderProps): JSX.Element => {
-  const DynamicComponent = lazy(() => import(/* @vite-ignore */ `/src/components/sections/${props.schema}/`))
-
-  console.log(props)
+export function SectionLoader(props: SectionLoaderProps) {
+  const DynamicComponent = importComponent(props.schema, props.path)
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -17,5 +21,3 @@ const SectionLoader = (props: SectionLoaderProps): JSX.Element => {
     </Suspense>
   )
 }
-
-export default SectionLoader

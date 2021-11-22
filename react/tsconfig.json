@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es6",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "allowJs": true,
     "emitDecoratorMetadata": true,
@@ -10,9 +9,8 @@
     "resolveJsonModule": true,
     "declaration": true,
     "outDir": "dist/",
-    "declarationDir": "./dist/types",
-    "lib": ["es2018", "dom"],
-    "jsx": "react-jsx"
+    "lib": ["dom", "esnext"],
+    "jsx": "react"
   },
   "include": ["src/"]
 }

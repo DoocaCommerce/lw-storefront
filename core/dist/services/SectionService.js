@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
-    get() {
+export default {
+    get: function () {
         return require('@/config/settings-data.json');
     }
 };
