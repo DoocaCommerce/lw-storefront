@@ -9,7 +9,7 @@ function parseRootVars(variables) {
   return `:root{ ${rootVars} }`
 }
 
-export function fontLoader(font: any) {
+function fontLoader(font: any) {
   if (!font) return ''
 
   const { family, category, font_weight } = font
