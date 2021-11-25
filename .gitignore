@@ -104,4 +104,4 @@ typings/
 
 .DS_Store
 
-dist/*
+**/dist/
