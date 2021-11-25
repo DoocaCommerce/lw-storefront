@@ -6,4 +6,3 @@ export default {
         createSocket(hashPreview, updateSettingsData(store), focusSection);
     }
 };
-//# sourceMappingURL=index.js.map

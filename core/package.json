@@ -2,9 +2,9 @@
   "name": "@tray-storefront/core",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist",
+  "main": "./dist/index.js",
   "source": "./dist",
-  "types": "./dist/types",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsc --watch --sourcemap",
     "build": "tsc"

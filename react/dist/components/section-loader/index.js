@@ -14,4 +14,3 @@ export function SectionLoader(props) {
     return (React.createElement(Suspense, { fallback: React.createElement("div", null, "Loading...") },
         React.createElement(DynamicComponent, { settings: props.settings, blocks: props.blocks })));
 }
-//# sourceMappingURL=index.js.map

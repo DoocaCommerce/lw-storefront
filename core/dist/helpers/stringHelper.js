@@ -11,4 +11,4 @@ export function slugify(text) {
         .replace(/[^a-z0-9 ]/g, '')
         .replace(/\s+/g, '-');
 }
-//# sourceMappingURL=stringHelper.js.map
+export default { slugify: slugify };

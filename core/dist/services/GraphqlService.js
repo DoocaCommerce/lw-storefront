@@ -61,4 +61,3 @@ export function query(query, variables) {
     });
 }
 export { gql };
-//# sourceMappingURL=GraphqlService.js.map

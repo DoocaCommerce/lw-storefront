@@ -10,4 +10,3 @@ export function Sections(_a) {
     };
     return React.createElement(React.Fragment, null, renderSections());
 }
-//# sourceMappingURL=index.js.map

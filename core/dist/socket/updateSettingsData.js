@@ -5,4 +5,3 @@ function updateSettingsData(store) {
     };
 }
 export default updateSettingsData;
-//# sourceMappingURL=updateSettingsData.js.map

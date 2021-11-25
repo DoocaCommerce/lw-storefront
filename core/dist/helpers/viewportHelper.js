@@ -20,4 +20,3 @@ function isMobile() {
     return regexMobile.test(navigator.userAgent) && widthLessThan(1024);
 }
 export default { getSize: getSize, widthGreaterThan: widthGreaterThan, widthLessThan: widthLessThan, heightGreaterhan: heightGreaterhan, heightLessThan: heightLessThan, isMobile: isMobile };
-//# sourceMappingURL=viewportHelper.js.map

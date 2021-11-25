@@ -39,37 +39,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { gql, query } from '../../services/GraphqlService';
-var schemaDefault = ['id', 'name', 'slug'];
-export function getBrands(options) {
+export function fetchSections() {
     return __awaiter(this, void 0, void 0, function () {
-        var fieldsQuery, brandsQuery, brands;
+        var settingsQuery, settings;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    fieldsQuery = (options === null || options === void 0 ? void 0 : options.fields) || schemaDefault;
-                    brandsQuery = gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    query {\n      brands {\n        ", "\n      }\n    }\n  "], ["\n    query {\n      brands {\n        ", "\n      }\n    }\n  "])), fieldsQuery.join());
-                    return [4 /*yield*/, query(brandsQuery)];
+                    settingsQuery = gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    query {\n      settings {\n        sections\n      }\n    }\n  "], ["\n    query {\n      settings {\n        sections\n      }\n    }\n  "])));
+                    return [4 /*yield*/, query(settingsQuery)];
                 case 1:
-                    brands = (_a.sent()).brands;
-                    return [2 /*return*/, brands];
+                    settings = (_a.sent()).settings;
+                    return [2 /*return*/, JSON.parse(settings.sections)];
             }
         });
     });
 }
-export function getBrandByID(id, options) {
-    return __awaiter(this, void 0, void 0, function () {
-        var fieldsQuery, brandQuery, brand;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    fieldsQuery = (options === null || options === void 0 ? void 0 : options.fields) || schemaDefault;
-                    brandQuery = gql(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    query ($id: ID!) {\n      brand(id: $id) {\n        ", "\n      }\n    }\n  "], ["\n    query ($id: ID!) {\n      brand(id: $id) {\n        ", "\n      }\n    }\n  "])), fieldsQuery.join());
-                    return [4 /*yield*/, query(brandQuery, { id: id })];
-                case 1:
-                    brand = (_a.sent()).brand;
-                    return [2 /*return*/, brand];
-            }
-        });
-    });
-}
-var templateObject_1, templateObject_2;
+var templateObject_1;

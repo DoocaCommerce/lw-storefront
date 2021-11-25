@@ -65,4 +65,3 @@ export default {
     get: get,
     getById: getById
 };
-//# sourceMappingURL=BrandService.js.map

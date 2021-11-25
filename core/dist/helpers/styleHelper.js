@@ -9,7 +9,7 @@ function parseRootVars(variables) {
     }, '');
     return ":root{ " + rootVars + " }";
 }
-export function fontLoader(font) {
+function fontLoader(font) {
     if (!font)
         return '';
     var family = font.family, category = font.category, font_weight = font.font_weight;
@@ -26,4 +26,3 @@ export function fontLoader(font) {
     return fontFamily;
 }
 export default { parseRootVars: parseRootVars, fontLoader: fontLoader };
-//# sourceMappingURL=styleHelper.js.map

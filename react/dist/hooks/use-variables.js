@@ -14,4 +14,3 @@ export function useVariable() {
     }, []);
     return { setVariables: setVariables, setRef: setRef };
 }
-//# sourceMappingURL=use-variables.js.map

@@ -16,4 +16,3 @@ function focusSection(_a) {
     }
 }
 export default focusSection;
-//# sourceMappingURL=focusSection.js.map
