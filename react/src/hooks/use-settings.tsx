@@ -8,7 +8,9 @@ export function useSettings() {
   const settings = useSelector((state: RootState) => state.settings)
 
   useEffect(() => {
-    dispatch(getSettings())
+    if (Object.keys(settings?.data).length === 0) {
+      dispatch(getSettings())
+    }
   }, [dispatch])
 
   return { settings }
