@@ -15,7 +15,11 @@ export const getSettings = createAsyncThunk('settings/getSettings', async (dispa
 const settingsSlice = createSlice({
   name: 'settings',
   initialState,
-  reducers: {},
+  reducers: {
+    updateSettings(state, action) {
+      state.data = action.payload
+    }
+  },
   extraReducers: builder => {
     builder.addCase(getSettings.pending, (state, action) => {
       state.loading = true
@@ -33,5 +37,5 @@ const settingsSlice = createSlice({
   }
 })
 
-export const {} = settingsSlice.actions
+export const { updateSettings } = settingsSlice.actions
 export default settingsSlice.reducer
