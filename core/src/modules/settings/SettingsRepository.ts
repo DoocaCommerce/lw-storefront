@@ -17,19 +17,6 @@ export async function fetchAllSettings(): Promise<Object> {
   return { sections: sectionsParse, settings: settingsParse }
 }
 
-export async function fetchSections(): Promise<Object> {
-  const settingsQuery = gql`
-    query {
-      settings {
-        sections
-      }
-    }
-  `
-
-  const { settings } = await query(settingsQuery)
-  return JSON.parse(settings.sections)
-}
-
 export async function fetchSettings(): Promise<Object> {
   const settingsQuery = gql`
     query {
