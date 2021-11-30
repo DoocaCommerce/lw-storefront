@@ -15,8 +15,6 @@ function importComponent(schema: string, path = 'sections') {
 export function SectionLoader(props: SectionLoaderProps) {
   const DynamicComponent = importComponent(props.schema, props.path)
 
-  console.log('sections ====>', props)
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <DynamicComponent settings={props.settings} blocks={props.blocks} />

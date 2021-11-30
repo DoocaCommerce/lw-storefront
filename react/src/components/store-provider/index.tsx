@@ -3,6 +3,7 @@ import { Provider, useDispatch } from 'react-redux'
 import { socket } from '@tray-storefront/core'
 import store from '../../store/configure-store'
 import { updateSettings } from '../../store/modules/settings'
+import { updateSections } from '../../store/modules/sections'
 
 function RootProvider(props) {
   const urlParams = new URLSearchParams(window.location.search)
@@ -10,7 +11,10 @@ function RootProvider(props) {
   const dispatch = useDispatch()
 
   function onUpdate({ shopID, data }) {
-    dispatch(updateSettings(data.settings))
+    if (data) {
+      dispatch(updateSettings(data?.settings))
+      dispatch(updateSections(data?.sections))
+    }
   }
 
   if (hashPreview) {
