@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client'
 
 function createSocket(hash, onUpdate, onFocus) {
-  const URL = 'http://localhost:3333'
+  const URL = 'http://localhost:3030'
   const socketIO = io(URL, { autoConnect: false, query: { hash } })
 
   socketIO.connect()
