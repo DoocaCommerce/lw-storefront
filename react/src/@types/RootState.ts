@@ -1,7 +1,8 @@
+import { SectionsState } from 'src/store/modules/sections/type'
+import { SettingsState } from 'src/store/modules/settings/type'
 import { CartResumeState } from '../store/modules/cart-resume/type'
-import { BaseState } from './BaseState'
-
 export interface RootState {
-  settings: BaseState
+  settings: SettingsState
+  sections: SectionsState
   cartResume: CartResumeState
 }

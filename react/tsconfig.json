@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "declaration": true,
+    "sourceMap": true,
     "outDir": "dist/",
     "lib": ["dom", "esnext"],
     "jsx": "react"

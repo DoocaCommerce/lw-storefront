@@ -6,10 +6,13 @@
     "allowJs": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "declaration": true,
+    "sourceMap": true,
     "outDir": "dist/",
     "lib": ["dom", "esnext"]
   },
-  "include": ["src/"]
+  "include": ["src/"],
+  "exclude": ["src/**/__test__/"]
 }
