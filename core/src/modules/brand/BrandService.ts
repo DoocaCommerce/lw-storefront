@@ -3,6 +3,7 @@ import { Brand } from './BrandTypes'
 
 async function get(): Promise<Brand[]> {
   const result = await getBrands()
+
   return result
 }
 

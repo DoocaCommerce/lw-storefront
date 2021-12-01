@@ -1,9 +1,14 @@
 import BrandService from '../BrandService'
 
-describe('test do teste', () => {
-  it('test get', () => {
-    const result = 'teste'
+jest.mock('../BrandRepository', () => {
+  return { getBrands: () => [{ name: 'opaa' }] }
+})
 
-    expect(result).toBe('teste')
+describe('Brand Service', () => {
+  it('Get brands', async () => {
+    const result = await BrandService.get()
+
+    expect(result[0]).toMatchObject({ name: 'opaa' })
+    expect(result.some(({ name }) => name === 'opaa')).toBe(true)
   })
 })
