@@ -3,18 +3,22 @@ import { Image } from '../../common/ImageTypes'
 export interface Brand {
   id: Number
   hotsite_id: Number
-  name: String
-  slug: String
-  description: String
-  short_description: String
+  name: string
+  slug: string
+  description: string
+  short_description: string
   image: Image
-  banner: String
-  meta_title: String
-  meta_keywords: String
-  meta_description: String
+  banner: string
+  meta_title: string
+  meta_keywords: string
+  meta_description: string
   position: Number
-  url: String
+  url: string
   active: Boolean
-  created_at: String
-  updated_at: String
+  created_at: string
+  updated_at: string
+}
+
+export interface BrandRepositoryType {
+  getBrands(): Promise<Brand[]>
 }
