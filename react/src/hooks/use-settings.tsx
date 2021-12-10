@@ -13,5 +13,5 @@ export function useSettings() {
     }
   }, [dispatch])
 
-  return { settings }
+  return settings
 }

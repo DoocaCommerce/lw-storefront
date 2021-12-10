@@ -13,5 +13,5 @@ export function useSections() {
     }
   }, [dispatch])
 
-  return { sections }
+  return sections
 }
