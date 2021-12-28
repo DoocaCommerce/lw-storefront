@@ -1,0 +1,20 @@
+{
+  "name": "tray-storefront",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "yarn --cwd ./packages/core dev & yarn --cwd ./packages/react dev"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "repository": "https://github.com/DoocaCommerce/tray-storefront.git",
+  "author": "tiagotermedooca <89025816+tiagotermedooca@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}

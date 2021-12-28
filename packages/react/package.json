@@ -6,7 +6,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsc --watch --sourcemap",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
