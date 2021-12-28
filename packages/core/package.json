@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "tsc --watch --sourcemap",
     "build": "tsc",
-    "test": "npx jest"
+    "test": "npx jest",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@urql/core": "^2.3.3",
