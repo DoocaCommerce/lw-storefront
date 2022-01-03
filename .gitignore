@@ -105,3 +105,6 @@ typings/
 .DS_Store
 
 **/dist/
+
+yarn.lock
+package-lock.json

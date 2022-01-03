@@ -1,5 +1,5 @@
-export interface BaseState<DataType = object> {
-  data: DataType
+export interface BaseState {
+  data: any
   loading: boolean
   error?: string | null
 }

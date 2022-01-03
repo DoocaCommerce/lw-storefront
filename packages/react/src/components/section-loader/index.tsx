@@ -3,13 +3,7 @@ import { Suspense } from 'react'
 import { SectionLoaderProps } from './types'
 
 function importComponent(schema: string, path = 'sections') {
-  return React.lazy(() =>
-    import(
-      /* webpackChunkName: "components" */
-      /* webpackMode: "lazy-once" */
-      /* webpackExports: ["default", "named"] */ `@components/${path}/${schema}`
-    ).catch(console.log)
-  )
+  return React.lazy(() => import(`/@components/${path}/${schema}/index.tsx`).catch(console.log))
 }
 
 export function SectionLoader(props: SectionLoaderProps) {

@@ -1,15 +1,9 @@
 import * as React from 'react'
-import type { RouteObject } from 'react-router-dom'
+import type { RouteObject } from 'react-router'
 import defaultRoutes from './default-routes.json'
 
 function importPage(page: string) {
-  return React.lazy(() =>
-    import(
-      /* webpackChunkName: "pages" */
-      /* webpackMode: "lazy-once" */
-      /* webpackExports: ["default", "named"] */ `@pages/${page}`
-    ).catch(console.log)
-  )
+  return React.lazy(() => import(`/@pages/${page}.tsx`).catch(console.log))
 }
 
 const routesConfig = (newRoutes = {}) => {
