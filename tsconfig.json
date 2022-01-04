@@ -8,11 +8,13 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
     "sourceMap": true,
-    "outDir": "dist/",
-    "lib": ["dom", "esnext"]
+    "outDir": "lib/",
+    "lib": ["dom", "esnext"],
+    "jsx": "react"
   },
-  "include": ["src/"],
+  "include": ["src/common", "src/core", "src/react", "src/vue"],
   "exclude": ["src/**/__test__/"]
 }

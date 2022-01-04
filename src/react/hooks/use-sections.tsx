@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSections } from '../store/modules/sections'
-import { RootState } from '../@types/RootState'
+import { RootState } from '../../common/types/RootState'
 
 export function useSections() {
   const dispatch = useDispatch()
