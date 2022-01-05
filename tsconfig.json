@@ -13,8 +13,12 @@
     "sourceMap": true,
     "outDir": "lib/",
     "lib": ["dom", "esnext"],
-    "jsx": "react"
+    "jsx": "react",
+    "paths": {
+      "@core/*": ["./src/core/*"],
+      "@react/*": ["./src/react/*"],
+      "@vue/*": ["./src/vue/*"]
+    }
   },
-  "include": ["src/common", "src/core", "src/react", "src/vue"],
-  "exclude": ["src/**/__test__/"]
+  "include": ["src"]
 }
