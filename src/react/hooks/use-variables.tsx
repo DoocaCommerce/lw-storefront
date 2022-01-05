@@ -1,4 +1,4 @@
-import { slugify } from '@tray-storefront/core/dist/helpers/stringHelper.js'
+import { slugify } from '../../core/helpers/stringHelper'
 import { useCallback, useRef } from 'react'
 
 export function useVariable() {
