@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useDispatch } from 'react-redux'
 import { useRoutes } from 'react-router-dom'
-import { socket } from '@tray-storefront/core'
+import { socket } from '../../../core'
 import { updateSections } from '../../store/modules/sections'
 import { updateSettings } from '../../store/modules/settings'
 import config from '../../routes/config'

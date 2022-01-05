@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@react/types/RootState'
 import { getSettings } from '../store/modules/settings'
-import { RootState } from '../@types/RootState'
 
 export function useSettings() {
   const dispatch = useDispatch()

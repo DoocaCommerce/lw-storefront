@@ -105,3 +105,6 @@ typings/
 .DS_Store
 
 **/dist/
+lib/
+
+yarn.lock

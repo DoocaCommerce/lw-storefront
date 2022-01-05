@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { services } from '@tray-storefront/core'
+import { services } from '@core/index'
 import { SectionsState } from './type'
 
 const initialState: SectionsState = {

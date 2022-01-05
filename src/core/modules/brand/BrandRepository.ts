@@ -1,5 +1,5 @@
 import { gql, query } from '../../services/GraphqlService'
-import { OptionsGet } from '../../common/FetchTypes'
+import { OptionsGet } from '../../types/FetchTypes'
 import { Brand } from './BrandTypes'
 
 const schemaDefault = ['id', 'name', 'slug']

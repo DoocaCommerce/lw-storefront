@@ -1,4 +1,4 @@
-import { Image } from '../../common/ImageTypes'
+import { Image } from '../../types/ImageTypes'
 
 export interface Brand {
   id: Number
