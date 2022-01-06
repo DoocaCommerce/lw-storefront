@@ -9,7 +9,7 @@
     "dev": "tsc --watch --sourcemap",
     "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./lib",
     "test": "npx jest",
-    "install": "npm run build"
+    "install": "tsc && tscpaths -p tsconfig.json -s ./src -o ./lib"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
