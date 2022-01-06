@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "tsc --watch --sourcemap",
     "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./lib",
-    "test": "npx jest"
+    "test": "npx jest",
+    "install": "npm run build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
