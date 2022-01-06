@@ -1,6 +1,6 @@
 import * as React from 'react'
 import type { RouteObject } from 'react-router-dom'
-import defaultRoutes from './default-routes.json'
+import * as defaultRoutes from './default-routes.json'
 
 function importPage(page: string) {
   return React.lazy(() =>
