@@ -26,5 +26,5 @@
       "@common/*": ["src/common/*"]
     }
   },
-  "include": ["src", "stories"]
+  "include": ["src", "stories", "src/**/*.json"]
 }
