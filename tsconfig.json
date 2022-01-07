@@ -20,6 +20,6 @@
       "@vue/*": ["./src/vue/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./src/react/webpack/tsconfig-base.json"],
   "exclude": ["src/**/__test__/"]
 }

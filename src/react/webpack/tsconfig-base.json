@@ -26,5 +26,5 @@
       "@common/*": ["src/common/*"]
     }
   },
-  "include": ["src", "stories", "./src/react/webpack/tsconfig-base.json"]
+  "include": ["src", "stories"]
 }
