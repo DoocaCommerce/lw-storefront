@@ -20,5 +20,6 @@
       "@vue/*": ["./src/vue/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/__test__/"]
 }
