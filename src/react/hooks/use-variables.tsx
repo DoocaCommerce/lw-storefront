@@ -1,4 +1,4 @@
-import { slugify } from '../../core/helpers/stringHelper'
+import { slugify } from '@core/helpers/stringHelper'
 import { useCallback, useRef } from 'react'
 
 export function useVariable() {

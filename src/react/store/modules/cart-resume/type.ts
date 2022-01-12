@@ -1,3 +1,5 @@
+import { BaseState } from '@react/types/BaseState'
+
 export interface CartResumeData {
   total_quantity: Number
   subtotal: Number
@@ -7,8 +9,6 @@ export interface CartResumeData {
   items: []
 }
 
-export interface CartResumeState {
+export interface CartResumeState extends BaseState {
   data: CartResumeData
-  loading: boolean
-  error: string | null
 }

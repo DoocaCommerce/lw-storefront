@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@react/types/RootState'
-import { getSettings } from '../store/modules/settings'
+import { SettingsState } from '@react/store/modules/settings/type'
+import { getSettings } from '@react/store/modules/settings'
 
-export function useSettings() {
+export function useSettings(): SettingsState {
   const dispatch = useDispatch()
   const settings = useSelector((state: RootState) => state.settings)
 
