@@ -16,15 +16,8 @@
     "noEmit": false,
     "removeComments": false,
     "jsx": "react-jsx",
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@config/*": ["src/config/*"],
-      "@pages/*": ["src/pages/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@common/*": ["src/common/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": ["src", "stories"]
