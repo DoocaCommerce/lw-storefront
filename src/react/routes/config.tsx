@@ -7,7 +7,7 @@ function importPage(page: string) {
     import(
       /* webpackChunkName: "pages" */
       /* webpackMode: "lazy-once" */
-      /* webpackExports: ["default", "named"] */ `@pages/${page}`
+      /* webpackExports: ["default", "named"] */ `@/pages/${page}`
     ).catch(console.log)
   )
 }

@@ -20,12 +20,7 @@ export default {
   resolve: {
     extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@assets': path.resolve(__dirname, 'src/assets'),
-      '@config': path.resolve(__dirname, 'src/config'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
-      '@hooks': path.resolve(__dirname, 'src/hooks'),
-      '@common': path.resolve(__dirname, 'src/common')
+      '@': path.resolve(__dirname, 'src/')
     },
     plugins: [new TsconfigPathsPlugin()],
     modules: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')]

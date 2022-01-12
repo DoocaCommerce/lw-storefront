@@ -26,12 +26,7 @@ export function createDevConfig() {
       resolve: {
         extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
         alias: {
-          '@components': path.resolve(process.cwd(), 'src/components'),
-          '@assets': path.resolve(process.cwd(), 'src/assets'),
-          '@config': path.resolve(process.cwd(), 'src/config'),
-          '@pages': path.resolve(process.cwd(), 'src/pages'),
-          '@hooks': path.resolve(process.cwd(), 'src/hooks'),
-          '@common': path.resolve(process.cwd(), 'src/common')
+          '@': path.resolve(process.cwd(), 'src')
         },
         plugins: [new TsconfigPathsPlugin()],
         modules: [path.resolve(process.cwd(), 'src'), path.resolve(process.cwd(), 'node_modules')]

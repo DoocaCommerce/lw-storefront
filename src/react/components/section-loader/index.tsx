@@ -7,7 +7,7 @@ function importComponent(schema: string, path = 'sections') {
     import(
       /* webpackChunkName: "components" */
       /* webpackMode: "lazy-once" */
-      /* webpackExports: ["default", "named"] */ `@components/${path}/${schema}`
+      /* webpackExports: ["default", "named"] */ `@/components/${path}/${schema}`
     ).catch(console.log)
   )
 }

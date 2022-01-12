@@ -9,9 +9,15 @@ export interface SectionsPropsType {
 export function Sections({ sections, path = 'sections' }: SectionsPropsType): JSX.Element {
   const renderSections = () => {
     return Object.keys(sections).map((index): JSX.Element => {
-      const { schema, blocks, settings } = sections[index]
+      const { schema, blocks, settings, type } = sections[index]
 
-      return <SectionLoader path={path} schema={schema} settings={settings} blocks={blocks} key={index} />
+      return (
+        <>
+          {type === 'content' && (
+            <SectionLoader path={path} schema={schema} settings={settings} blocks={blocks} key={index} />
+          )}
+        </>
+      )
     })
   }
 
