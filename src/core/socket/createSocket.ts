@@ -9,7 +9,6 @@ function createSocket(hash, onUpdate, onFocus) {
   socketIO.on('FOCUS_SECTION', onFocus)
 
   socketIO.on('connect', () => {
-    console.log('Room', hash)
     console.log('socketId', socketIO.id)
   })
 }

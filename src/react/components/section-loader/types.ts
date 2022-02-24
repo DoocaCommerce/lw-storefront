@@ -1,5 +1,5 @@
 export interface SectionLoaderProps {
-  schema: string
+  schema: Function
   path?: string
   settings?: Object
   blocks?: Object[]

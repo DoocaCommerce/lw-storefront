@@ -8,7 +8,7 @@ export function StoreProvider(props) {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <RootProvider routes={props.routes} />
+        <RootProvider pages={props.pages} routes={props.routes} />
       </BrowserRouter>
     </Provider>
   )

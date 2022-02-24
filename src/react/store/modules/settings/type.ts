@@ -1,3 +1,3 @@
-import { BaseState } from '@react/types/BaseState'
+import { BaseState } from '../../../types/BaseState'
 
 export interface SettingsState extends BaseState {}

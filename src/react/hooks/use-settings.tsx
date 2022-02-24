@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@react/types/RootState'
-import { SettingsState } from '@react/store/modules/settings/type'
-import { getSettings } from '@react/store/modules/settings'
+import { RootState } from '../types/RootState'
+import { SettingsState } from '../store/modules/settings/type'
+import { getSettings } from '../store/modules/settings'
 
 export function useSettings(): SettingsState {
   const dispatch = useDispatch()

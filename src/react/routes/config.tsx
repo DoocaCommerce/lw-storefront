@@ -2,27 +2,17 @@ import * as React from 'react'
 import type { RouteObject } from 'react-router-dom'
 import defaultRoutes from './default-routes'
 
-function importPage(page: string) {
-  return React.lazy(() =>
-    import(
-      /* webpackChunkName: "pages" */
-      /* webpackMode: "lazy-once" */
-      /* webpackExports: ["default", "named"] */ `@/pages/${page}`
-    ).catch(console.log)
-  )
-}
-
-const routesConfig = (newRoutes = {}) => {
+const routesConfig = (pages, newRoutes = {}) => {
   const routes = Object.assign(defaultRoutes, newRoutes)
-  const Layout = importPage('layout')
-  const Home = importPage(routes.home.component)
-  const Category = importPage(routes.category.component)
-  const Product = importPage(routes.product.component)
-  const Brand = importPage(routes.brand.component)
-  const LandingPage = importPage(routes.landingpage.component)
-  const Institutional = importPage(routes.institutional.component)
-  const Blog = importPage(routes.blog.component)
-  const BlogPost = importPage(routes.blogPost.component)
+  const Layout = pages['layout']
+  const Home = pages[routes.home.component]
+  const Category = pages[routes.category.component]
+  const Product = pages[routes.product.component]
+  const Brand = pages[routes.brand.component]
+  const LandingPage = pages[routes.landingpage.component]
+  const Institutional = pages[routes.institutional.component]
+  const Blog = pages[routes.blog.component]
+  const BlogPost = pages[routes.blogPost.component]
 
   return [
     {

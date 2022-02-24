@@ -7,7 +7,7 @@ import { updateSettings } from '../../store/modules/settings'
 import config from '../../routes/config'
 
 function RootProvider(props) {
-  const routerElement = useRoutes(config(props.routes))
+  const routerElement = useRoutes(config(props.pages, props.routes))
   const urlParams = new URLSearchParams(window.location.search)
   const hashPreview = urlParams.get('preview')
   const dispatch = useDispatch()
