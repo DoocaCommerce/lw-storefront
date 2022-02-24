@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { services } from '@core/index'
+import { services } from '../../../../core/index'
 import { SettingsState } from './type'
 
 const initialState: SettingsState = {

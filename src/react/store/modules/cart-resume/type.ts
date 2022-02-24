@@ -1,4 +1,4 @@
-import { BaseState } from '@react/types/BaseState'
+import { BaseState } from '../../../types/BaseState'
 
 export interface CartResumeData {
   total_quantity: Number

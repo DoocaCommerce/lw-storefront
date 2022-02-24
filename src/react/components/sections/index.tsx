@@ -1,20 +1,22 @@
 import * as React from 'react'
 import { SectionLoader } from '../section-loader'
 
+type Obj = Record<string, any>
 export interface SectionsPropsType {
-  sections: Object
+  sections: Obj
+  components: Obj
   path?: string
 }
 
-export function Sections({ sections, path = 'sections' }: SectionsPropsType): JSX.Element {
+export function Sections({ sections, components, path = 'sections' }: SectionsPropsType): JSX.Element {
   const renderSections = () => {
-    return Object.keys(sections).map((index): JSX.Element => {
+    return Object.keys(sections).map((index: string): JSX.Element => {
       const { schema, blocks, settings, type } = sections[index]
 
       return (
         <>
           {type === 'content' && (
-            <SectionLoader path={path} schema={schema} settings={settings} blocks={blocks} key={index} />
+            <SectionLoader path={path} schema={components[schema]} settings={settings} blocks={blocks} />
           )}
         </>
       )

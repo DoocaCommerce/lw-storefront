@@ -11,15 +11,10 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "sourceMap": true,
-    "outDir": "lib/",
+    "outDir": "lib",
     "lib": ["dom", "esnext"],
-    "jsx": "react",
-    "paths": {
-      "@core/*": ["./src/core/*"],
-      "@react/*": ["./src/react/*"],
-      "@vue/*": ["./src/vue/*"]
-    }
+    "jsx": "react"
   },
-  "include": ["src", "./src/react/webpack/tsconfig-base.json"],
+  "include": ["src"],
   "exclude": ["src/**/__test__/"]
 }
