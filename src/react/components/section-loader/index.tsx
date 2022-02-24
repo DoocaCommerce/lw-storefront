@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import { SectionLoaderProps } from './types'
 
 export function SectionLoader(props: SectionLoaderProps) {
-  const fallBack = () => 'errroouuuuu!!!!'
+  const fallBack = () => 'Section not found.'
   const DynamicComponent = props.schema || fallBack
 
   return (
