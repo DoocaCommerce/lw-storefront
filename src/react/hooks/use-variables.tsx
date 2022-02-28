@@ -6,9 +6,7 @@ export function useVariable() {
 
   const setVariables = (variables: object) => {
     const element = ref?.current || document.documentElement
-    Object.entries(variables).map(([name, value]) => {
-      element.style.setProperty(`--${slugify(name)}`, value)
-    })
+    Object.entries(variables).map(([name, value]) => value && element.style.setProperty(`--${slugify(name)}`, value))
   }
 
   const setRef = useCallback(element => {
