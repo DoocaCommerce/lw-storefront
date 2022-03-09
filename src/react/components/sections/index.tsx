@@ -8,20 +8,24 @@ export interface SectionsPropsType {
   path?: string
 }
 
-export function Sections({ sections, components, path = 'sections' }: SectionsPropsType): JSX.Element {
-  const renderSections = () => {
-    return Object.keys(sections).map((index: string): JSX.Element => {
-      const { schema, blocks, settings, type } = sections[index]
+export function Sections({ sections, components }: SectionsPropsType): JSX.Element {
+  const sectionsList = Object.entries(sections)
 
-      return (
-        <>
-          {type === 'content' && (
-            <SectionLoader path={path} schema={components[schema]} settings={settings} blocks={blocks} />
-          )}
-        </>
-      )
-    })
-  }
+  return (
+    <>
+      {sectionsList.map(([id, { schema, blocks, settings, type }]): JSX.Element => {
+        const component = components[schema]
 
-  return <>{renderSections()}</>
+        return (
+          <React.Fragment key={id}>
+            {type === 'content' && (
+              <section id={id}>
+                <SectionLoader id={id} component={component} settings={settings} blocks={blocks} />
+              </section>
+            )}
+          </React.Fragment>
+        )
+      })}
+    </>
+  )
 }

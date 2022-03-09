@@ -4,11 +4,11 @@ import { SectionLoaderProps } from './types'
 
 export function SectionLoader(props: SectionLoaderProps) {
   const fallBack = () => 'Section not found.'
-  const DynamicComponent = props.schema || fallBack
+  const DynamicComponent = props.component || fallBack
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <DynamicComponent settings={props.settings} blocks={props.blocks} />
+      <DynamicComponent settings={props.settings} blocks={props.blocks} id={props.id} />
     </Suspense>
   )
 }

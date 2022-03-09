@@ -1,5 +1,6 @@
 export interface SectionLoaderProps {
-  schema: Function
+  component: Function
+  id: string
   path?: string
   settings?: Object
   blocks?: Object[]
