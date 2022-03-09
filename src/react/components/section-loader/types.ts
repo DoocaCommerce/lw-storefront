@@ -4,4 +4,5 @@ export interface SectionLoaderProps {
   path?: string
   settings?: Object
   blocks?: Object[]
+  disabled?: boolean
 }

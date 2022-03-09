@@ -7,8 +7,14 @@ export function SectionLoader(props: SectionLoaderProps) {
   const DynamicComponent = props.component || fallBack
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <DynamicComponent settings={props.settings} blocks={props.blocks} id={props.id} />
-    </Suspense>
+    <>
+      {!props.disabled && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <section data-section-id={props.id}>
+            <DynamicComponent settings={props.settings} blocks={props.blocks} id={props.id} />
+          </section>
+        </Suspense>
+      )}
+    </>
   )
 }

@@ -13,15 +13,13 @@ export function Sections({ sections, components }: SectionsPropsType): JSX.Eleme
 
   return (
     <>
-      {sectionsList.map(([id, { schema, blocks, settings, type }]): JSX.Element => {
+      {sectionsList.map(([id, { schema, blocks, settings, type, disabled }]): JSX.Element => {
         const component = components[schema]
 
         return (
           <React.Fragment key={id}>
             {type === 'content' && (
-              <section data-section-id={id}>
-                <SectionLoader id={id} component={component} settings={settings} blocks={blocks} />
-              </section>
+              <SectionLoader id={id} component={component} settings={settings} blocks={blocks} disabled={disabled} />
             )}
           </React.Fragment>
         )
