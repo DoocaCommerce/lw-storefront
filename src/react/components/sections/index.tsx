@@ -19,7 +19,7 @@ export function Sections({ sections, components }: SectionsPropsType): JSX.Eleme
         return (
           <React.Fragment key={id}>
             {type === 'content' && (
-              <section id={id}>
+              <section data-section-id={id}>
                 <SectionLoader id={id} component={component} settings={settings} blocks={blocks} />
               </section>
             )}
