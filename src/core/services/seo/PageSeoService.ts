@@ -10,7 +10,7 @@ export class PageSeoService extends SeoService {
     this.data = data
   }
 
-  public getPage(): JSX.Element {
+  public getPage(): string {
     if (this.data.template === 'faq') return this.render(this.faqPage())
     return this.render(this.genericPage())
   }
