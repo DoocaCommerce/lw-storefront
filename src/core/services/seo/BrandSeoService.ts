@@ -10,7 +10,7 @@ export class BrandSeoService extends SeoService {
     this.data = data
   }
 
-  public getBrand(): JSX.Element {
+  public getBrand(): string {
     let brand = this.data
     let microData: BrandMicroData = {
       '@context': 'https://schema.org',
