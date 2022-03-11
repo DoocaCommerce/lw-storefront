@@ -3,22 +3,21 @@ import { Brand } from '../../types/product/BrandTypes'
 import { BrandMicroData } from './types'
 
 export class BrandSeoService extends SeoService {
-  data: Brand
+  brand: Brand
 
   constructor(data: Brand) {
     super()
-    this.data = data
+    this.brand = data
   }
 
   public getBrand(): string {
-    let brand = this.data
     let microData: BrandMicroData = {
       '@context': 'https://schema.org',
       '@type': 'Brand',
-      name: brand.name,
-      logo: brand.image.src,
-      image: brand.image.src,
-      url: brand.url
+      name: this.brand.name,
+      logo: this.brand.image.src,
+      image: this.brand.image.src,
+      url: this.brand.url
     }
 
     return this.render(microData)
