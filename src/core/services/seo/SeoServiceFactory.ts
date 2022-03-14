@@ -1,5 +1,7 @@
 import { ShopSeoService } from './ShopSeoService'
-import { ProductSeoService } from './ProductSeoService'
+import { ProductItemSeoService } from './ProductItemSeoService'
+import { ProductListSeoService } from './ProductListSeoService'
+import { SomeProductsSeoService } from './SomeProductsSeoService'
 import { BrandSeoService } from './BrandSeoService'
 import { PageSeoService } from './PageSeoService'
 import { BlogSeoService } from './BlogSeoService'
@@ -10,9 +12,11 @@ export class SeoServiceFactory {
       case 'shop':
         return new ShopSeoService(data).getShop()
       case 'product-item':
-        return new ProductSeoService(data).getProductItem()
+        return new ProductItemSeoService(data).getProductItem()
       case 'product-list':
-        return new ProductSeoService(data).getProductList()
+        return new ProductListSeoService(data).getProductList()
+      case 'some-products':
+        return new SomeProductsSeoService(data).getSomeProducts()
       case 'brand':
         return new BrandSeoService(data).getBrand()
       case 'page':

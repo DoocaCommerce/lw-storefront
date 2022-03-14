@@ -98,3 +98,8 @@ export interface PageMicroData extends MicroData {
   name: string
   description: string
 }
+
+export interface SomeProductsMicroData extends MicroData {
+  name?: string
+  description?: string
+}
