@@ -94,9 +94,19 @@ interface AddressMicroData extends MicroData {
 }
 
 export interface PageMicroData extends MicroData {
-  url: string
+  url?: string
+  name?: string
+  description?: string
+  mainEntity?: MainEntity[]
+}
+
+interface MainEntity extends MicroData {
   name: string
-  description: string
+  acceptedAnswer: AcceptedAnswer
+}
+
+interface AcceptedAnswer extends MicroData {
+  text: string
 }
 
 export interface SomeProductsMicroData extends MicroData {
