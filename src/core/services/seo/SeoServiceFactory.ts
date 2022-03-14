@@ -5,7 +5,7 @@ import { PageSeoService } from './PageSeoService'
 import { BlogSeoService } from './BlogSeoService'
 
 export class SeoServiceFactory {
-  static getInstance(type: string, data: any) {
+  static getInstance(type: string, data: any): string {
     switch (type) {
       case 'shop':
         return new ShopSeoService(data).getShop()
