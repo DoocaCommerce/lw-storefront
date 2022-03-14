@@ -4,7 +4,8 @@ import { ProductListSeoService } from './ProductListSeoService'
 import { SomeProductsSeoService } from './SomeProductsSeoService'
 import { BrandSeoService } from './BrandSeoService'
 import { PageSeoService } from './PageSeoService'
-import { BlogSeoService } from './BlogSeoService'
+import { BlogCategorySeoService } from './BlogCategorySeoService'
+import { BlogPostSeoService } from './BlogPostSeoService'
 
 export class SeoServiceFactory {
   static getInstance(type: string, data: any): string {
@@ -22,9 +23,9 @@ export class SeoServiceFactory {
       case 'page':
         return new PageSeoService(data).getPage()
       case 'blog-category':
-        return new BlogSeoService(data).getBlogCategory()
+        return new BlogCategorySeoService(data).getBlogCategory()
       case 'blog-post':
-        return new BlogSeoService(data).getBlogPost()
+        return new BlogPostSeoService(data).getBlogPost()
       default:
         break
     }
