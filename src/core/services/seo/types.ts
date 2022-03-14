@@ -108,3 +108,8 @@ interface MainEntity extends MicroData {
 interface AcceptedAnswer extends MicroData {
   text: string
 }
+
+export interface SomeProductsMicroData extends MicroData {
+  name?: string
+  description?: string
+}
