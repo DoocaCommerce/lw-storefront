@@ -9,7 +9,7 @@ const initialState: SettingsState = {
 }
 
 export const getSettings = createAsyncThunk('settings/getSettings', async (dispatch, getState) => {
-  return await services.settings.get()
+  return await services.settings.getSettings()
 })
 
 const settingsSlice = createSlice({
