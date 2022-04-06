@@ -1,31 +1,33 @@
 import { gql, query } from '../../services/GraphqlService'
 
-export async function fetchAllSettings(): Promise<Object> {
-  const settingsQuery = gql`
-    query {
-      settings {
-        settings
-        sections
+export class SettingsRepository {
+  static async fetchAllSettings(): Promise<Object> {
+    const settingsQuery = gql`
+      query {
+        settings {
+          settings
+          sections
+        }
       }
-    }
-  `
+    `
 
-  const { settings } = await query(settingsQuery)
-  const sectionsParse = JSON.parse(settings.sections)
-  const settingsParse = JSON.parse(settings.settings)
+    const { settings } = await query(settingsQuery)
+    const sectionsParsed = JSON.parse(settings.sections)
+    const settingsParsed = JSON.parse(settings.settings)
 
-  return { sections: sectionsParse, settings: settingsParse }
-}
+    return { sections: sectionsParsed, settings: settingsParsed }
+  }
 
-export async function fetchSettings(): Promise<Object> {
-  const settingsQuery = gql`
-    query {
-      settings {
-        settings
+  static async fetchSettings(): Promise<Object> {
+    const settingsQuery = gql`
+      query {
+        settings {
+          settings
+        }
       }
-    }
-  `
+    `
 
-  const { settings } = await query(settingsQuery)
-  return JSON.parse(settings.settings)
+    const { settings } = await query(settingsQuery)
+    return JSON.parse(settings.settings)
+  }
 }
