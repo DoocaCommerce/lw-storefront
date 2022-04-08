@@ -7,8 +7,7 @@ export async function fetchAllSettings(): Promise<Object> {
         settings
         sections
       }
-    }
-  `
+    `
 
   const { settings } = await client.query(settingsQuery)
   const sectionsParse = JSON.parse(settings.sections)
@@ -26,8 +25,7 @@ export async function fetchSettings(): Promise<Object> {
         version
         data
       }
-    }
-  `
+    `
 
   const { setting } = await client.query<any>(settingsQuery)
 
