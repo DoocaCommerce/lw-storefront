@@ -6,14 +6,15 @@
   "source": "./lib",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "dev": "tsc --watch --sourcemap",
-    "build": "tsc",
+    "dev": "tsc --watch --sourcemap && tsc -p ./src/plugin --watch --sourcemap",
+    "build": "tsc && tsc -p ./src/plugin",
     "test": "npx jest",
-    "install": "tsc"
+    "install": "tsc && tsc -p ./src/plugin"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@urql/core": "^2.3.3",
+    "dotenv": "^16.0.0",
     "graphql": "^15.6.1",
     "react-helmet": "^6.1.0",
     "react-redux": "^7.2.6",
@@ -30,6 +31,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/webfontloader": "^1.6.33",
     "jest": "^27.4.2",
+    "jest-fetch-mock": "^3.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "ts-jest": "^27.0.7"

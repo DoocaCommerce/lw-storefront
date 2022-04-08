@@ -1,14 +1,21 @@
-import { gql, query } from '../../services/GraphqlService'
+import { client } from '../../services/GraphqlService'
 
 export async function fetchSections(): Promise<Object> {
-  const settingsQuery = gql`
-    query {
-      settings {
-        sections
+  const settingsQuery = `
+    query getSections{
+      section {
+        data
+        type
+        page
+        version
+        themeId
+        shopId
       }
     }
   `
 
-  const { settings } = await query(settingsQuery)
-  return JSON.parse(settings.sections)
+  const { section } = await client.query(settingsQuery)
+  const data = JSON.parse(section.data)
+
+  return { ...section, data }
 }

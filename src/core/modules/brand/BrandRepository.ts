@@ -1,4 +1,4 @@
-import { gql, query } from '../../services/GraphqlService'
+import { client } from '../../services/GraphqlService'
 import { OptionsGet } from '../../types/FetchTypes'
 import { Brand } from './BrandTypes'
 
@@ -6,7 +6,7 @@ const schemaDefault = ['id', 'name', 'slug']
 
 export async function getBrands(options?: OptionsGet): Promise<Brand[]> {
   const fieldsQuery = options?.fields || schemaDefault
-  const brandsQuery = gql`
+  const brandsQuery = `
     query {
       brands {
         ${fieldsQuery.join()}
@@ -14,13 +14,13 @@ export async function getBrands(options?: OptionsGet): Promise<Brand[]> {
     }
   `
 
-  const { brands } = await query(brandsQuery)
+  const { brands } = await client.query(brandsQuery)
   return brands
 }
 
 export async function getBrandByID(id: number, options?: OptionsGet): Promise<Brand> {
   const fieldsQuery = options?.fields || schemaDefault
-  const brandQuery = gql`
+  const brandQuery = `
     query ($id: ID!) {
       brand(id: $id) {
         ${fieldsQuery.join()}
@@ -28,6 +28,6 @@ export async function getBrandByID(id: number, options?: OptionsGet): Promise<Br
     }
   `
 
-  const { brand } = await query(brandQuery, { id })
+  const { brand } = await client.query(brandQuery, { id })
   return brand
 }
