@@ -31,7 +31,6 @@ export class SettingsRepository {
     `
 
     const { setting } = await client.query<any>(settingsQuery)
-    console.log(setting)
 
     const data = JSON.parse(setting.data)
 
