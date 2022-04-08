@@ -1,7 +1,8 @@
 import { client } from '../../services/GraphqlService'
 
-export async function fetchAllSettings(): Promise<Object> {
-  const settingsQuery = `
+export class SettingsRepository {
+  static async fetchAllSettings(): Promise<Object> {
+    const settingsQuery = `
     query {
       settings {
         settings
@@ -9,27 +10,31 @@ export async function fetchAllSettings(): Promise<Object> {
       }
     `
 
-  const { settings } = await client.query(settingsQuery)
-  const sectionsParse = JSON.parse(settings.sections)
-  const settingsParse = JSON.parse(settings.settings)
+    const { settings } = await client.query(settingsQuery)
+    const sectionsParse = JSON.parse(settings.sections)
+    const settingsParse = JSON.parse(settings.settings)
 
-  return { sections: sectionsParse, settings: settingsParse }
-}
+    return { sections: sectionsParse, settings: settingsParse }
+  }
 
-export async function fetchSettings(): Promise<Object> {
-  const settingsQuery = `
-    query {
+  static async fetchSettings(): Promise<Object> {
+    const settingsQuery = `
+    query Setting {
       setting {
+        data
+        page
         shopId
         themeId
         version
-        data
       }
+    }
     `
 
-  const { setting } = await client.query<any>(settingsQuery)
+    const { setting } = await client.query<any>(settingsQuery)
+    console.log(setting)
 
-  const data = JSON.parse(setting.data)
+    const data = JSON.parse(setting.data)
 
-  return { ...setting, data }
+    return { ...setting, data }
+  }
 }

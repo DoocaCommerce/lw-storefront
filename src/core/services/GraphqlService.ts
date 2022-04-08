@@ -3,9 +3,11 @@ import { Client, createClient, defaultExchanges, gql } from '@urql/core'
 class GraphqlService {
   client: Client
 
-  constructor(token: string) {
+  constructor(api_url: string, token: string) {
+    if (!api_url && !token) console.error('api_url and token are required')
+
     this.client = createClient({
-      url: 'https://dc-api-storefront.herokuapp.com/',
+      url: api_url,
       requestPolicy: 'cache-first',
       exchanges: defaultExchanges,
       fetchOptions: {
@@ -29,6 +31,6 @@ class GraphqlService {
   }
 }
 //@ts-ignore
-const client = new GraphqlService(DC_CONFIG.token)
+const client = new GraphqlService(DC_CONFIG.api_url, DC_CONFIG.token)
 
 export { client, gql }

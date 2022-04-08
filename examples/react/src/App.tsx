@@ -4,8 +4,7 @@ import { services } from 'lw-storefront/lib/core'
 const { settings, sections } = services
 
 const get = async (id: string) => {
-  const result = await settings.get()
-  console.log(`result ${id}`, result)
+  const result = await settings.getSettings()
 }
 
 function Header() {
