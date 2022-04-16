@@ -6,9 +6,10 @@
   "source": "./lib",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "dev": "tsc --watch --sourcemap && tsc -p ./src/plugin --watch --sourcemap",
-    "build": "tsc && tsc -p ./src/plugin",
+    "dev": "tsc --watch --sourcemap",
+    "dev:plugin": "tsc -p ./src/plugin --watch --sourcemap",
     "test": "npx jest",
+    "build": "tsc && tsc -p ./src/plugin",
     "install": "tsc && tsc -p ./src/plugin"
   },
   "dependencies": {
