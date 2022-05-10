@@ -1,6 +1,19 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "outDir": "../../lib/plugin"
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "sourceMap": true,
+    "lib": ["dom", "esnext"],
+    "jsx": "react",
+    "outDir": "../../lib/plugin",
+    "skipLibCheck": true
   }
 }
