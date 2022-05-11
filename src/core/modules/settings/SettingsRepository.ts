@@ -21,11 +21,11 @@ export class SettingsRepository {
     const settingsQuery = `
     query Setting {
       setting {
-        data
-        page
-        shopId
-        themeId
+        shop_id
+        theme_id
         version
+        page
+        data
       }
     }
     `

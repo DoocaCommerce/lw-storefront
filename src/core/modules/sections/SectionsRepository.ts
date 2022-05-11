@@ -5,11 +5,9 @@ export async function fetchSections(): Promise<Object> {
     query getSections{
       section {
         data
-        type
         page
         version
-        themeId
-        shopId
+        theme_id
       }
     }
   `
