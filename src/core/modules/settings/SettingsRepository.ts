@@ -1,23 +1,8 @@
 import { client } from '../../services/GraphqlService'
+import { Setting, SettingResponse } from './SettingsTypes'
 
 export class SettingsRepository {
-  static async fetchAllSettings(): Promise<Object> {
-    const settingsQuery = `
-    query {
-      settings {
-        settings
-        sections
-      }
-    `
-
-    const { settings } = await client.query(settingsQuery)
-    const sectionsParse = JSON.parse(settings.sections)
-    const settingsParse = JSON.parse(settings.settings)
-
-    return { sections: sectionsParse, settings: settingsParse }
-  }
-
-  static async fetchSettings(): Promise<Object> {
+  static async fetchSettings(): Promise<Setting> {
     const settingsQuery = `
     query Setting {
       setting {
@@ -30,7 +15,7 @@ export class SettingsRepository {
     }
     `
 
-    const { setting } = await client.query<any>(settingsQuery)
+    const { setting } = await client.query<SettingResponse>(settingsQuery)
 
     const data = JSON.parse(setting.data)
 

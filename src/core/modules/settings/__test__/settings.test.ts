@@ -1,12 +1,19 @@
-import SettingsService from '../SettingsService'
-import fetchMock from 'jest-fetch-mock'
-global.fetch = fetchMock
-// fetchMock.enableMocks()
+import { SettingsService } from '../SettingsService'
+import { Setting, SettingResponse } from '../SettingsTypes'
+import settingMock from '../../../mocks/settings/settings.json'
 
-describe('Settings Service', () => {
+jest.mock('../../../services/GraphqlService', () => {
+  return { client: { query: ():SettingResponse => (settingMock.data) } }
+})
+
+function normalizeMockData() {
+  const data = JSON.parse(settingMock.data.setting.data)
+  return { ...settingMock.data.setting, data }
+}
+
+describe('Settings Module', () => {
   it('Get settings', async () => {
-    const result = await SettingsService.get()
-
-    expect(result[0]).toMatchObject({ name: 'opaa' })
+    const settingResult:Setting = await SettingsService.getSettings()
+    expect(settingResult).toMatchObject(normalizeMockData())
   })
 })
