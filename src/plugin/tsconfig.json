@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
+    "module": "CommonJS",
     "baseUrl": ".",
-    "module": "ESNext",
     "moduleResolution": "node",
     "allowJs": true,
     "emitDecoratorMetadata": true,
@@ -11,10 +11,9 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "sourceMap": true,
-    "outDir": "lib",
     "lib": ["dom", "esnext"],
-    "jsx": "react"
-  },
-  "include": ["src"],
-  "exclude": ["src/**/__test__/", "src/plugin/"]
+    "jsx": "react",
+    "outDir": "../../lib/plugin",
+    "skipLibCheck": true
+  }
 }

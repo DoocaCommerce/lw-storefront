@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { CartResumeState } from './modules/cart-resume/type'
 import reducer from './reducer'
 
-const store = configureStore({ reducer })
+const store: any = configureStore({ reducer: reducer })
 
 export default store

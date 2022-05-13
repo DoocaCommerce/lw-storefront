@@ -1,31 +1,24 @@
-import { gql, query } from '../../services/GraphqlService'
+import { client } from '../../services/GraphqlService'
+import { Setting, SettingResponse } from './SettingsTypes'
 
-export async function fetchAllSettings(): Promise<Object> {
-  const settingsQuery = gql`
-    query {
-      settings {
-        settings
-        sections
+export class SettingsRepository {
+  static async fetchSettings(): Promise<Setting<unknown>> {
+    const settingsQuery = `
+    query Setting {
+      setting {
+        shop_id
+        theme_id
+        version
+        page
+        data
       }
     }
-  `
+    `
 
-  const { settings } = await query(settingsQuery)
-  const sectionsParse = JSON.parse(settings.sections)
-  const settingsParse = JSON.parse(settings.settings)
+    const { setting } = await client.query<SettingResponse>(settingsQuery)
 
-  return { sections: sectionsParse, settings: settingsParse }
-}
+    const data = JSON.parse(setting.data)
 
-export async function fetchSettings(): Promise<Object> {
-  const settingsQuery = gql`
-    query {
-      settings {
-        settings
-      }
-    }
-  `
-
-  const { settings } = await query(settingsQuery)
-  return JSON.parse(settings.settings)
+    return { ...setting, data }
+  }
 }

@@ -1,10 +1,9 @@
-import { fetchSettings } from './SettingsRepository'
+import { SettingsRepository } from './SettingsRepository'
+import { Setting } from './SettingsTypes'
 
-async function get() {
-  const result = await fetchSettings()
-  return result
-}
-
-export default {
-  get
+export class SettingsService {
+  static async getSettings() {
+    const result:Setting<unknown> = await SettingsRepository.fetchSettings()
+    return result
+  }
 }
