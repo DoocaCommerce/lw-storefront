@@ -9,6 +9,7 @@
     "dev": "tsc --watch --sourcemap",
     "dev:plugin": "tsc -p ./src/plugin --watch --sourcemap",
     "test": "npx jest",
+    "test:dev": "npx jest --watch",
     "build": "tsc && tsc -p ./src/plugin",
     "install": "tsc && tsc -p ./src/plugin"
   },

@@ -1,11 +1,11 @@
-export interface Setting {
+export interface Setting<T> {
     shop_id: number
     theme_id: number
     version: string
     page: string
-    data: string
+    data: T
 }
 
 export interface SettingResponse {
-    setting: Setting
+    setting: Setting<string>
 }
