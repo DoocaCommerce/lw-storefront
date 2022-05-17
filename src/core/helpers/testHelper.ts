@@ -6,7 +6,7 @@ export function normalizeMockData(mock: any, module: Module) {
     return data && { ...mockData, data }
 }
 
-export function getBaseAsserts(result: unknown, mock: unknown, referenceObject: unknown) {
+export function buildBaseAsserts(result: unknown, mock: unknown, referenceObject: unknown) {
     Object.keys(result).forEach((key) => {
         expect(result[key]).toEqual(mock[key])
         expect(typeof result[key]).toEqual(typeof referenceObject[key])

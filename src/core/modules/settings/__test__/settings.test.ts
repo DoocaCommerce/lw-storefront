@@ -1,6 +1,6 @@
 import { SettingsService } from '../SettingsService'
 import { Setting, SettingResponse } from '../SettingsTypes'
-import { getBaseAsserts, normalizeMockData } from '../../../helpers/testHelper'
+import { buildBaseAsserts, normalizeMockData } from '../../../helpers/testHelper'
 import settingMock from '../../../mocks/settings/settings.json'
 import { Module } from '../../../types/TestMockType'
 
@@ -20,6 +20,6 @@ describe('Settings Module', () => {
   it('Get settings', async () => {
     const settingResult:Setting<any> = await SettingsService.getSettings()
     const normalizedMock = normalizeMockData(settingMock, Module.setting)
-    getBaseAsserts(settingResult, normalizedMock, refereceSettingObject)
+    buildBaseAsserts(settingResult, normalizedMock, refereceSettingObject)
   })
 })

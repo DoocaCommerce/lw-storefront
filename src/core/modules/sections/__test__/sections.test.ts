@@ -1,6 +1,6 @@
 import { SectionsService } from '../SectionsService'
 import { Section, SectionFilter, SectionResponse } from '../SectionsTypes'
-import { getBaseAsserts, normalizeMockData } from '../../../helpers/testHelper'
+import { buildBaseAsserts, normalizeMockData } from '../../../helpers/testHelper'
 import sectionMock from '../../../mocks/sections/sections.json'
 import sectionPageFilterMock from '../../../mocks/sections/sections.page.json'
 import sectionVersionFilterMock from '../../../mocks/sections/sections.version.json'
@@ -30,12 +30,12 @@ function getMock(filter?: {filter: SectionFilter}) {
   return !filterKey ? sectionMock : mockSelector[filterKey]
 }
 
-async function executeTests(filter?: unknown, filterValue?: any) {
+async function buildSectionAsserts(filter?: unknown, filterValue?: any) {
   const sectionResult:Section<any> = await SectionsService.getSections(filter)
   const mock = getMock(filter && {filter: filter})
   const normalizedMock = normalizeMockData(mock, Module.section)
   
-  getBaseAsserts(sectionResult, normalizedMock, refereceSettingObject)
+  buildBaseAsserts(sectionResult, normalizedMock, refereceSettingObject)
   
   if (filter) {
     const filterKey = Object.keys(filter)[0]
@@ -45,24 +45,24 @@ async function executeTests(filter?: unknown, filterValue?: any) {
 
 describe('Sections Module', () => {
   it('Get sections with no filter', async () => {
-    await executeTests()
+    await buildSectionAsserts()
   })
 
   it('Get sections with page filter', async () => {
     const PAGE_FILTER = 'products'
     const filter: SectionFilter = { page: PAGE_FILTER } 
-    await executeTests(filter, PAGE_FILTER)
+    await buildSectionAsserts(filter, PAGE_FILTER)
   })
 
   it('Get sections with theme_id filter', async () => {
     const THEME_FILTER = 3
     const filter: SectionFilter = { theme_id: THEME_FILTER } 
-    await executeTests(filter, THEME_FILTER)
+    await buildSectionAsserts(filter, THEME_FILTER)
   })
 
   it('Get sections with version filter', async () => {
     const VERSION_FILTER = '2'
     const filter: SectionFilter = { version: VERSION_FILTER } 
-    await executeTests(filter, VERSION_FILTER)
+    await buildSectionAsserts(filter, VERSION_FILTER)
   })
 })
