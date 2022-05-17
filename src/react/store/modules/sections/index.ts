@@ -9,7 +9,7 @@ const initialState: SectionsState = {
 }
 
 export const getSections = createAsyncThunk('settings/getSections', async (dispatch, getState) => {
-  return await services.sections.get()
+  return await services.sections.getSections()
 })
 
 const sectionsSlice = createSlice({
