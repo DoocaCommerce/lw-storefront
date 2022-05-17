@@ -5,4 +5,3 @@ export function normalizeMockData(mock: any, module: Module) {
     const data = mockData && JSON.parse(mockData.data)
     return data && { ...mockData, data }
 }
-  
