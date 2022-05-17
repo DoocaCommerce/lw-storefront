@@ -1,6 +1,6 @@
 import { SettingsService } from '../SettingsService'
 import { Setting, SettingResponse } from '../SettingsTypes'
-import { normalizeMockData } from '../../../helpers/testHelper'
+import { getBaseAsserts, normalizeMockData } from '../../../helpers/testHelper'
 import settingMock from '../../../mocks/settings/settings.json'
 import { Module } from '../../../types/TestMockType'
 
@@ -20,9 +20,6 @@ describe('Settings Module', () => {
   it('Get settings', async () => {
     const settingResult:Setting<any> = await SettingsService.getSettings()
     const normalizedMock = normalizeMockData(settingMock, Module.setting)
-    Object.keys(settingResult).forEach((key) => {
-      expect(settingResult[key]).toEqual(normalizedMock[key])
-      expect(typeof settingResult[key]).toEqual(typeof refereceSettingObject[key])
-    })
+    getBaseAsserts(settingResult, normalizedMock, refereceSettingObject)
   })
 })
