@@ -19,7 +19,6 @@ class GraphqlService {
   }
 
   public async query<T>(query: string, variables?: any): Promise<T> {
-    console.log(query, variables)
     try {
       const { data, error }: any = await this.client.query(query, variables).toPromise()
 
