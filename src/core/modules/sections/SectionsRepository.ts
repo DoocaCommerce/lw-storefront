@@ -1,19 +1,23 @@
 import { client } from '../../services/GraphqlService'
+import { Section, SectionFilter, SectionResponse } from './SectionsTypes'
 
-export async function fetchSections(): Promise<Object> {
-  const settingsQuery = `
-    query getSections{
-      section {
-        data
-        page
-        version
-        theme_id
+export class SectionsRepository {
+  static async fetchSections(filter?: SectionFilter): Promise<Section<unknown>> {
+    const settingsQuery = `
+      query getSections${filter && '($filter: filterSection)'}{
+        section${filter && '(filter: $filter)'}{
+          data
+          page
+          version
+          theme_id
       }
     }
   `
 
-  const { section } = await client.query(settingsQuery)
-  const data = JSON.parse(section.data)
-
-  return { ...section, data }
+    const { section }:SectionResponse = await client.query(settingsQuery, {filter: {...filter}})
+    
+    const data = JSON.parse(section.data)
+  
+    return { ...section, data }
+  }
 }

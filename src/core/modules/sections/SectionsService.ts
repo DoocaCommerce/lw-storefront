@@ -1,10 +1,9 @@
-import { fetchSections } from './SectionsRepository'
+import { SectionsRepository } from './SectionsRepository'
+import { Section, SectionFilter } from './SectionsTypes'
 
-async function get() {
-  const result = await fetchSections()
-  return result
-}
-
-export default {
-  get
+export class SectionsService {
+  static async getSections(filter?: SectionFilter) {
+    const result:Section<unknown> = await SectionsRepository.fetchSections(filter)
+    return result
+  }
 }
