@@ -1,0 +1,26 @@
+{
+    "data": {
+        "brand": {
+        "id": 1090,
+        "name": "AV Bolsas",
+        "slug": "av-bolsas",
+        "position": 3,
+        "url": "",
+        "active": true,
+        "created_at": "2019-08-02 09:41:32",
+        "external_id": 0,
+        "hotsite_id": 0,
+        "description": "",
+        "short_description": "",
+        "image": {
+            "alt": "",
+            "src": "media://brands/av-carteiras.png"
+        },
+        "banner": "",
+        "meta_title": "",
+        "meta_keywords": "",
+        "meta_description": "",
+        "updated_at": "2019-08-02 10:39:35"
+        }
+    }
+}

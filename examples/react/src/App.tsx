@@ -1,16 +1,17 @@
 import { useEffect } from 'react'
 import { services } from 'lw-storefront/lib/core'
 
-const { settings, sections } = services
+const { brand, sections, settings } = services
 
 const get = async (id: string) => {
   const result = await settings.getSettings()
+  console.log(`result ${id}`, result)
 }
 
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await sections.getSections({ page: 'home'})
+      const result = await sections.getSections()
       console.log(`result ${id}`, result)
     }
     get('header')

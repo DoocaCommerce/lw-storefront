@@ -4,8 +4,8 @@ import { Section, SectionFilter, SectionResponse } from './SectionsTypes'
 export class SectionsRepository {
   static async fetchSections(filter?: SectionFilter): Promise<Section<unknown>> {
     const settingsQuery = `
-      query getSections${filter && '($filter: filterSection)'}{
-        section${filter && '(filter: $filter)'}{
+      query getSections($filter: filterSection){
+        section(filter: $filter){
           data
           page
           version
@@ -14,7 +14,7 @@ export class SectionsRepository {
     }
   `
 
-    const { section }:SectionResponse = await client.query(settingsQuery, {filter: {...filter}})
+    const { section }:SectionResponse = await client.query(settingsQuery, filter &&  {filter: {...filter}})
     
     const data = JSON.parse(section.data)
   
