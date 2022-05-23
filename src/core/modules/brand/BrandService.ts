@@ -1,19 +1,16 @@
 import { BrandRepository } from './BrandRepository'
-import { Brand, BrandFilter } from './BrandTypes'
+import { Brand, BrandFields } from './BrandTypes'
 
 export class BrandService {
-  static async getBrands(filter?: BrandFilter): Promise<Brand[]> {
-    const result:Brand[] = await BrandRepository.getBrands(filter)
-    return result
-  }
+
   
-  static async getBrandsById(id: number): Promise<Brand[]> {
-    const result:Brand[] = await BrandRepository.getBrandsById(id)
+  static async getBrandById(id: number, fields?: Array<BrandFields>): Promise<Brand> {
+    const result:Brand = await BrandRepository.getBrandById(id, fields)
     return result
   } 
 
-  static async getBrandsBySlug(slug: string): Promise<Brand[]> {
-    const result:Brand[] = await BrandRepository.getBrandsBySlug(slug)
+  static async getBrandBySlug(slug: string, fields?: Array<BrandFields>): Promise<Brand> {
+    const result:Brand = await BrandRepository.getBrandBySlug(slug, fields)
     return result
   } 
 }

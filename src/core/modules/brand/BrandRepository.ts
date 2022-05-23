@@ -1,45 +1,63 @@
 import { client } from '../../services/GraphqlService'
-import { Brand, BrandFilter, BrandResponse } from './BrandTypes'
+import { Brand, BrandFields, BrandList, BrandListResponse, BrandResponse, OptionsGetBrand, OptionsGetBrandList } from './BrandTypes'
+
+const BRAND_QUERY_DEFAULT_FIELDS = ["id" , "hotsite_id" , "external_id" , "name" , "slug" , "description" 
+    , "short_description" , "image" , "banner" , "meta_title" , "meta_keywords" , "meta_description"
+    , "position" , "url" , "active" , "created_at" , "updated_at"]
 
 export class BrandRepository {
-  static async getBrands(filter?: BrandFilter): Promise<Brand[]> {
+
+  static async getBrandList(optionsGetBrandList: OptionsGetBrandList): Promise<BrandList> {
+
+    const { fields, filter } = optionsGetBrandList
+
+    const queryFields: string = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
+
+    queryFields. replace("image", "image {alt, src}")
+
+    const brandListQuery = `
+      query getBrands($filter: filterPaginationBrand) {
+        brands(filter: $filter) {
+          edges {
+            node {
+              ${queryFields}
+            }
+          }
+        }
+      }
+    `
+
+    const { brands }:BrandListResponse = await client.query(brandListQuery, filter && {filter: {...filter}})
+   
+    return brands
+  }
+
+  private static async getBrand(optionsGetBrand: OptionsGetBrand): Promise<Brand> {
+
+    const { fields, filter } = optionsGetBrand
+
+    const queryFields: string = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
+
+    queryFields. replace("image", "image {alt, src}")
+
     const brandQuery = `
       query getBrand($filter: filterBrand){
         brand(filter: $filter){
-          id
-          name
-          slug
-          position
-          url
-          active
-          created_at
-          external_id
-          hotsite_id
-          description
-          short_description
-          image {
-            alt
-            src
-          }
-          banner
-          meta_title
-          meta_keywords
-          meta_description
-          updated_at
+          ${queryFields}
+        }
       }
-    }
-  `
+    `
 
     const { brand }:BrandResponse = await client.query(brandQuery, filter && {filter: {...filter}})
   
     return brand
   }
 
-  static async getBrandsById(id: number) {
-    return this.getBrands({id: id})
+  static async getBrandById(id: number, fields?: BrandFields[]): Promise<Brand> {
+    return this.getBrand({fields: fields || null, filter: {id: id}})
   }
 
-  static async getBrandsBySlug(slug: string) {
-    return this.getBrands({slug: slug})
+  static async getBrandBySlug(slug: string, fields?: BrandFields[]){
+    return this.getBrand({fields: fields || null, filter: {slug: slug}})
   }
 }

@@ -5,13 +5,9 @@ import brandMock from '../../../mocks/brand/brand.json'
 import brandIdFIlterMock from '../../../mocks/brand/brand.id.json'
 import sectionbrandSlugFilterMock from '../../../mocks/brand/brand.slug.json'
 
-jest.mock('../../../services/GraphqlService', () => {
-  return { client: { query: (query, filter?):BrandResponse => (getMock(filter).data) } }
-})
-
 const mockSelector = {
   id: brandIdFIlterMock,
-  slug: sectionbrandSlugFilterMock,
+  slug: sectionbrandSlugFilterMock
 }
 
 const refereceBrandObject:Brand = {
@@ -34,16 +30,19 @@ const refereceBrandObject:Brand = {
   updated_at: ''
 }
 
-function getMock(filter?: {filter: BrandFilter}) {
+jest.mock('../../../services/GraphqlService', () => {
+  return { client: { query: (query, filter?):BrandResponse => (getSingleBrandMock(filter).data) } }
+})
+
+function getSingleBrandMock(filter?: {filter: BrandFilter}) {
   const filterKey = filter && Object.keys(filter.filter)[0]
   return !filterKey ? brandMock : mockSelector[filterKey]
 }
 
-function buildBrandAsserts(brandResult:Brand[], filter?: unknown, filterValue?: any) {
-  const mock = getMock(filter && {filter: filter}).data.brand
+function buildBrandAsserts(brandResult:Brand, filter?: unknown, filterValue?: any) {
+  const mock = getSingleBrandMock(filter && {filter: filter}).data.brand
 
   buildBaseAsserts(brandResult, mock, refereceBrandObject)
-  
   if (filter) {
     const filterKey = Object.keys(filter)[0]
     expect(brandResult[filterKey]).toEqual(filterValue)
@@ -51,20 +50,15 @@ function buildBrandAsserts(brandResult:Brand[], filter?: unknown, filterValue?: 
 }
 
 describe('Brand Module', () => {
-  it('Get brands with no filter', async () => {
-    const brandResult:Brand[] = await BrandService.getBrands()
-    buildBrandAsserts(brandResult)
-  })
-
-  it('Get brands by id', async () => {
+  it('Get brand by id', async () => {
     const BRAND_ID_FILTER = 1090
-    const brandResult:Brand[] = await BrandService.getBrandsById(BRAND_ID_FILTER)
+    const brandResult: Brand = await BrandService.getBrandById(BRAND_ID_FILTER)
     buildBrandAsserts(brandResult, {id: BRAND_ID_FILTER}, BRAND_ID_FILTER)
   })
 
-  it('Get brands by slug', async () => {
-    const SLUG_FILTER = "av-bolsas"
-    const brandResult:Brand[] = await BrandService.getBrandsBySlug(SLUG_FILTER)
-    buildBrandAsserts(brandResult, {slug: SLUG_FILTER}, SLUG_FILTER)
+  it('Get brand by slug', async () => {
+    const BRAND_SLUG_FILTER = 'av-bolsas'
+    const brandResult: Brand = await BrandService.getBrandBySlug(BRAND_SLUG_FILTER)
+    buildBrandAsserts(brandResult, {slug: BRAND_SLUG_FILTER}, BRAND_SLUG_FILTER)
   })
 })
