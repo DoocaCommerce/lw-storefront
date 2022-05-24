@@ -7,28 +7,28 @@ const BRAND_QUERY_DEFAULT_FIELDS = ["id" , "hotsite_id" , "external_id" , "name"
 
 export class BrandRepository {
 
-  // static async getBrandList(optionsGetBrandList: OptionsGetBrandList): Promise<BrandList> {
+  static async getBrandList(optionsGetBrandList: OptionsGetBrandList): Promise<BrandList> {
 
-  //   const { fields, filter } = optionsGetBrandList
+    const { fields, filter } = optionsGetBrandList
 
-  //   const queryFields: String = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
+    const queryFields: String = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
 
-  //   const brandListQuery = `
-  //     query getBrands($filter: filterPaginationBrand) {
-  //       brands(filter: $filter) {
-  //         edges {
-  //           node {
-  //             ${queryFields}
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `
+    const brandListQuery = `
+      query getBrands($filter: filterPaginationBrand) {
+        brands(filter: $filter) {
+          edges {
+            node {
+              ${queryFields}
+            }
+          }
+        }
+      }
+    `
 
-  //   const { brands }:BrandListResponse = await client.query(brandListQuery, filter && {filter: {...filter}})
+    const { brands }:BrandListResponse = await client.query(brandListQuery, filter && {filter: {...filter}})
    
-  //   return brands
-  // }
+    return brands
+  }
 
   private static async getBrand(optionsGetBrand: OptionsGetBrand): Promise<Brand> {
 
