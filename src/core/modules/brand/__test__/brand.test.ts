@@ -1,17 +1,10 @@
+import "isomorphic-fetch"
 import { BrandService } from '../BrandService'
-import { Brand, BrandFilter, BrandResponse } from '../BrandTypes'
+import { Brand, BrandFields } from '../BrandTypes'
 import { buildBaseAsserts } from '../../../helpers/testHelper'
-import brandMock from '../../../mocks/brand/brand.json'
-import brandIdFIlterMock from '../../../mocks/brand/brand.id.json'
-import sectionbrandSlugFilterMock from '../../../mocks/brand/brand.slug.json'
 
-const mockSelector = {
-  id: brandIdFIlterMock,
-  slug: sectionbrandSlugFilterMock
-}
-
-const refereceBrandObject:Brand = {
-  id: 0,
+const refereceBrandAllFieldsObject:Brand = {
+  id: '',
   hotsite_id: 0,
   external_id: 0,
   name: '',
@@ -30,35 +23,44 @@ const refereceBrandObject:Brand = {
   updated_at: ''
 }
 
-jest.mock('../../../services/GraphqlService', () => {
-  return { client: { query: (query, filter?):BrandResponse => (getSingleBrandMock(filter).data) } }
-})
-
-function getSingleBrandMock(filter?: {filter: BrandFilter}) {
-  const filterKey = filter && Object.keys(filter.filter)[0]
-  return !filterKey ? brandMock : mockSelector[filterKey]
+const refereceBrandSelectedFieldsObject:Brand = {
+  id: '',
+  name: '',
+  slug: ''
 }
 
-function buildBrandAsserts(brandResult:Brand, filter?: unknown, filterValue?: any) {
-  const mock = getSingleBrandMock(filter && {filter: filter}).data.brand
+const selectedFields: Array<BrandFields> = ['id', 'name', 'slug']
 
-  buildBaseAsserts(brandResult, mock, refereceBrandObject)
+function buildBrandAsserts(brandResult:Brand, refereceBrandObject: unknown, filter?: unknown, filterValue?: any) {
+  buildBaseAsserts(brandResult, refereceBrandObject)
   if (filter) {
     const filterKey = Object.keys(filter)[0]
-    expect(brandResult[filterKey]).toEqual(filterValue)
+    expect(brandResult[filterKey] == filterValue).toBeTruthy()
   }
 }
 
 describe('Brand Module', () => {
-  it('Get brand by id', async () => {
-    const BRAND_ID_FILTER = 1090
+  it('Get brand by id with all fields', async () => {
+    const BRAND_ID_FILTER = 1070
     const brandResult: Brand = await BrandService.getBrandById(BRAND_ID_FILTER)
-    buildBrandAsserts(brandResult, {id: BRAND_ID_FILTER}, BRAND_ID_FILTER)
+    buildBrandAsserts(brandResult, refereceBrandAllFieldsObject, {id: BRAND_ID_FILTER}, BRAND_ID_FILTER)
   })
 
-  it('Get brand by slug', async () => {
-    const BRAND_SLUG_FILTER = 'av-bolsas'
+  it('Get brand by slug with all fields', async () => {
+    const BRAND_SLUG_FILTER = 'av-carteiras'
     const brandResult: Brand = await BrandService.getBrandBySlug(BRAND_SLUG_FILTER)
-    buildBrandAsserts(brandResult, {slug: BRAND_SLUG_FILTER}, BRAND_SLUG_FILTER)
+    buildBrandAsserts(brandResult, refereceBrandAllFieldsObject, {slug: BRAND_SLUG_FILTER}, BRAND_SLUG_FILTER)
+  })
+
+  it('Get brand by id with selected fields', async () => {
+    const BRAND_ID_FILTER = 1070
+    const brandResult: Brand = await BrandService.getBrandById(BRAND_ID_FILTER, selectedFields)
+    buildBrandAsserts(brandResult, refereceBrandSelectedFieldsObject, {id: BRAND_ID_FILTER}, BRAND_ID_FILTER)
+  })
+
+  it('Get brand by slug with selected fields', async () => {
+    const BRAND_SLUG_FILTER = 'av-carteiras'
+    const brandResult: Brand = await BrandService.getBrandBySlug(BRAND_SLUG_FILTER, selectedFields)
+    buildBrandAsserts(brandResult, refereceBrandSelectedFieldsObject, {slug: BRAND_SLUG_FILTER}, BRAND_SLUG_FILTER)
   })
 })

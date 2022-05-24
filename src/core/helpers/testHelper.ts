@@ -6,9 +6,9 @@ export function normalizeMockData(mock: any, module: Module) {
     return data && { ...mockData, data }
 }
 
-export function buildBaseAsserts(result: unknown, mock: unknown, referenceObject: unknown) {
-    Object.keys(result).forEach((key) => {
-        expect(result[key]).toEqual(mock[key])
-        expect(typeof result[key]).toEqual(typeof referenceObject[key])
+export function buildBaseAsserts(result: unknown, referenceObject: unknown, mock?: unknown) {
+    Object.keys(result).filter(key => key !== '__typename').forEach((key) => {
+        mock && expect(result[key]).toEqual(mock[key])
+        expect(typeof result[key] === typeof referenceObject[key] || result[key] === null).toBeTruthy()
     })
 }

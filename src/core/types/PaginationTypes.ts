@@ -4,8 +4,8 @@ export interface PaginationFilter {
 }
 
 export interface PageInfo {
-  hasNextPage: Boolean
-  hasPreviousPage: Boolean
-  startCursor: String
-  endCursor: String
+  hasNextPage?: Boolean
+  hasPreviousPage?: Boolean
+  startCursor?: String
+  endCursor?: String
 }

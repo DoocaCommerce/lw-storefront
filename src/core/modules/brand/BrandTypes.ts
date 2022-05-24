@@ -1,21 +1,22 @@
+import { nullable } from 'src/core/types/NullableTypes'
 import { Image } from '../../types/ImageTypes'
 import { PageInfo, PaginationFilter } from '../../types/PaginationTypes'
 
 export interface Brand {
-  id?: Number
-  hotsite_id?: Number
-  external_id?: Number
-  name?: String
-  slug?: String
-  description?: String
-  short_description?: String
-  image?: Image
-  banner?: String
-  meta_title?: String
-  meta_keywords?: String
-  meta_description?: String
-  position?: Number
-  url?: String
+  id?: String
+  hotsite_id?: nullable<Number>
+  external_id?: nullable<Number>
+  name?: nullable<String>
+  slug?: nullable<String>
+  description?: nullable<String>
+  short_description?: nullable<String>
+  image?: nullable<Image>
+  banner?: nullable<String>
+  meta_title?: nullable<String>
+  meta_keywords?: nullable<String>
+  meta_description?: nullable<String>
+  position?: nullable<Number>
+  url?: nullable<String>
   active?: Boolean
   created_at?: String
   updated_at?: String
@@ -23,7 +24,7 @@ export interface Brand {
 
 export interface BrandEdges {
   node: Brand[]
-  cursor: String
+  cursor?: String
 }
 
 export interface BrandList {
@@ -36,7 +37,7 @@ export interface BrandListResponse {
 }
 
 export interface BrandFilter {
-  id?: number
+  id?: Number
   slug?: String
 }
 
@@ -45,7 +46,7 @@ export interface BrandResponse {
 }
 
 export interface OptionsGetBrand {
-  fields: BrandFields[] | null
+  fields: nullable<BrandFields[]> 
   filter?: BrandFilter
 }
 
@@ -55,5 +56,5 @@ export interface OptionsGetBrandList {
 }
 
 export type BrandFields = "id" | "hotsite_id" | "external_id" | "name" | "slug" | "description" 
-| "short_description" | "image" | "banner" | "meta_title" | "meta_keywords" | "meta_description"
+| "short_description" | "image {alt, src}" | "banner" | "meta_title" | "meta_keywords" | "meta_description"
 | "position" | "url" | "active" | "created_at" | "updated_at" 

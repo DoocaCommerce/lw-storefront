@@ -20,6 +20,6 @@ describe('Settings Module', () => {
   it('Get settings', async () => {
     const settingResult:Setting<any> = await SettingsService.getSettings()
     const normalizedMock = normalizeMockData(settingMock, Module.setting)
-    buildBaseAsserts(settingResult, normalizedMock, refereceSettingObject)
+    buildBaseAsserts(settingResult, refereceSettingObject, normalizedMock)
   })
 })

@@ -2,43 +2,39 @@ import { client } from '../../services/GraphqlService'
 import { Brand, BrandFields, BrandList, BrandListResponse, BrandResponse, OptionsGetBrand, OptionsGetBrandList } from './BrandTypes'
 
 const BRAND_QUERY_DEFAULT_FIELDS = ["id" , "hotsite_id" , "external_id" , "name" , "slug" , "description" 
-    , "short_description" , "image" , "banner" , "meta_title" , "meta_keywords" , "meta_description"
+    , "short_description" , "image {alt, src}" , "banner" , "meta_title" , "meta_keywords" , "meta_description"
     , "position" , "url" , "active" , "created_at" , "updated_at"]
 
 export class BrandRepository {
 
-  static async getBrandList(optionsGetBrandList: OptionsGetBrandList): Promise<BrandList> {
+  // static async getBrandList(optionsGetBrandList: OptionsGetBrandList): Promise<BrandList> {
 
-    const { fields, filter } = optionsGetBrandList
+  //   const { fields, filter } = optionsGetBrandList
 
-    const queryFields: string = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
+  //   const queryFields: String = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
 
-    queryFields. replace("image", "image {alt, src}")
+  //   const brandListQuery = `
+  //     query getBrands($filter: filterPaginationBrand) {
+  //       brands(filter: $filter) {
+  //         edges {
+  //           node {
+  //             ${queryFields}
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `
 
-    const brandListQuery = `
-      query getBrands($filter: filterPaginationBrand) {
-        brands(filter: $filter) {
-          edges {
-            node {
-              ${queryFields}
-            }
-          }
-        }
-      }
-    `
-
-    const { brands }:BrandListResponse = await client.query(brandListQuery, filter && {filter: {...filter}})
+  //   const { brands }:BrandListResponse = await client.query(brandListQuery, filter && {filter: {...filter}})
    
-    return brands
-  }
+  //   return brands
+  // }
 
   private static async getBrand(optionsGetBrand: OptionsGetBrand): Promise<Brand> {
 
     const { fields, filter } = optionsGetBrand
 
-    const queryFields: string = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
-
-    queryFields. replace("image", "image {alt, src}")
+    const queryFields: String = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
 
     const brandQuery = `
       query getBrand($filter: filterBrand){
@@ -53,11 +49,11 @@ export class BrandRepository {
     return brand
   }
 
-  static async getBrandById(id: number, fields?: BrandFields[]): Promise<Brand> {
+  static async getBrandById(id: Number, fields?: BrandFields[]): Promise<Brand> {
     return this.getBrand({fields: fields || null, filter: {id: id}})
   }
 
-  static async getBrandBySlug(slug: string, fields?: BrandFields[]){
+  static async getBrandBySlug(slug: String, fields?: BrandFields[]){
     return this.getBrand({fields: fields || null, filter: {slug: slug}})
   }
 }
