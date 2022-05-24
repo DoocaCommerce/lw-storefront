@@ -2,6 +2,7 @@ import "isomorphic-fetch"
 import { BrandService } from '../BrandService'
 import { Brand, BrandFields, BrandList } from '../BrandTypes'
 import { buildBaseAsserts } from '../../../helpers/testHelper'
+import { PageInfo, PaginationFilter } from "../../../types/PaginationTypes"
 
 const refereceBrandAllFieldsObject:Brand = {
   id: '',
@@ -30,6 +31,13 @@ const refereceBrandSelectedFieldsObject:Brand = {
 }
 
 const selectedFields: Array<BrandFields> = ['id', 'name', 'slug']
+
+const referencePageInfoObject: PageInfo = {
+  hasNextPage: false,
+  hasPreviousPage: false,
+  startCursor: '',
+  endCursor: ''
+}
 
 function buildBrandAsserts(brandResult:Brand, refereceBrandObject: unknown, filter?: unknown, filterValue?: any) {
   buildBaseAsserts(brandResult, refereceBrandObject)
@@ -70,6 +78,7 @@ describe('Brand Module', () => {
     const brandResult: any = await BrandService.getBrandList(PAGINATION_FILTER, selectedFields)
     const brandList:Array<Brand> = brandResult.edges.map(edge => (edge.node))
     brandList.forEach(brand => buildBrandAsserts(brand, refereceBrandSelectedFieldsObject))
+    buildBaseAsserts(brandResult.pageInfo, referencePageInfoObject)
     expect(brandList.length).toEqual(NUMBER_OF_RECORDS)
   })
 })
