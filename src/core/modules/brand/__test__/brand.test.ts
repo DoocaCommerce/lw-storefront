@@ -1,6 +1,6 @@
 import "isomorphic-fetch"
 import { BrandService } from '../BrandService'
-import { Brand, BrandFields } from '../BrandTypes'
+import { Brand, BrandFields, BrandList } from '../BrandTypes'
 import { buildBaseAsserts } from '../../../helpers/testHelper'
 
 const refereceBrandAllFieldsObject:Brand = {
@@ -41,26 +41,35 @@ function buildBrandAsserts(brandResult:Brand, refereceBrandObject: unknown, filt
 
 describe('Brand Module', () => {
   it('Get brand by id with all fields', async () => {
-    const BRAND_ID_FILTER = 1070
-    const brandResult: Brand = await BrandService.getBrandById(BRAND_ID_FILTER)
-    buildBrandAsserts(brandResult, refereceBrandAllFieldsObject, {id: BRAND_ID_FILTER}, BRAND_ID_FILTER)
+    const ID_FILTER = 1070
+    const brandResult: Brand = await BrandService.getBrandById(ID_FILTER)
+    buildBrandAsserts(brandResult, refereceBrandAllFieldsObject, {id: ID_FILTER}, ID_FILTER)
   })
 
   it('Get brand by slug with all fields', async () => {
-    const BRAND_SLUG_FILTER = 'av-carteiras'
-    const brandResult: Brand = await BrandService.getBrandBySlug(BRAND_SLUG_FILTER)
-    buildBrandAsserts(brandResult, refereceBrandAllFieldsObject, {slug: BRAND_SLUG_FILTER}, BRAND_SLUG_FILTER)
+    const SLUG_FILTER = 'av-carteiras'
+    const brandResult: Brand = await BrandService.getBrandBySlug(SLUG_FILTER)
+    buildBrandAsserts(brandResult, refereceBrandAllFieldsObject, {slug: SLUG_FILTER}, SLUG_FILTER)
   })
 
   it('Get brand by id with selected fields', async () => {
-    const BRAND_ID_FILTER = 1070
-    const brandResult: Brand = await BrandService.getBrandById(BRAND_ID_FILTER, selectedFields)
-    buildBrandAsserts(brandResult, refereceBrandSelectedFieldsObject, {id: BRAND_ID_FILTER}, BRAND_ID_FILTER)
+    const ID_FILTER = 1070
+    const brandResult: Brand = await BrandService.getBrandById(ID_FILTER, selectedFields)
+    buildBrandAsserts(brandResult, refereceBrandSelectedFieldsObject, {id: ID_FILTER}, ID_FILTER)
   })
 
   it('Get brand by slug with selected fields', async () => {
-    const BRAND_SLUG_FILTER = 'av-carteiras'
-    const brandResult: Brand = await BrandService.getBrandBySlug(BRAND_SLUG_FILTER, selectedFields)
-    buildBrandAsserts(brandResult, refereceBrandSelectedFieldsObject, {slug: BRAND_SLUG_FILTER}, BRAND_SLUG_FILTER)
+    const SLUG_FILTER = 'av-carteiras'
+    const brandResult: Brand = await BrandService.getBrandBySlug(SLUG_FILTER, selectedFields)
+    buildBrandAsserts(brandResult, refereceBrandSelectedFieldsObject, {slug: SLUG_FILTER}, SLUG_FILTER)
+  })
+
+  it('Get brand list with selected fields', async () => {
+    const NUMBER_OF_RECORDS = 3
+    const PAGINATION_FILTER = {page: 1, first: NUMBER_OF_RECORDS}
+    const brandResult: any = await BrandService.getBrandList(PAGINATION_FILTER, selectedFields)
+    const brandList:Array<Brand> = brandResult.edges.map(edge => (edge.node))
+    brandList.forEach(brand => buildBrandAsserts(brand, refereceBrandSelectedFieldsObject))
+    expect(brandList.length).toEqual(NUMBER_OF_RECORDS)
   })
 })

@@ -20,6 +20,13 @@ export class BrandRepository {
             node {
               ${queryFields}
             }
+            cursor
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
           }
         }
       }

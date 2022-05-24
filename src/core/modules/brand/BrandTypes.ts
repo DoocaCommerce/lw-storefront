@@ -51,7 +51,7 @@ export interface OptionsGetBrand {
 }
 
 export interface OptionsGetBrandList {
-  fields: BrandFields[] | null
+  fields: nullable<BrandFields[]>
   filter: PaginationFilter
 }
 

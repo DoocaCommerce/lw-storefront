@@ -11,7 +11,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await brand.getBrandBySlug('av', ["id" , "hotsite_id" , "external_id" , "name" , "slug" , "description" , "short_description" , "image"])
+      const result = await brand.getBrandList({page: 1, first: 3}, ['id', 'slug'])
       console.log(`result ${id}`, result)
     }
     get('header')
