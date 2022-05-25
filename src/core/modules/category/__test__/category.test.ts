@@ -1,9 +1,9 @@
 import "isomorphic-fetch"
 import { buildGeneralModuleAsserts } from "../../../helpers/testHelper"
 import { CategoryService } from "../CategoryService"
-import { Category, CategoryFields } from "../CategoryTypes"
+import { Category, CategoryFields, CategoryTree, CategoryTreeFields } from "../CategoryTypes"
 
-const referenceCategoryAllFieldsObject = {
+const referenceCategoryAllFieldsObject: Category = {
     id: 0,
     name: '',
     slug: '',
@@ -27,13 +27,19 @@ const referenceCategoryAllFieldsObject = {
     meta_description: '',
 }
 
-const selectedFields: Array<CategoryFields> = ['id', 'name', 'slug']
+const referenceCategoryTreeAllFieldsObject: CategoryTree = { ...referenceCategoryAllFieldsObject, children: [] }
 
-const referenceCategorySelectedFieldsObject = {
+const categorySelectedFields: Array<CategoryFields> = ['id', 'name', 'slug']
+
+const referenceCategorySelectedFieldsObject: Category = {
     id: 0,
     name: '',
     slug: ''
 }
+
+const categoryTreeSelectedFields: Array<CategoryTreeFields> = ['id', 'name', 'slug', 'children']
+
+const referenceCategoryTreeSelectedFieldsObject: CategoryTree = { ...referenceCategorySelectedFieldsObject, children: []}
 
 async function buildGetCategoryByIdAsserts(referenceObject: any, fields?: Array<CategoryFields>) {
     const ID_FILTER = 3 
@@ -47,6 +53,18 @@ async function buildGetCategoryBySlugAsserts(referenceObject: any, fields?: Arra
     buildGeneralModuleAsserts(categoryResult, referenceObject, {slug: SLUG_FILTER}, SLUG_FILTER)
 }
 
+async function buildGetCategoryTreeByIdAsserts(referenceObject: any, fields?: Array<CategoryTreeFields>) {
+    const ID_FILTER = 1104
+    const categoryResult:Array<CategoryTree> = await CategoryService.getCategoryTreeById(ID_FILTER, fields)
+    categoryResult.forEach(category => buildGeneralModuleAsserts(category, referenceObject, {id: ID_FILTER}, ID_FILTER))
+}
+
+async function buildGetCategoryTreeBySlugAsserts(referenceObject: any, fields?: Array<CategoryTreeFields>) {
+    const SLUG_FILTER = 'produtos-masculinos'
+    const categoryResult:Array<CategoryTree> = await CategoryService.getCategoryTreeBySlug(SLUG_FILTER, fields)
+    categoryResult.forEach(category => buildGeneralModuleAsserts(category, referenceObject, {slug: SLUG_FILTER}, SLUG_FILTER))
+}
+
 describe('Category Module', () => {
     it('Get category by id with all fields', async () => {
         await buildGetCategoryByIdAsserts(referenceCategoryAllFieldsObject)
@@ -57,10 +75,26 @@ describe('Category Module', () => {
     })
 
     it('Get category by id with selected fields', async () => {
-        await buildGetCategoryByIdAsserts(referenceCategorySelectedFieldsObject, selectedFields)
+        await buildGetCategoryByIdAsserts(referenceCategorySelectedFieldsObject, categorySelectedFields)
     })
 
     it('Get category by slug with selected fields', async () => {
-        await buildGetCategoryBySlugAsserts(referenceCategorySelectedFieldsObject, selectedFields)
+        await buildGetCategoryBySlugAsserts(referenceCategorySelectedFieldsObject, categorySelectedFields)
+    })
+
+    it('Get categoryTree by id with all fields', async () => {
+        await buildGetCategoryTreeByIdAsserts(referenceCategoryTreeAllFieldsObject)
+    })
+
+    it('Get categoryTree by slug with all fields', async () => {
+        await buildGetCategoryTreeBySlugAsserts(referenceCategoryTreeAllFieldsObject)
+    })
+
+    it('Get categoryTree by id with selected fields', async () => {
+        await buildGetCategoryTreeByIdAsserts(referenceCategoryTreeSelectedFieldsObject, categoryTreeSelectedFields)
+    })
+
+    it('Get categoryTree by slug with selected fields', async () => {
+        await buildGetCategoryTreeBySlugAsserts(referenceCategoryTreeSelectedFieldsObject, categoryTreeSelectedFields)
     })
 })
