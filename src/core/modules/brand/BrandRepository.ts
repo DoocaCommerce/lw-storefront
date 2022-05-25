@@ -2,7 +2,7 @@ import { client } from '../../services/GraphqlService'
 import { Brand, BrandFields, BrandList, BrandListResponse, BrandResponse, OptionsGetBrand, OptionsGetBrandList } from './BrandTypes'
 
 const BRAND_QUERY_DEFAULT_FIELDS = ["id" , "hotsite_id" , "external_id" , "name" , "slug" , "description" 
-    , "short_description" , "image {alt, src}" , "banner" , "meta_title" , "meta_keywords" , "meta_description"
+    , "short_description" , "image {alt, src}" , "banner {alt, src}" , "meta_title" , "meta_keywords" , "meta_description"
     , "position" , "url" , "active" , "created_at" , "updated_at"]
 
 export class BrandRepository {
@@ -27,6 +27,7 @@ export class BrandRepository {
             hasPreviousPage
             startCursor
             endCursor
+            total
           }
         }
       }

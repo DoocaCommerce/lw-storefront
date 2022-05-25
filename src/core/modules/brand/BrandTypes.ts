@@ -11,7 +11,7 @@ export interface Brand {
   description?: nullable<String>
   short_description?: nullable<String>
   image?: nullable<Image>
-  banner?: nullable<String>
+  banner?: nullable<Image>
   meta_title?: nullable<String>
   meta_keywords?: nullable<String>
   meta_description?: nullable<String>
@@ -56,5 +56,5 @@ export interface OptionsGetBrandList {
 }
 
 export type BrandFields = "id" | "hotsite_id" | "external_id" | "name" | "slug" | "description" 
-| "short_description" | "image {alt, src}" | "banner" | "meta_title" | "meta_keywords" | "meta_description"
+| "short_description" | "image {alt, src}" | "banner {alt, src}" | "meta_title" | "meta_keywords" | "meta_description"
 | "position" | "url" | "active" | "created_at" | "updated_at" 

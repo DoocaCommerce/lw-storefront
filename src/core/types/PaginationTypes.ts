@@ -8,4 +8,5 @@ export interface PageInfo {
   hasPreviousPage?: Boolean
   startCursor?: String
   endCursor?: String
+  total?: Number
 }

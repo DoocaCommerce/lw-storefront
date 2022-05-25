@@ -1,8 +1,8 @@
 import "isomorphic-fetch"
 import { BrandService } from '../BrandService'
-import { Brand, BrandFields, BrandList } from '../BrandTypes'
+import { Brand, BrandFields } from '../BrandTypes'
 import { buildBaseAsserts } from '../../../helpers/testHelper'
-import { PageInfo, PaginationFilter } from "../../../types/PaginationTypes"
+import { PageInfo } from "../../../types/PaginationTypes"
 
 const refereceBrandAllFieldsObject:Brand = {
   id: '',
@@ -13,7 +13,7 @@ const refereceBrandAllFieldsObject:Brand = {
   description: '',
   short_description: '',
   image: {src: ''},
-  banner: '',
+  banner: {src: ''},
   meta_title: '',
   meta_keywords: '',
   meta_description: '',
@@ -36,7 +36,18 @@ const referencePageInfoObject: PageInfo = {
   hasNextPage: false,
   hasPreviousPage: false,
   startCursor: '',
-  endCursor: ''
+  endCursor: '',
+  total: 0
+}
+
+async function buildBrandListAsserts(referenceObject: unknown, fields?: Array<BrandFields>) {
+  const NUMBER_OF_RECORDS = 3
+  const PAGINATION_FILTER = {page: 1, first: NUMBER_OF_RECORDS}
+  const brandResult: any = await BrandService.getBrandList(PAGINATION_FILTER, fields)
+  const brandList:Array<Brand> = brandResult.edges.map(edge => (edge.node))
+  brandList.forEach(brand => buildBrandAsserts(brand, referenceObject))
+  buildBaseAsserts(brandResult.pageInfo, referencePageInfoObject)
+  expect(brandList.length).toEqual(NUMBER_OF_RECORDS)
 }
 
 function buildBrandAsserts(brandResult:Brand, refereceBrandObject: unknown, filter?: unknown, filterValue?: any) {
@@ -72,13 +83,11 @@ describe('Brand Module', () => {
     buildBrandAsserts(brandResult, refereceBrandSelectedFieldsObject, {slug: SLUG_FILTER}, SLUG_FILTER)
   })
 
+  it('Get brand list with all fields', async () => {
+    await buildBrandListAsserts(refereceBrandAllFieldsObject)
+  })
+
   it('Get brand list with selected fields', async () => {
-    const NUMBER_OF_RECORDS = 3
-    const PAGINATION_FILTER = {page: 1, first: NUMBER_OF_RECORDS}
-    const brandResult: any = await BrandService.getBrandList(PAGINATION_FILTER, selectedFields)
-    const brandList:Array<Brand> = brandResult.edges.map(edge => (edge.node))
-    brandList.forEach(brand => buildBrandAsserts(brand, refereceBrandSelectedFieldsObject))
-    buildBaseAsserts(brandResult.pageInfo, referencePageInfoObject)
-    expect(brandList.length).toEqual(NUMBER_OF_RECORDS)
+    await buildBrandListAsserts(refereceBrandSelectedFieldsObject, selectedFields)
   })
 })
