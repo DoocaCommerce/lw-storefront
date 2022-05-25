@@ -35,7 +35,7 @@ async function buildSectionAsserts(filter?: unknown, filterValue?: any) {
   const mock = getMock(filter && {filter: filter})
   const normalizedMock = normalizeMockData(mock, Module.section)
   
-  buildBaseAsserts(sectionResult, normalizedMock, refereceSettingObject)
+  buildBaseAsserts(sectionResult, refereceSettingObject, normalizedMock)
   
   if (filter) {
     const filterKey = Object.keys(filter)[0]

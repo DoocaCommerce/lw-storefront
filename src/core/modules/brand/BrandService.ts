@@ -1,18 +1,21 @@
-import { getBrandByID, getBrands } from './BrandRepository'
-import { Brand } from './BrandTypes'
+import { PaginationFilter } from 'src/core/types/PaginationTypes'
+import { BrandRepository } from './BrandRepository'
+import { Brand, BrandFields, BrandList } from './BrandTypes'
 
-async function get(): Promise<Brand[]> {
-  const result = await getBrands()
+export class BrandService {
 
-  return result
-}
+  static async getBrandList(pagenationFilter: PaginationFilter, fields?: Array<BrandFields>): Promise<BrandList> {
+    const result:BrandList = await BrandRepository.getBrandList({fields: fields || null, filter: pagenationFilter})
+    return result
+  }
+  
+  static async getBrandById(id: Number, fields?: Array<BrandFields>): Promise<Brand> {
+    const result:Brand = await BrandRepository.getBrandById(id, fields)
+    return result
+  } 
 
-async function getById(id: number): Promise<Brand> {
-  const result = await getBrandByID(id)
-  return result
-}
-
-export default {
-  get,
-  getById
+  static async getBrandBySlug(slug: String, fields?: Array<BrandFields>): Promise<Brand> {
+    const result:Brand = await BrandRepository.getBrandBySlug(slug, fields)
+    return result
+  } 
 }

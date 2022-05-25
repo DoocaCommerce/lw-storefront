@@ -1,24 +1,60 @@
+import { nullable } from 'src/core/types/NullableTypes'
 import { Image } from '../../types/ImageTypes'
+import { PageInfo, PaginationFilter } from '../../types/PaginationTypes'
 
 export interface Brand {
-  id: Number
-  hotsite_id: Number
-  name: string
-  slug: string
-  description: string
-  short_description: string
-  image: Image
-  banner: string
-  meta_title: string
-  meta_keywords: string
-  meta_description: string
-  position: Number
-  url: string
-  active: Boolean
-  created_at: string
-  updated_at: string
+  id?: String
+  hotsite_id?: nullable<Number>
+  external_id?: nullable<Number>
+  name?: nullable<String>
+  slug?: nullable<String>
+  description?: nullable<String>
+  short_description?: nullable<String>
+  image?: nullable<Image>
+  banner?: nullable<Image>
+  meta_title?: nullable<String>
+  meta_keywords?: nullable<String>
+  meta_description?: nullable<String>
+  position?: nullable<Number>
+  url?: nullable<String>
+  active?: Boolean
+  created_at?: String
+  updated_at?: String
 }
 
-export interface BrandRepositoryType {
-  getBrands(): Promise<Brand[]>
+export interface BrandEdges {
+  node: Brand[]
+  cursor?: String
 }
+
+export interface BrandList {
+  edges: BrandEdges
+  pageInfo: PageInfo
+}
+
+export interface BrandListResponse {
+  brands: BrandList
+}
+
+export interface BrandFilter {
+  id?: Number
+  slug?: String
+}
+
+export interface BrandResponse {
+  brand: Brand
+}
+
+export interface OptionsGetBrand {
+  fields: nullable<BrandFields[]> 
+  filter?: BrandFilter
+}
+
+export interface OptionsGetBrandList {
+  fields: nullable<BrandFields[]>
+  filter: PaginationFilter
+}
+
+export type BrandFields = "id" | "hotsite_id" | "external_id" | "name" | "slug" | "description" 
+| "short_description" | "image {alt, src}" | "banner {alt, src}" | "meta_title" | "meta_keywords" | "meta_description"
+| "position" | "url" | "active" | "created_at" | "updated_at" 

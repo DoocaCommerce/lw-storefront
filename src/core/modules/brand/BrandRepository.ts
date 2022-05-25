@@ -1,33 +1,67 @@
 import { client } from '../../services/GraphqlService'
-import { OptionsGet } from '../../types/FetchTypes'
-import { Brand } from './BrandTypes'
+import { Brand, BrandFields, BrandList, BrandListResponse, BrandResponse, OptionsGetBrand, OptionsGetBrandList } from './BrandTypes'
 
-const schemaDefault = ['id', 'name', 'slug']
+const BRAND_QUERY_DEFAULT_FIELDS = ["id" , "hotsite_id" , "external_id" , "name" , "slug" , "description" 
+    , "short_description" , "image {alt, src}" , "banner {alt, src}" , "meta_title" , "meta_keywords" , "meta_description"
+    , "position" , "url" , "active" , "created_at" , "updated_at"]
 
-export async function getBrands(options?: OptionsGet): Promise<Brand[]> {
-  const fieldsQuery = options?.fields || schemaDefault
-  const brandsQuery = `
-    query {
-      brands {
-        ${fieldsQuery.join()}
+export class BrandRepository {
+
+  static async getBrandList(optionsGetBrandList: OptionsGetBrandList): Promise<BrandList> {
+
+    const { fields, filter } = optionsGetBrandList
+
+    const queryFields: String = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
+
+    const brandListQuery = `
+      query getBrands($filter: filterPaginationBrand) {
+        brands(filter: $filter) {
+          edges {
+            node {
+              ${queryFields}
+            }
+            cursor
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+            total
+          }
+        }
       }
-    }
-  `
+    `
 
-  const { brands } = await client.query(brandsQuery)
-  return brands
-}
+    const { brands }:BrandListResponse = await client.query(brandListQuery, filter && {filter: {...filter}})
+   
+    return brands
+  }
 
-export async function getBrandByID(id: number, options?: OptionsGet): Promise<Brand> {
-  const fieldsQuery = options?.fields || schemaDefault
-  const brandQuery = `
-    query ($id: ID!) {
-      brand(id: $id) {
-        ${fieldsQuery.join()}
+  private static async getBrand(optionsGetBrand: OptionsGetBrand): Promise<Brand> {
+
+    const { fields, filter } = optionsGetBrand
+
+    const queryFields: String = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
+
+    const brandQuery = `
+      query getBrand($filter: filterBrand){
+        brand(filter: $filter){
+          ${queryFields}
+        }
       }
-    }
-  `
+    `
 
-  const { brand } = await client.query(brandQuery, { id })
-  return brand
+    const { brand }:BrandResponse = await client.query(brandQuery, filter && {filter: {...filter}})
+  
+    return brand
+  }
+
+  static async getBrandById(id: Number, fields?: BrandFields[]): Promise<Brand> {
+    return this.getBrand({fields: fields || null, filter: {id: id}})
+  }
+
+  static async getBrandBySlug(slug: String, fields?: BrandFields[]){
+    return this.getBrand({fields: fields || null, filter: {slug: slug}})
+  }
 }
