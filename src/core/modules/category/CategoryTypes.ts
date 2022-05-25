@@ -1,7 +1,7 @@
 import { nullable } from "src/core/types/NullableTypes";
 
 export interface Category {
-    id?: nullable<Number>
+    id?: Number
     name?: nullable<String>
     slug?: nullable<String>
     position?: nullable<Number>
