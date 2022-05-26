@@ -1,18 +1,31 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../types/RootState'
+import { useEffect, useState } from 'react'
 import { SettingsState } from '../store/modules/settings/type'
-import { getSettings } from '../store/modules/settings'
+import { services, socket } from '../../core'
 
-export function useSettings(): SettingsState {
-  const dispatch = useDispatch()
-  const settings = useSelector((state: RootState) => state.settings)
+export function useSettings(): any {
+  const urlParams = new URLSearchParams(window.location.search)
+  const hashPreview = urlParams.get('preview')
+  const [settings, setSettings] = useState<any>()
+
+  const getSettings = async () => {
+    const result = await services.settings.getSettings()
+    setSettings(result)
+  }
+
+  function onUpdate({ shopID, data }) {
+    if (data) {
+      setSettings(data?.settings)
+      // dispatch(updateSections(data?.sections))
+    }
+  }
+
+  if (hashPreview) {
+    socket.create(hashPreview, onUpdate)
+  }
 
   useEffect(() => {
-    if (Object.keys(settings?.data).length === 0) {
-      dispatch(getSettings())
-    }
-  }, [dispatch])
+    getSettings()
+  }, [])
 
   return settings
 }

@@ -1,4 +1,6 @@
 import { useEffect } from 'react'
+import { useSettings } from 'lw-storefront/lib/react/hooks/use-settings'
+
 import { services } from 'lw-storefront/lib/core'
 
 const { brand, category, sections, settings } = services
@@ -20,15 +22,11 @@ function Header() {
 }
 
 function App() {
+  const setting = useSettings()
   useEffect(() => {
-    get('app')
-  }, [])
-
-  return (
-    <div className="App">
-      <Header />
-    </div>
-  )
+    console.log(setting)
+  }, [setting])
+  return <div className="App">Teste </div>
 }
 
 export default App
