@@ -57,11 +57,11 @@ export class BrandRepository {
     return brand
   }
 
-  static async getBrandById(id: Number, fields?: BrandFields[]): Promise<Brand> {
+  static async getBrandById(id: Number, fields?: Array<BrandFields>): Promise<Brand> {
     return this.getBrand({fields: fields || null, filter: {id: id}})
   }
 
-  static async getBrandBySlug(slug: String, fields?: BrandFields[]){
+  static async getBrandBySlug(slug: String, fields?: Array<BrandFields>): Promise<Brand> {
     return this.getBrand({fields: fields || null, filter: {slug: slug}})
   }
 }

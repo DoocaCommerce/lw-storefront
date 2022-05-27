@@ -3,7 +3,7 @@ import { useSettings } from 'lw-storefront/lib/react/hooks/use-settings'
 
 import { services } from 'lw-storefront/lib/core'
 
-const { brand, category, sections, settings } = services
+const { brand, category, pages, sections, settings } = services
 
 const get = async (id: string) => {
   const result = await settings.getSettings()
@@ -13,7 +13,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await category.getCategoryTreeById(1104)
+      const result = await pages.getPageById(320, ['id', 'faq'])
       console.log(`result ${id}`, result)
     }
     get('header')
@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     console.log(setting)
   }, [setting])
-  return <div className="App">Teste </div>
+  return <div className="App"><Header /></div>
 }
 
 export default App
