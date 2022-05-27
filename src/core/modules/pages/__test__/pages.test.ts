@@ -56,4 +56,14 @@ describe('Pages Module', () => {
     it('Should get page by slug with selected fields when passing array of fields as parameter', async () => {
         await buildGetPageBySlugAsserts(referencePageObjectSelectedFields, selectedFIelds)
     })
+
+    it('Should get page list with all fields', async () => {
+        const result: Array<Page> = await PagesService.getPageList()
+        result.forEach(page => buildGeneralModuleAsserts(page, referencePageObjectAllFields))
+    })
+
+    it('Should get page list with selected fields', async () => {
+        const result: Array<Page> = await PagesService.getPageList(selectedFIelds)
+        result.forEach(page => buildGeneralModuleAsserts(page, referencePageObjectSelectedFields))
+    })
 })
