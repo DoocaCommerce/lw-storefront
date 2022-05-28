@@ -10,10 +10,6 @@ function App() {
   const setting = useSettings()
   const sections = useSections()
 
-  useEffect(() => {
-    console.log('dio', sections)
-  }, [setting])
-
   return (
     <div className="App">
       <h1>Teste {setting && setting.contactEmail}</h1>

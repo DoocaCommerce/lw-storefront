@@ -9,14 +9,12 @@ export function useSections(): SectionsState {
 
   async function getSections() {
     const result = await services.sections.getSections()
-    console.log('getSections', result)
 
     setSections(result.data)
   }
 
   function onUpdate({ shopID, data }) {
     if (data) {
-      console.log('onUpdate', data)
       setSections(data?.sections)
     }
   }

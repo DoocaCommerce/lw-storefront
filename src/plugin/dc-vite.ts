@@ -5,7 +5,6 @@ export function doocaPlugin(dcConfig) {
     name: 'vite-plugin-dooca',
     config(config, options) {
       if (!dcConfig) throw new Error('dooca config is required')
-      console.log('asdasa', dcConfig)
 
       process.env = { ...process.env, ...loadEnv(options.mode, process.cwd()) }
 

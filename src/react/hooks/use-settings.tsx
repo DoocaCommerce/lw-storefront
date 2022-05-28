@@ -9,14 +9,12 @@ export function useSettings(): any {
 
   async function getSettings() {
     const result = await services.settings.getSettings()
-    console.log('getSettings', result)
 
     setSettings(result.data)
   }
 
   function onUpdate({ shopID, data }) {
     if (data) {
-      console.log('onUpdate', data)
       setSettings(data?.settings)
     }
   }
