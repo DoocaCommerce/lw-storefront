@@ -1,6 +1,6 @@
 import { SeoService } from './SeoService'
 import { ShopMicroData } from './types'
-import { Shop } from 'src/core/types/ShopTypes'
+import { Shop } from '../../types/ShopTypes'
 
 export class ShopSeoService extends SeoService {
   shop: Shop

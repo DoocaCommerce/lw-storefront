@@ -1,5 +1,5 @@
 import { SeoService } from './SeoService'
-import { Post } from 'src/core/types/PostTypes'
+import { Post } from '../../types/PostTypes'
 import { PostMicroData } from './types'
 
 export class BlogSeoServiceBase extends SeoService {

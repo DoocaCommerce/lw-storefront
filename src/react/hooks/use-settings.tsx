@@ -7,24 +7,23 @@ export function useSettings(): any {
   const hashPreview = urlParams.get('preview')
   const [settings, setSettings] = useState<any>()
 
-  const getSettings = async () => {
+  async function getSettings() {
     const result = await services.settings.getSettings()
-    setSettings(result)
+    setSettings(result.data)
   }
 
   function onUpdate({ shopID, data }) {
     if (data) {
+      console.log('onUpdate', data)
       setSettings(data?.settings)
-      // dispatch(updateSections(data?.sections))
     }
-  }
-
-  if (hashPreview) {
-    socket.create(hashPreview, onUpdate)
   }
 
   useEffect(() => {
     getSettings()
+    if (hashPreview) {
+      socket.create(hashPreview, onUpdate)
+    }
   }, [])
 
   return settings

@@ -1,4 +1,4 @@
-import { Product } from 'src/core/types/product/ProductTypes'
+import { Product } from '../../types/product/ProductTypes'
 import { SeoService } from './SeoService'
 import { ProductMicroData } from './types'
 

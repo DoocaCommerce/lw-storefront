@@ -1,4 +1,4 @@
-import { Page } from 'src/core/types/PageTypes'
+import { Page } from '../../types/PageTypes'
 import { SeoService } from './SeoService'
 import { PageMicroData } from './types'
 

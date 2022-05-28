@@ -1,4 +1,4 @@
-import { nullable } from 'src/core/types/NullableTypes'
+import { nullable } from '../../types/NullableTypes'
 import { Image } from '../../types/ImageTypes'
 import { PageInfo, PaginationFilter } from '../../types/PaginationTypes'
 
@@ -46,7 +46,7 @@ export interface BrandResponse {
 }
 
 export interface OptionsGetBrand {
-  fields: nullable<BrandFields[]> 
+  fields: nullable<BrandFields[]>
   filter?: BrandFilter
 }
 
@@ -55,6 +55,21 @@ export interface OptionsGetBrandList {
   filter: PaginationFilter
 }
 
-export type BrandFields = "id" | "hotsite_id" | "external_id" | "name" | "slug" | "description" 
-| "short_description" | "image {alt, src}" | "banner {alt, src}" | "meta_title" | "meta_keywords" | "meta_description"
-| "position" | "url" | "active" | "created_at" | "updated_at" 
+export type BrandFields =
+  | 'id'
+  | 'hotsite_id'
+  | 'external_id'
+  | 'name'
+  | 'slug'
+  | 'description'
+  | 'short_description'
+  | 'image {alt, src}'
+  | 'banner {alt, src}'
+  | 'meta_title'
+  | 'meta_keywords'
+  | 'meta_description'
+  | 'position'
+  | 'url'
+  | 'active'
+  | 'created_at'
+  | 'updated_at'
