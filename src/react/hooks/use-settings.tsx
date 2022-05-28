@@ -9,6 +9,8 @@ export function useSettings(): any {
 
   async function getSettings() {
     const result = await services.settings.getSettings()
+    console.log('getSettings', result)
+
     setSettings(result.data)
   }
 
