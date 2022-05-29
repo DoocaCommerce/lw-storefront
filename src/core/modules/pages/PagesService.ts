@@ -1,5 +1,6 @@
 import { PagesRepository } from "./PagesRepository"
 import { Page, PageFields } from "./PageTypes"
+import "isomorphic-fetch"
 
 export class PagesService {
     static async getPageById(id: Number, fields?: Array<PageFields>): Promise<Page> {
@@ -12,4 +13,3 @@ export class PagesService {
       return result
     } 
 }
-  

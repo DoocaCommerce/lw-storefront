@@ -1,5 +1,5 @@
-import { OptionsGetPage, Page, PageFields, PageResponse } from "./PageTypes";
-import { client } from "../../services/GraphqlService";
+import { OptionsGetPage, Page, PageFields, PageResponse } from "./PageTypes"
+import { client } from "../../services/GraphqlService"
 
 const PAGE_QUERY_DEFAULT_FILTERS = ["id", "name", "slug", "template", "url", "active"
 , "faq", "created_at", "updated_at", "description", "meta_title", "meta_description"
