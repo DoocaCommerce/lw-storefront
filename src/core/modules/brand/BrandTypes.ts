@@ -46,12 +46,12 @@ export interface BrandResponse {
 }
 
 export interface OptionsGetBrand {
-  fields: nullable<BrandFields[]> 
+  fields: nullable<Array<BrandFields>> 
   filter?: BrandFilter
 }
 
 export interface OptionsGetBrandList {
-  fields: nullable<BrandFields[]>
+  fields: nullable<Array<BrandFields>>
   filter: PaginationFilter
 }
 
