@@ -5,6 +5,7 @@ import viewportHelper from './helpers/viewportHelper'
 import { BrandService } from './modules/brand/BrandService'
 import { SectionsService }from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
+import { CategoryService } from './modules/category/CategoryService'
 import Socket from './socket'
 
 export const helpers = {
@@ -16,7 +17,8 @@ export const helpers = {
 export const services = {
   brand: BrandService,
   sections: SectionsService,
-  settings: SettingsService
+  settings: SettingsService,
+  category: CategoryService
 }
 
 export const socket = {
