@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { services, socket } from '../../core'
-import { SectionsState } from '../store/modules/sections/type'
 
-export function useSections(): SectionsState {
+export function useSections(): any {
   const urlParams = new URLSearchParams(window.location.search)
   const hashPreview = urlParams.get('preview')
   const [sections, setSections] = useState<any>()

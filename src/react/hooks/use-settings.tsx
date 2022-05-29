@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { SettingsState } from '../store/modules/settings/type'
 import { services, socket } from '../../core'
 
 export function useSettings(): any {

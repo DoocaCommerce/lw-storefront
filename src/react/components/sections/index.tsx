@@ -10,7 +10,7 @@ export interface SectionsPropsType {
 
 export function Sections({ sections, components }: SectionsPropsType): JSX.Element {
   const sectionsData = sections ? sections : useSections()
-  const sectionsList = sectionsData && Object.entries(sectionsData)
+  const sectionsList = sectionsData && Object.entries<any>(sectionsData)
 
   return (
     <>
