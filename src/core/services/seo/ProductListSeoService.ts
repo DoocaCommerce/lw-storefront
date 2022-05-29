@@ -1,5 +1,5 @@
 import { ProductSeoServiceBase } from './ProductSeoServiceBase'
-import { Product } from 'src/core/types/product/ProductTypes'
+import { Product } from '../../types/product/ProductTypes'
 import { ProductListMicroData, ProductListMicroDataItem } from './types'
 
 export class ProductListSeoService extends ProductSeoServiceBase {

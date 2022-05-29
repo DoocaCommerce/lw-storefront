@@ -1,4 +1,4 @@
-import { Shop } from 'src/core/types/ShopTypes'
+import { Shop } from '../../../core/types/ShopTypes'
 
 export interface ShopMicroDataProps {
   data: Shop

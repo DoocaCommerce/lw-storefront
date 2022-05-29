@@ -26,9 +26,7 @@ export default {
       socket.create(hashPreview, store)
     }
 
-    brand.getById(32991).then(result => {
-      console.log(result)
-    })
+    brand.getById(32991).then(result => {})
   }
 }
 
