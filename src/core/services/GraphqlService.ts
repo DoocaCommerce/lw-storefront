@@ -31,6 +31,6 @@ class GraphqlService {
   }
 }
 //@ts-ignore
-const client = new GraphqlService(DC_CONFIG.api_url, DC_CONFIG.token)
+const client = new GraphqlService(dc_config.api_url, dc_config.token)
 
 export { client }

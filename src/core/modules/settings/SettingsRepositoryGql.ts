@@ -1,8 +1,8 @@
 import { client } from '../../services/GraphqlService'
-import { Setting, SettingResponse } from './SettingsTypes'
+import { Setting, SettingResponse, SettingsRepository } from './SettingsTypes'
 
-export class SettingsRepository {
-  static async fetchSettings(): Promise<Setting<unknown>> {
+export class SettingsRepositoryGql {
+  static async fetchSettings() {
     const settingsQuery = `
     query Setting {
       setting {

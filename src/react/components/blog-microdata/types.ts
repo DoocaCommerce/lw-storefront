@@ -1,4 +1,4 @@
-import { Post } from 'src/core/types/PostTypes'
+import { Post } from '../../../core/types/PostTypes'
 
 export interface BlogCategoryMicroDataProps {
   data: Post[]

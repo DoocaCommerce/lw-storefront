@@ -1,5 +1,10 @@
 import { useEffect } from 'react'
-import { useSettings } from 'lw-storefront/lib/react/hooks/use-settings'
+import { useSettings, Sections, useSections } from 'lw-storefront/lib/react'
+import Html from './components/html'
+
+const components = {
+  html: Html
+}
 
 import { services } from 'lw-storefront/lib/core'
 
@@ -23,10 +28,14 @@ function Header() {
 
 function App() {
   const setting = useSettings()
-  useEffect(() => {
-    console.log(setting)
-  }, [setting])
-  return <div className="App"><Header /></div>
+  const sections = useSections()
+
+  return (
+    <div className="App">
+      <h1>Teste {setting && setting.contactEmail}</h1>
+      <Sections components={components} />
+    </div>
+  )
 }
 
 export default App
