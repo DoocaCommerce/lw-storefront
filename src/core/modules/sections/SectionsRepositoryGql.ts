@@ -1,7 +1,7 @@
 import { client } from '../../services/GraphqlService'
 import { Section, SectionFilter, SectionResponse } from './SectionsTypes'
 
-export class SectionsRepository {
+export class SectionsRepositoryGql {
   static async fetchSections(filter?: SectionFilter): Promise<Section<unknown>> {
     const settingsQuery = `
       query getSections($filter: filterSection){
@@ -14,10 +14,10 @@ export class SectionsRepository {
     }
   `
 
-    const { section }:SectionResponse = await client.query(settingsQuery, filter &&  {filter: {...filter}})
-    
+    const { section }: SectionResponse = await client.query(settingsQuery, filter && { filter: { ...filter } })
+
     const data = JSON.parse(section.data)
-  
+
     return { ...section, data }
   }
 }

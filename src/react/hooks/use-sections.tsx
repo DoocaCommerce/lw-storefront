@@ -1,18 +1,29 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../types/RootState'
-import { getSections } from '../store/modules/sections'
-import { SectionsState } from '../store/modules/sections/type'
+import { useEffect, useState } from 'react'
+import { services, socket } from '../../core'
 
-export function useSections(): SectionsState {
-  const dispatch = useDispatch()
-  const sections = useSelector((state: RootState) => state.sections)
+export function useSections(): any {
+  const urlParams = new URLSearchParams(window.location.search)
+  const hashPreview = urlParams.get('preview')
+  const [sections, setSections] = useState<any>()
+
+  async function getSections() {
+    const result = await services.sections.getSections()
+
+    setSections(result.data)
+  }
+
+  function onUpdate({ shopID, data }) {
+    if (data) {
+      setSections(data?.sections)
+    }
+  }
 
   useEffect(() => {
-    if (Object.keys(sections?.data).length === 0 && !sections.loading) {
-      dispatch(getSections())
+    getSections()
+    if (hashPreview) {
+      socket.create(hashPreview, onUpdate)
     }
-  }, [dispatch])
+  }, [])
 
   return sections
 }
