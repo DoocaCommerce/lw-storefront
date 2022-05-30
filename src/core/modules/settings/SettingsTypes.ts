@@ -1,11 +1,14 @@
 export interface Setting<T> {
-    shop_id: number
-    theme_id: number
-    version: string
-    page: string
-    data: T
+  shop_id: number
+  theme_id: number
+  version: string
+  page: string
+  data: T
 }
 
+export interface SettingsRepository {
+  fetchSettings(): Promise<any>
+}
 export interface SettingResponse {
-    setting: Setting<string>
+  setting: Setting<string>
 }

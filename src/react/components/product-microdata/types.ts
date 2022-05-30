@@ -1,4 +1,4 @@
-import { Product } from 'src/core/types/product/ProductTypes'
+import { Product } from '../../../core/types/product/ProductTypes'
 
 export interface ProductListMicroDataProps {
   data: Product[]

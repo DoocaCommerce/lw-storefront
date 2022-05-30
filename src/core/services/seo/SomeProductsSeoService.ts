@@ -1,5 +1,5 @@
 import { SeoService } from './SeoService'
-import { SomeProductsProps } from 'src/react/components/product-microdata/types'
+import { SomeProductsProps } from '../../../react/components/product-microdata/types'
 import { SomeProductsMicroData } from './types'
 
 export class SomeProductsSeoService extends SeoService {

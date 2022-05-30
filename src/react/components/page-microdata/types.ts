@@ -1,4 +1,4 @@
-import { Page } from 'src/core/types/PageTypes'
+import { Page } from '../../../core/types/PageTypes'
 
 export interface PageMicroDataProps {
   data: Page
