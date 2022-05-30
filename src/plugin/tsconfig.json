@@ -14,6 +14,7 @@
     "lib": ["dom", "esnext"],
     "jsx": "react",
     "outDir": "../../lib/plugin",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "exclude": ["src/**/__test__/", "node_modules"]
   }
 }
