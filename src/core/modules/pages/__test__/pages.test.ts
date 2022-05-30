@@ -1,6 +1,7 @@
 import { buildGeneralModuleAsserts } from '../../../helpers/__test__/testHelper'
 import { PagesService } from '../PagesService'
 import { Page, PageFields } from '../PageTypes'
+import "isomorphic-fetch"
 
 const referencePageObjectAllFields = {
   id: 0,
