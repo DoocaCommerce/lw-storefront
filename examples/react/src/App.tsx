@@ -18,7 +18,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await pages.getPageById(320, ['id', 'faq'])
+      const result = await pages.getPageList(['id', 'faq'])
       console.log(`result ${id}`, result)
     }
     get('header')

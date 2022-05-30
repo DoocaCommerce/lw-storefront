@@ -1,4 +1,4 @@
-import { OptionsGetPage, Page, PageFields, PageResponse } from "./PageTypes"
+import { OptionsGetPage, Page, PageFields, PageListResponse, PageResponse } from "./PageTypes"
 import { client } from "../../services/GraphqlService"
 
 const PAGE_QUERY_DEFAULT_FILTERS = ["id", "name", "slug", "template", "url", "active"
@@ -6,6 +6,27 @@ const PAGE_QUERY_DEFAULT_FILTERS = ["id", "name", "slug", "template", "url", "ac
 , "meta_keywords"]
 
 export class PagesRepository {
+    static async getPageList(fields?: Array<PageFields>): Promise<Array<Page>> {
+        const queryFields: String = (fields 
+                                    ? fields
+                                        .join() 
+                                    : PAGE_QUERY_DEFAULT_FILTERS
+                                        .join())
+                                    .replace('faq', 'faq {active answer question}')
+
+        const pageQuery = `
+        query getPages {
+            pages {
+            ${queryFields}
+            }
+        }
+        `
+
+        const { pages }:PageListResponse = await client.query(pageQuery)
+        
+        return pages
+    }
+
     private static async getPage(optionsGetPage: OptionsGetPage): Promise<Page> {
         const { fields, filter } = optionsGetPage
 

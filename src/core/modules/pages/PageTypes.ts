@@ -16,6 +16,10 @@ export interface Page {
     meta_keywords?: nullable<String>
 }
 
+export interface PageListResponse {
+    pages: Array<Page>
+}
+
 export interface PageResponse {
     pageBy: Page
 }
