@@ -8,6 +8,7 @@ import { SettingsService } from './modules/settings/SettingsService'
 import { CategoryService } from './modules/category/CategoryService'
 import { PagesService } from './modules/pages/PagesService'
 import Socket from './socket'
+import { MenuService } from './modules/menu/MenuService'
 
 export const helpers = {
   stringHelper,
@@ -20,7 +21,8 @@ export const services = {
   sections: SectionsService,
   settings: SettingsService,
   category: CategoryService,
-  pages: PagesService
+  pages: PagesService,
+  menu: MenuService
 }
 
 export const socket = {
