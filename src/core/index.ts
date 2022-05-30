@@ -6,6 +6,7 @@ import { BrandService } from './modules/brand/BrandService'
 import { SectionsService }from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
 import { CategoryService } from './modules/category/CategoryService'
+import { PagesService } from './modules/pages/PagesService'
 import Socket from './socket'
 
 export const helpers = {
@@ -18,7 +19,8 @@ export const services = {
   brand: BrandService,
   sections: SectionsService,
   settings: SettingsService,
-  category: CategoryService
+  category: CategoryService,
+  pages: PagesService
 }
 
 export const socket = {
