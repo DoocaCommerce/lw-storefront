@@ -43,8 +43,8 @@ export class MenuRepository {
 
     const queryFields: String = (fields ? fields : [ ...MENU_QUERY_DEFAULT_FIELDS, menuValuesField ])
                                     .join()
-                                    .replace('values', 'values {}')
-                                    .replace('children', `children {${MENU_VALUE_QUERY_DEFAULT_FIELDS
+                                    .replace('values', `values {${MENU_VALUE_QUERY_DEFAULT_FIELDS.join()}}`)
+                                    .replace('children', `children {${MENU_QUERY_DEFAULT_FIELDS
                                                                     .join()
                                                                     .replace('image', 'image {alt, src}')}}`)
 
@@ -56,9 +56,7 @@ export class MenuRepository {
         }
       }
     `
-
-    console.log(brandQuery)
-
+    
     const { menu }:MenuResponse = await client.query(brandQuery, filter && {filter: {...filter}})
   
     return menu

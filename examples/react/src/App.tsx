@@ -18,7 +18,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await menu.getMenuById(47018)
+      const result = await menu.getMenuById(47018, ['id'])
       console.log(`result ${id}`, result)
     }
     get('header')
@@ -32,9 +32,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Teste {setting && setting.contactEmail}</h1>
       <Header />
-      <Sections components={components} />
+      {/* <h1>Teste {setting && setting.contactEmail}</h1>
+      <Sections components={components} /> */}
     </div>
   )
 }
