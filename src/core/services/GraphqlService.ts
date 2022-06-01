@@ -3,7 +3,7 @@ import { Client, createClient, defaultExchanges, gql } from '@urql/core'
 class GraphqlService {
   client: Client
 
-  constructor(api_url: string, token: string, domain:string) {
+  constructor(api_url: string, token: string, domain: string) {
     if (!api_url && !token && !domain) console.error('api_url and token are required')
 
     this.client = createClient({
