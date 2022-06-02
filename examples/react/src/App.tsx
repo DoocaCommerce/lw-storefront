@@ -8,7 +8,7 @@ const components = {
 
 import { services } from 'lw-storefront/lib/core'
 
-const { brand, category, pages, sections, settings } = services
+const { brand, category, cart, pages, sections, settings } = services
 
 const get = async (id: string) => {
   const result = await settings.getSettings()
@@ -18,7 +18,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await sections.getSections()
+      const result = await cart.addItem({items: [{"variation_id": 1394682, "quantity": 1}]}, ['id', 'token', 'address', 'items'])
       console.log(`result ${id}`, result)
     }
     get('header')
