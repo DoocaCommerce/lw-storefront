@@ -1,39 +1,42 @@
 import { client } from '../../services/GraphqlService'
 import { Menu, MenuFields, MenuResponse, OptionsGetMenu } from './MenuTypes'
 
+const MENU_ITEM_DEFAULT_FIELDS = [
+  'id', 
+  'menu_id', 
+  'brand_id',
+  'name',
+  'menu_type',
+  'slug', 
+  'menu_type_slug', 
+  'active', 
+  'created_at', 
+  'image {src, alt}', 
+  'parent_id', 
+  'page_id', 
+  'hotsite_id',
+  'category_id',
+  'banner',
+  'banner_link',
+  'is_featured',
+  'link',
+  'menu_type_link',
+  'updated_at',
+  'position',
+]
+
+const VALUES_DEFAULT_FIELDS = [
+  ...MENU_ITEM_DEFAULT_FIELDS,
+  `children {${MENU_ITEM_DEFAULT_FIELDS.join()}}`
+]
+
 const MENU_QUERY_DEFAULT_FIELDS = [
     'id',
     'name',
     'handle',
     'createdAt',
-    'updatedAt'
-]
-
-const menuValuesField:MenuFields = 'values'
-
-const MENU_VALUE_QUERY_DEFAULT_FIELDS = [
-    'id', 
-    'menu_id', 
-    'brand_id',
-    'name',
-    'menu_type',
-    'slug', 
-    'menu_type_slug', 
-    'active', 
-    'created_at', 
-    'image {src, alt}', 
-    'parent_id', 
-    'page_id', 
-    'hotsite_id',
-    'category_id',
-    'banner',
-    'banner_link',
-    'is_featured',
-    'link',
-    'menu_type_link',
-    'updated_at',
-    'position',
-    'children',
+    'updatedAt',
+    `values {${VALUES_DEFAULT_FIELDS.join()}}`
 ]
 
 export class MenuRepository {
@@ -41,13 +44,7 @@ export class MenuRepository {
 
     const { fields, filter } = optionsGetMenu
 
-    const queryFields: String = (fields ? fields : [ ...MENU_QUERY_DEFAULT_FIELDS, menuValuesField ])
-                                    .join()
-                                    .replace('values', `values {${MENU_VALUE_QUERY_DEFAULT_FIELDS.join()}}`)
-                                    .replace('children', `children {${MENU_QUERY_DEFAULT_FIELDS
-                                                                    .join()
-                                                                    .replace('image', 'image {alt, src}')}}`)
-
+    const queryFields: String = (fields ? fields : MENU_QUERY_DEFAULT_FIELDS).join()
 
     const brandQuery = `
       query getMenu($filter: filterMenu){
