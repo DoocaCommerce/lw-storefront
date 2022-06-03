@@ -4,7 +4,7 @@ class GraphqlService {
   client: Client
 
   constructor(api_url: string, token: string, domain: string) {
-    if (!api_url && !token && !domain) console.error('api_url and token are required')
+    if (!api_url && !token && !domain) console.error('api_url, token and domain are required')
 
     this.client = createClient({
       url: api_url,
