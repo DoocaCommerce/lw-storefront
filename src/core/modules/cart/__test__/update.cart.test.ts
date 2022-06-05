@@ -1,33 +1,8 @@
 import { CartService } from '../CartService'
-import { Cart, CartFields, CartItemAddInput, CartItemUpdateInput } from '../CartTypes'
+import { CartFields, CartItemAddInput, CartItemUpdateInput } from '../CartTypes'
 import { buildBaseAsserts } from '../../../helpers/__test__/testHelper'
+import { refereceCartAllFieldsObject, refereceCartSelectedFieldsObject, selectedFields } from './CartTestHelper'
 import "isomorphic-fetch"
-
-const selectedFields: Array<CartFields> = ['id', 'token', 'address', 'items']
-
-const refereceCartAllFieldsObject: Cart = {
-    id: '',
-    token: '',
-    customer: {},
-    address: {},
-    coupon: '',
-    shipping_token: '',
-    payment_token: '',
-    creditcard: {},
-    items: []
-}
-
-const refereceCartSelectedFieldsObject: Cart = {
-    id: '',
-    token: '',
-    customer: {},
-    address: {},
-    coupon: '',
-    shipping_token: '',
-    payment_token: '',
-    creditcard: {},
-    items: []
-}
 
 const singleItemToBeAddedSample: Array<CartItemAddInput> = [{"variation_id": 1394682, "quantity": 1}]
 
