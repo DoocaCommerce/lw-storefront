@@ -53,7 +53,7 @@ async function buildUpdateCartAsserts(fields?: Array<CartFields>) {
         expect(cartItem.variation_id).toEqual(updatedItemCart.items[index].variation_id)
         expect(cartItem.quantity).toEqual(updatedItemCart.items[index].quantity)
     })
-    
+
     expect(updatedItemCart.items[FIRST_ITEM_INDEX].quantity).toEqual(UPDATED_ITEM_QUANTITY)
     expect(updatedItemCart.items[FIRST_ITEM_INDEX].variation_id).toEqual(addedItemCart.items[FIRST_ITEM_INDEX].variation_id)
     expect(updatedItemCart.token).toEqual(addedItemCart.token)
