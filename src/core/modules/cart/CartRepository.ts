@@ -36,8 +36,8 @@ export class CartRepository {
         } 
         `
 
-        const teste: any = await client.mutation(updateItemMutation, input && {...input})
+        const { updateItem }:UpdateItemReponse = await client.mutation(updateItemMutation, input && {...input})
 
-        return teste.updateItem
+        return updateItem
     }
 }
