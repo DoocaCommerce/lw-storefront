@@ -1,6 +1,6 @@
 import { client } from "../../services/GraphqlService"
 import { CART_DEFAULT_FIELDS, replaceComplextCartItems } from "./CartHelper"
-import { AddItemReponse, Cart, CartFields, OptionsAddCart } from "./CartTypes"
+import { AddItemReponse, Cart, CartFields, OptionsAddCart, OptionsUpdateCart, UpdateItemReponse } from "./CartTypes"
 
 export class CartRepository {
 
@@ -22,5 +22,22 @@ export class CartRepository {
 
         const { addItem }:AddItemReponse = await client.mutation(addItemMutation, input && {...input})
         return addItem
+    }
+
+    static async updateItem(optionsUpodateCart: OptionsUpdateCart): Promise<Cart> {
+        const { fields, input } = optionsUpodateCart
+        const cartFields: String = this.buildJoinedCartFields(fields)
+
+        const updateItemMutation = `
+        mutation Mutation($cartToken: String!, $item: updateItemTypeInput) {
+            updateItem(cartToken: $cartToken, item: $item) {
+                ${cartFields}
+            }   
+        } 
+        `
+
+        const teste: any = await client.mutation(updateItemMutation, input && {...input})
+
+        return teste.updateItem
     }
 }

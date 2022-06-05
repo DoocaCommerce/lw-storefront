@@ -1,7 +1,7 @@
 import { CartService } from '../CartService'
 import { Cart, CartFields, CartItemAddInput } from '../CartTypes'
-import "isomorphic-fetch"
 import { buildBaseAsserts } from '../../../helpers/__test__/testHelper'
+import "isomorphic-fetch"
 
 const selectedFields: Array<CartFields> = ['id', 'token', 'address', 'items']
 

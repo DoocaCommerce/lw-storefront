@@ -68,8 +68,13 @@ export interface ComponentItem {
 }
 
 export interface AddItemInput {
-    cartToken?: String
     items: Array<CartItemAddInput>
+    cartToken?: String
+}
+
+export interface UpdateItemInput {
+    item: CartItemUpdateInput
+    cartToken: String
 }
 
 export interface CartItemAddInput {
@@ -79,6 +84,12 @@ export interface CartItemAddInput {
     zipcode?: nullable<Number>
     customize?: CustomizationsItemInput
     components?: ComponentItemInput
+}
+
+export interface CartItemUpdateInput {
+    id: nullable<Number>
+    quantity: nullable<Number>
+    customize?: CustomizationsItemInput
 }
 
 export interface ComponentItemInput {
@@ -99,13 +110,21 @@ export interface CustomizationContentInput {
     price?: nullable<Number>
 }
 
-export interface OptionsAddCart {
+interface OptionsCartMutation<T> {
     fields: nullable<Array<CartFields>>
-    input: AddItemInput
+    input: T
 }
+
+export interface OptionsAddCart extends OptionsCartMutation<AddItemInput> {}
+
+export interface OptionsUpdateCart extends OptionsCartMutation<UpdateItemInput> {}
 
 export interface AddItemReponse {
     addItem: Cart
+}
+
+export interface UpdateItemReponse {
+    updateItem: Cart
 }
 
 export type CartFields = 
