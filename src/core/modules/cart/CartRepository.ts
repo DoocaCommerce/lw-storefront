@@ -53,7 +53,7 @@ export class CartRepository {
         `
 
         const { cart }:GetCartResponse = await client.query(getCartQuery, filter && {...filter})
-
+        
         return cart
     }
 }

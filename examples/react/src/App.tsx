@@ -36,7 +36,8 @@ function App() {
   return (
     <div className="App">
       <h1>Teste {setting && setting.contactEmail}</h1>
-      <Sections components={components} />
+      <Header />
+      {/* <Sections components={components} /> */}
     </div>
   )
 }
