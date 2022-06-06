@@ -21,8 +21,9 @@ function Header() {
       const resultAdd = await cart.addItem({items: [{"variation_id": 1394682, "quantity": 1}, {"variation_id": 75053, "quantity": 1}]}, ['id', 'token', 'address', 'items'])
       const items = resultAdd.items!
       const token = resultAdd.token!
-      const resultGet = await cart.deleteItem({item: {id: items[0].id!}, cartToken: token})
-      console.log("Add", resultAdd, "Get", resultGet)
+      console.log("Add", resultAdd)
+      const resultGet = await cart.cleanCart({items: [{id: items[0].id!}, {id: items[1].id!}], cartToken: token})
+      console.log("Clean", resultGet)
     }
     get('header')
   }, [])

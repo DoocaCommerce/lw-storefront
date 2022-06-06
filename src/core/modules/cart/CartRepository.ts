@@ -1,6 +1,6 @@
 import { client } from "../../services/GraphqlService"
 import { CART_DEFAULT_FIELDS, replaceComplextCartItems } from "./CartHelper"
-import { AddItemReponse, Cart, CartFields, DeleteItemReponse, GetCartResponse, OptionsAddItemCart, OptionsDeleteItemCart, OptionsGetCart, OptionsUpdateItemCart, UpdateItemReponse } from "./CartTypes"
+import { AddItemReponse, Cart, CartFields, CleanCartReponse, DeleteItemReponse, GetCartResponse, OptionsAddItemCart, OptionsCleanCart, OptionsDeleteItemCart, OptionsGetCart, OptionsUpdateItemCart, UpdateItemReponse } from "./CartTypes"
 
 export class CartRepository {
 
@@ -51,8 +51,26 @@ export class CartRepository {
             }   
         } 
         `
+        
         const { deleteItem }: DeleteItemReponse = await client.mutation(deleteItemMutation, input && {...input})
         return deleteItem
+    }
+
+    static async cleanCart(optionsCleanCart: OptionsCleanCart): Promise<Cart> {
+        const { fields, input } = optionsCleanCart
+        const cartFields: String = this.buildJoinedCartFields(fields)
+
+        const cleanCartMutation = `
+        mutation CleanCart($cartToken: String!, $items: [deleteItemTypeInput]) {
+            cleanCart(cartToken: $cartToken, items: $items) {
+                ${cartFields}
+            }   
+        } 
+        `
+       
+        const { cleanCart }:CleanCartReponse = await client.mutation(cleanCartMutation, input && {...input})
+
+        return cleanCart
     }
 
     static async getCart(optionsGetCart: OptionsGetCart): Promise<Cart> {
@@ -68,7 +86,6 @@ export class CartRepository {
         `
 
         const { cart }:GetCartResponse = await client.query(getCartQuery, filter && {...filter})
-        
         return cart
     }
 }
