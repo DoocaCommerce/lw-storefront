@@ -77,6 +77,15 @@ export interface UpdateItemInput {
     cartToken: String
 }
 
+interface CartItemDeleteInput {
+    id: nullable<Number>
+}
+
+export interface DeleteItemInput {
+    item: CartItemDeleteInput
+    cartToken: String
+}
+
 export interface CartItemAddInput {
     variation_id: nullable<Number>
     quantity: nullable<Number>
@@ -115,9 +124,11 @@ interface OptionsCartMutation<T> {
     input: T
 }
 
-export interface OptionsAddCart extends OptionsCartMutation<AddItemInput> {}
+export interface OptionsAddItemCart extends OptionsCartMutation<AddItemInput> {}
 
-export interface OptionsUpdateCart extends OptionsCartMutation<UpdateItemInput> {}
+export interface OptionsUpdateItemCart extends OptionsCartMutation<UpdateItemInput> {}
+
+export interface OptionsDeleteItemCart extends OptionsCartMutation<DeleteItemInput> {}
 
 export interface OptionsGetCart {
     fields: nullable<Array<CartFields>>
@@ -134,6 +145,10 @@ export interface AddItemReponse {
 
 export interface UpdateItemReponse {
     updateItem: Cart
+}
+
+export interface DeleteItemReponse {
+    deleteItem: Cart
 }
 
 export interface GetCartResponse {

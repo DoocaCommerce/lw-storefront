@@ -18,10 +18,10 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const resultAdd = await cart.addItem({items: [{"variation_id": 1394682, "quantity": 1}]}, ['id', 'token', 'address', 'items'])
+      const resultAdd = await cart.addItem({items: [{"variation_id": 1394682, "quantity": 1}, {"variation_id": 75053, "quantity": 1}]}, ['id', 'token', 'address', 'items'])
       const items = resultAdd.items!
       const token = resultAdd.token!
-      const resultGet = await cart.getCart(token, ['id', 'token', 'address', 'items'])
+      const resultGet = await cart.deleteItem({item: {id: items[0].id!}, cartToken: token})
       console.log("Add", resultAdd, "Get", resultGet)
     }
     get('header')

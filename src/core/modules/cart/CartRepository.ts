@@ -1,6 +1,6 @@
 import { client } from "../../services/GraphqlService"
 import { CART_DEFAULT_FIELDS, replaceComplextCartItems } from "./CartHelper"
-import { AddItemReponse, Cart, CartFields, GetCartResponse, OptionsAddCart, OptionsGetCart, OptionsUpdateCart, UpdateItemReponse } from "./CartTypes"
+import { AddItemReponse, Cart, CartFields, DeleteItemReponse, GetCartResponse, OptionsAddItemCart, OptionsDeleteItemCart, OptionsGetCart, OptionsUpdateItemCart, UpdateItemReponse } from "./CartTypes"
 
 export class CartRepository {
 
@@ -8,7 +8,7 @@ export class CartRepository {
         return (fields ? replaceComplextCartItems(fields) : CART_DEFAULT_FIELDS).join()
     }
 
-    static async addItem(optionsAddCart: OptionsAddCart): Promise<Cart> {
+    static async addItem(optionsAddCart: OptionsAddItemCart): Promise<Cart> {
         const { fields, input } = optionsAddCart
         const cartFields: String = this.buildJoinedCartFields(fields)
 
@@ -24,7 +24,7 @@ export class CartRepository {
         return addItem
     }
 
-    static async updateItem(optionsUpodateCart: OptionsUpdateCart): Promise<Cart> {
+    static async updateItem(optionsUpodateCart: OptionsUpdateItemCart): Promise<Cart> {
         const { fields, input } = optionsUpodateCart
         const cartFields: String = this.buildJoinedCartFields(fields)
 
@@ -38,6 +38,21 @@ export class CartRepository {
 
         const { updateItem }:UpdateItemReponse = await client.mutation(updateItemMutation, input && {...input})
         return updateItem
+    }
+
+    static async deleteItem(optionsDeleteItemCart: OptionsDeleteItemCart): Promise<Cart> {
+        const { fields, input } = optionsDeleteItemCart
+        const cartFields: String = this.buildJoinedCartFields(fields)
+
+        const deleteItemMutation = `
+        mutation DeleteItem($cartToken: String!, $item: deleteItemTypeInput) {
+            deleteItem(cartToken: $cartToken, item: $item) {
+                ${cartFields}
+            }   
+        } 
+        `
+        const { deleteItem }: DeleteItemReponse = await client.mutation(deleteItemMutation, input && {...input})
+        return deleteItem
     }
 
     static async getCart(optionsGetCart: OptionsGetCart): Promise<Cart> {

@@ -1,11 +1,8 @@
 import { CartService } from '../CartService'
 import { CartFields, CartItemAddInput } from '../CartTypes'
 import { buildBaseAsserts } from '../../../helpers/__test__/testHelper'
-import { refereceCartAllFieldsObject, refereceCartSelectedFieldsObject, selectedFields } from './CartTestHelper'
+import { multipleItemsToBeAddedSample, refereceCartAllFieldsObject, refereceCartSelectedFieldsObject, selectedFields, singleItemToBeAddedSample } from './CartTestHelper'
 import "isomorphic-fetch"
-
-const singleItemToBeAddedSample: Array<CartItemAddInput> = [{"variation_id": 1394682, "quantity": 1}]
-const multipleItemsToBeAddedSample: Array<CartItemAddInput> = [...singleItemToBeAddedSample, {"variation_id": 75053, "quantity": 1}]
 
 async function buildAddCartAsserts(itemsToBeAdded: Array<CartItemAddInput>, fields?: Array<CartFields>) {
     const updatedCartResult = await CartService.addItem({items: itemsToBeAdded}, fields)
