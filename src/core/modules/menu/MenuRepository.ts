@@ -30,21 +30,31 @@ const VALUES_DEFAULT_FIELDS = [
   `children {${MENU_ITEM_DEFAULT_FIELDS.join()}}`
 ]
 
+const valueField = `values {${VALUES_DEFAULT_FIELDS.join()}}`
+
 const MENU_QUERY_DEFAULT_FIELDS = [
     'id',
     'name',
     'handle',
     'createdAt',
     'updatedAt',
-    `values {${VALUES_DEFAULT_FIELDS.join()}}`
+    valueField
 ]
 
 export class MenuRepository {
+  private static replaceMenuValuesFields(fields: Array<String>): Array<String> {
+    const indexOfField = fields.indexOf('values')
+    const isFieldSelected = indexOfField != -1 
+    isFieldSelected && (fields[indexOfField] = valueField)
+
+    return fields
+}
+
   private static async getMenu(optionsGetMenu: OptionsGetMenu): Promise<Menu> {
 
     const { fields, filter } = optionsGetMenu
 
-    const queryFields: String = (fields ? fields : MENU_QUERY_DEFAULT_FIELDS).join()
+    const queryFields: String = (fields ? this.replaceMenuValuesFields(fields) : MENU_QUERY_DEFAULT_FIELDS).join()
 
     const brandQuery = `
       query getMenu($filter: filterMenu){

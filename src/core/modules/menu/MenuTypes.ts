@@ -32,7 +32,7 @@ export interface MenuValues {
     menu_type_link?: nullable<Number>
     updated_at?: nullable<String>
     position?: nullable<String>
-    children?: Array<Menu>
+    children?: Array<MenuValues>
 }
 
 export interface OptionsGetMenu {
