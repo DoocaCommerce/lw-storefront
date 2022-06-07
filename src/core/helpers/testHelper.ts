@@ -6,7 +6,7 @@ export function normalizeMockData(mock: any, module: Module) {
     return data && { ...mockData, data }
 }
 
-export function buildGeneralModuleAsserts(result:ModuleType, refereceBrandObject: unknown, filter?: unknown, filterValue?: any) {
+export function buildGeneralModuleAsserts(result:ModuleType, refereceBrandObject: unknown, filter?: unknown, filterValue?: unknown) {
     buildBaseAsserts(result, refereceBrandObject)
     if (filter) {
       const filterKey = Object.keys(filter)[0]
