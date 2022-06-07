@@ -1,37 +1,20 @@
 import { Menu, MenuFields } from '../MenuTypes'
 import { MenuService } from '../MenuService'
 import "isomorphic-fetch"
-import { buildBaseAsserts, buildGeneralModuleAsserts } from '../../../helpers/testHelper'
 
-const refereceMenuAllFieldsObject: Menu = {
-    id: 0,
-    name: '',
-    handle: '',
-    createdAt: '',
-    updatedAt: '',
-    values: {}
-}
-
-const refereceMenuSelectedFieldsObject: Menu = {
-    id: 0,
-    name: '',
-    values: {}
-}
-
-const selectedFields: Array<MenuFields> = ['id', 'name', 'values']
-
-async function buildGetMenuByIdAsserts(referenceObject: unknown, fields?: Array<MenuFields>) {
-    const ID_FILTER = 47018
-    const menuResult: Menu = await MenuService.getMenuById(ID_FILTER, fields)
-    buildGeneralModuleAsserts(menuResult, referenceObject, {id: ID_FILTER}, ID_FILTER)
-}
+const ID_FILTER = 47018
+const SELECTED_FIELDS: Array<MenuFields> = ['id', 'name', 'values']
 
 describe('Menu Module', () => {
-    it('Should Get menu by id with all fields', async () => {
-        await buildGetMenuByIdAsserts(refereceMenuAllFieldsObject)
+    it('Should Get menu by id with all fields successfully', async () => {
+        const menuResult: Menu = await MenuService.getMenuById(ID_FILTER)
+        expect(menuResult.id).toEqual(ID_FILTER)
     })
 
-    it('Should Get menu by id with selected fields', async () => {
-        await buildGetMenuByIdAsserts(refereceMenuSelectedFieldsObject, selectedFields)
+    it('Should Get menu by id with selected fields successfully', async () => {
+        const menuResult: Menu = await MenuService.getMenuById(ID_FILTER, [...SELECTED_FIELDS])
+        const menuResultKeys = Object.keys(menuResult).filter(key => key != '__typename')
+        expect(menuResultKeys).toEqual(SELECTED_FIELDS)
+        expect(menuResultKeys.length).toEqual(SELECTED_FIELDS.length)
     })
 })

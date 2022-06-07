@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import { BrandService } from '../BrandService'
-import { Brand, BrandFields, BrandList } from '../BrandTypes'
-import { buildBaseAsserts, buildGeneralModuleAsserts } from '../../../helpers/testHelper'
-import { PageInfo } from "../../../types/PaginationTypes"
-import "isomorphic-fetch"
-=======
 import 'isomorphic-fetch'
 import { BrandService } from '../BrandService'
 import { Brand, BrandFields } from '../BrandTypes'
 import { buildBaseAsserts, buildGeneralModuleAsserts } from '../../../helpers/__test__/testHelper'
 import { PageInfo } from '../../../types/PaginationTypes'
->>>>>>> origin/task/service-menu
 
 const refereceBrandAllFieldsObject: Brand = {
   id: '',
