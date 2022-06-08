@@ -48,10 +48,6 @@ export interface MenuResponse {
     menu: Menu
 }
 
-export interface MenuListResponse {
-    menus: Array<Menu>
-}
-
 export type MenuFields = 
 | 'id'
 | 'name'

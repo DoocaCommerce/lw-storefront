@@ -1,5 +1,5 @@
 import { client } from '../../services/GraphqlService'
-import { Menu, MenuFields, MenuListResponse, MenuResponse, OptionsGetMenu } from './MenuTypes'
+import { Menu, MenuFields, MenuResponse, OptionsGetMenu } from './MenuTypes'
 
 const MENU_ITEM_DEFAULT_FIELDS = [
   'id', 
