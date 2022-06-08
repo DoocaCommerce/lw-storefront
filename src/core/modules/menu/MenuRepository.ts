@@ -48,24 +48,7 @@ export class MenuRepository {
     isFieldSelected && (fields[indexOfField] = VALUE_FIELD)
 
     return fields
-}
-
-static async getMenuList(fields?: Array<MenuFields>): Promise<Array<Menu>> {
-
-  const queryFields: String = (fields ? this.replaceMenuValuesFields(fields) : MENU_QUERY_DEFAULT_FIELDS).join()
-
-  const menuListQuery = `
-    query getMenus {
-      menus {
-        ${queryFields}
-      }
-    }
-  `
-  
-  const { menus }:MenuListResponse = await client.query(menuListQuery)
-
-  return menus
-}
+  }
 
   private static async getMenu(optionsGetMenu: OptionsGetMenu): Promise<Menu> {
     const { fields, filter } = optionsGetMenu
