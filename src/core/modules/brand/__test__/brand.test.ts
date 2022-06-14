@@ -50,13 +50,13 @@ async function buildBrandListAsserts(referenceObject: unknown, fields?: Array<Br
   expect(brandList.length).toEqual(NUMBER_OF_RECORDS)
 }
 
-async function buildGetBrandByIdAsserts(referenceObject: any, fields?: Array<BrandFields>) {
+async function buildGetBrandByIdAsserts(referenceObject: unknown, fields?: Array<BrandFields>) {
   const ID_FILTER = 1070
   const brandResult: Brand = await BrandService.getBrandById(ID_FILTER, fields)
   buildGeneralModuleAsserts(brandResult, referenceObject, { id: ID_FILTER }, ID_FILTER)
 }
 
-async function buildGetBrandBySlugAsserts(referenceObject: any, fields?: Array<BrandFields>) {
+async function buildGetBrandBySlugAsserts(referenceObject: unknown, fields?: Array<BrandFields>) {
   const SLUG_FILTER = 'av-carteiras'
   const brandResult: Brand = await BrandService.getBrandBySlug(SLUG_FILTER, fields)
   buildGeneralModuleAsserts(brandResult, referenceObject, { slug: SLUG_FILTER }, SLUG_FILTER)
