@@ -17,4 +17,11 @@ describe('Menu Module', () => {
         expect(menuResultKeys).toEqual(SELECTED_FIELDS)
         expect(menuResultKeys.length).toEqual(SELECTED_FIELDS.length)
     })
+
+    it('Should Get menu list with all fields successfully', async () => {
+        const FIRST_ITEM_INDEX = 0
+        const menuListResult: Array<Menu> = await MenuService.getMenuList()
+        expect(menuListResult.length).toEqual(1)
+        expect(menuListResult[FIRST_ITEM_INDEX].id).toEqual(ID_FILTER)
+    })
 })
