@@ -23,7 +23,7 @@ export interface Brand {
 }
 
 export interface BrandEdges {
-  node: Brand[]
+  node: Array<Brand>
   cursor?: String
 }
 

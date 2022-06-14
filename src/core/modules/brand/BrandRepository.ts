@@ -11,7 +11,8 @@ export class BrandRepository {
 
     const { fields, filter } = optionsGetBrandList
 
-    const queryFields: String = fields ? fields.join() : BRAND_QUERY_DEFAULT_FIELDS.join()
+    const queryFields: String = (fields ? fields : BRAND_QUERY_DEFAULT_FIELDS)
+                                  .join()
 
     const brandListQuery = `
       query getBrands($filter: filterPaginationBrand) {
