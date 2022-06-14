@@ -18,7 +18,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await menu.getMenuById(47018, ['id', 'values'])
+      const result = await menu.getMenuList(['id', 'values'])
       console.log(`result ${id}`, result)
     }
     get('header')

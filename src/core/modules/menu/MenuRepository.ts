@@ -1,5 +1,5 @@
 import { client } from '../../services/GraphqlService'
-import { Menu, MenuFields, MenuResponse, OptionsGetMenu } from './MenuTypes'
+import { Menu, MenuFields, MenuListResponse, MenuResponse, OptionsGetMenu } from './MenuTypes'
 
 const MENU_ITEM_DEFAULT_FIELDS = [
   'id', 
@@ -66,6 +66,22 @@ export class MenuRepository {
     const { menu }:MenuResponse = await client.query(menuQuery, filter && {filter: {...filter}})
   
     return menu
+  }
+
+  static async getMenuList(fields?: Array<MenuFields>): Promise<Array<Menu>> {
+    const queryFields: String = (fields ? this.replaceMenuValuesFields(fields) : MENU_QUERY_DEFAULT_FIELDS).join()
+
+    const menuQuery = `
+      query getMenus {
+        menus {
+          ${queryFields}
+        }
+      }
+    `
+    
+    const { menus }:MenuListResponse = await client.query(menuQuery)
+  
+    return menus
   }
 
   static async getMenuById(id: Number, fields?: Array<MenuFields>): Promise<Menu> {
