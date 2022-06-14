@@ -53,7 +53,7 @@ const CART_ITEM_DEFAULT_FIELD = [
     `components {${COMPONENTS_DEFAULT_FIELDS.join()}}`
 ]
 
-const cartComplexFields = {
+export const CART_COMPLEX_FIELDS = {
     customer: `customer {${CUSTOMER_CART_DEFAULT_FIELDS.join()}}`,
     address: `address {${ADRESS_CART_FIELDS_DEFAULT.join()}}`,
     creditcard: `creditcard {${CART_CREDIT_CARD_DEFAULT_FIELDS.join()}}`,
@@ -63,22 +63,11 @@ const cartComplexFields = {
 export const CART_DEFAULT_FIELDS = [
     "id",
     "token",
-    cartComplexFields.customer,
-    cartComplexFields.address,
+    CART_COMPLEX_FIELDS.customer,
+    CART_COMPLEX_FIELDS.address,
     "coupon",
     "shipping_token",
     "payment_token",
-    cartComplexFields.creditcard,
-    cartComplexFields.items
+    CART_COMPLEX_FIELDS.creditcard,
+    CART_COMPLEX_FIELDS.items
 ]
-
-
-export function replaceComplextCartItems(fields: Array<String>): Array<String> {
-    Object.keys(cartComplexFields).forEach(complexFieldItemKey => {
-        const indexOfField = fields.indexOf(complexFieldItemKey)
-        const isFieldSelected = indexOfField != -1 
-        isFieldSelected && (fields[indexOfField] = cartComplexFields[complexFieldItemKey])
-    })
-
-    return fields
-}
