@@ -66,7 +66,7 @@ export type MenuValueFields =
 | 'menu_type_slug'
 | 'active'
 | 'created_at'
-| 'image {src, alt}'
+| 'image'
 | 'parent_id'
 | 'page_id'
 | 'hotsite_id'
