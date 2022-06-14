@@ -1,5 +1,5 @@
 import { CartRepository } from "./CartRepository"
-import { AddItemInput, CartFields, UpdateItemInput } from "./CartTypes"
+import { AddItemInput, CartFields, DeleteItemInput, UpdateItemInput } from "./CartTypes"
 
 export class CartService {
     static async addItem(input: AddItemInput, fields?: Array<CartFields>) {
@@ -9,6 +9,11 @@ export class CartService {
 
     static async updateItem(input: UpdateItemInput, fields?: Array<CartFields>) {
         const result = await CartRepository.updateItem({fields: fields || null, input: input})
+        return result
+    }
+
+    static async deleteItem(input: DeleteItemInput, fields?: Array<CartFields>) {
+        const result = await CartRepository.deleteItem({fields: fields || null, input: input})
         return result
     }
 
