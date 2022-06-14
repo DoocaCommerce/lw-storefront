@@ -2,7 +2,6 @@ import { CartService } from '../CartService'
 import { CartFields, CartItemAddInput } from '../CartTypes'
 import "isomorphic-fetch"
 
-
 const FIRST_ITEM_INDEX = 0
 const SELECTED_FIELDS: Array<CartFields> = ['id', 'token', 'address', 'items']
 const SINGLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [{"variation_id": 1394682, "quantity": 1}]

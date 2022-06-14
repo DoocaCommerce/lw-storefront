@@ -119,12 +119,25 @@ export interface OptionsAddCart extends OptionsCartMutation<AddItemInput> {}
 
 export interface OptionsUpdateCart extends OptionsCartMutation<UpdateItemInput> {}
 
+export interface OptionsGetCart {
+    fields: nullable<Array<CartFields>>
+    filter: CartFilter
+}
+
+export interface CartFilter {
+    cartToken: String
+}
+
 export interface AddItemReponse {
     addItem: Cart
 }
 
 export interface UpdateItemReponse {
     updateItem: Cart
+}
+
+export interface GetCartResponse {
+    cart: Cart
 }
 
 export type CartFields = 

@@ -1,6 +1,6 @@
 import { client } from "../../services/GraphqlService"
 import { CART_COMPLEX_FIELDS, CART_DEFAULT_FIELDS } from "./CartHelper"
-import { AddItemReponse, Cart, CartFields, OptionsAddCart, OptionsUpdateCart, UpdateItemReponse } from "./CartTypes"
+import { AddItemReponse, Cart, CartFields, GetCartResponse, OptionsAddCart, OptionsGetCart, OptionsUpdateCart, UpdateItemReponse } from "./CartTypes"
 
 export class CartRepository {
 
@@ -48,7 +48,23 @@ export class CartRepository {
         `
 
         const { updateItem }:UpdateItemReponse = await client.mutation(updateItemMutation, input && {...input})
-
         return updateItem
+    }
+
+    static async getCart(optionsGetCart: OptionsGetCart): Promise<Cart> {
+        const { fields, filter } = optionsGetCart
+        const cartFields: String = this.buildJoinedCartFields(fields)
+
+        const getCartQuery = `
+        query Query($cartToken: String) {
+            cart(cartToken: $cartToken) {
+                ${cartFields}
+            }   
+        } 
+        `
+
+        const { cart }:GetCartResponse = await client.query(getCartQuery, filter && {...filter})
+        
+        return cart
     }
 }

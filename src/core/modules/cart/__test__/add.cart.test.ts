@@ -1,11 +1,32 @@
 import { CartService } from '../CartService'
 import { CartFields, CartItemAddInput } from '../CartTypes'
+<<<<<<< HEAD
+import { buildBaseAsserts } from '../../../helpers/__test__/testHelper'
+import { refereceCartAllFieldsObject, refereceCartSelectedFieldsObject, selectedFields } from './CartTestHelper'
+import "isomorphic-fetch"
+
+const singleItemToBeAddedSample: Array<CartItemAddInput> = [{"variation_id": 1394682, "quantity": 1}]
+const multipleItemsToBeAddedSample: Array<CartItemAddInput> = [...singleItemToBeAddedSample, {"variation_id": 75053, "quantity": 1}]
+
+async function buildAddCartAsserts(itemsToBeAdded: Array<CartItemAddInput>, fields?: Array<CartFields>) {
+    const updatedCartResult = await CartService.addItem({items: itemsToBeAdded}, fields)
+    const cartItems = updatedCartResult.items
+
+    buildBaseAsserts(updatedCartResult, fields ? refereceCartSelectedFieldsObject : refereceCartAllFieldsObject)
+    cartItems.forEach((cartItem, index) => {
+        expect(cartItem.variation_id).toEqual(updatedCartResult.items[index].variation_id)
+        expect(cartItem.quantity).toEqual(updatedCartResult.items[index].quantity)
+    })
+    expect(itemsToBeAdded.length).toEqual(updatedCartResult.items.length)
+}
+=======
 import "isomorphic-fetch"
 
 const SELECTED_FIELDS: Array<CartFields> = ['id', 'token', 'address', 'items']
 
 const SINGLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [{"variation_id": 75053, "quantity": 1}]
 const MULTIPLE_ITEMS_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [...SINGLE_ITEM_TO_BE_ADDED_SAMPLE, {"variation_id": 1394682, "quantity": 1}]
+>>>>>>> origin/feat/modulo-cart
 
 describe('Cart Module', () => {
     it('Should add item and return cart with all fields successfully', async () => {
