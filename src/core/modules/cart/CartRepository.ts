@@ -1,11 +1,22 @@
 import { client } from "../../services/GraphqlService"
-import { CART_DEFAULT_FIELDS, replaceComplextCartItems } from "./CartHelper"
+import { CART_COMPLEX_FIELDS, CART_DEFAULT_FIELDS } from "./CartHelper"
 import { AddItemReponse, Cart, CartFields, CleanCartReponse, DeleteItemReponse, GetCartResponse, OptionsAddItemCart, OptionsCleanCart, OptionsDeleteItemCart, OptionsGetCart, OptionsUpdateItemCart, UpdateItemReponse } from "./CartTypes"
 
 export class CartRepository {
 
+    private static replaceComplextCartItems(fields: Array<String>): Array<String> {
+        Object.keys(CART_COMPLEX_FIELDS).forEach(complexFieldItemKey => {
+            const indexOfField = fields.indexOf(complexFieldItemKey)
+            const isFieldSelected = indexOfField != -1 
+            isFieldSelected && (fields[indexOfField] = CART_COMPLEX_FIELDS[complexFieldItemKey])
+        })
+    
+        return fields
+    }
+    
+
     private static buildJoinedCartFields(fields?: Array<CartFields>): String {
-        return (fields ? replaceComplextCartItems(fields) : CART_DEFAULT_FIELDS).join()
+        return (fields ? this.replaceComplextCartItems(fields) : CART_DEFAULT_FIELDS).join()
     }
 
     static async addItem(optionsAddCart: OptionsAddItemCart): Promise<Cart> {
