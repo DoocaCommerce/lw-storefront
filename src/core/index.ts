@@ -8,6 +8,7 @@ import { MenuService } from './modules/menu/MenuService'
 import { PagesService } from './modules/pages/PagesService'
 import { SectionsService }from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
+import { UserService } from './modules/user/UserService'
 
 import Socket from './socket'
 
@@ -19,11 +20,12 @@ export const helpers = {
 
 export const services = {
   brand: BrandService,
+  category: CategoryService,
+  menu: MenuService,
+  pages: PagesService,
   sections: SectionsService,
   settings: SettingsService,
-  category: CategoryService,
-  pages: PagesService,
-  menu: MenuService
+  user: UserService
 }
 
 export const socket = {
