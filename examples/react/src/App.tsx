@@ -8,7 +8,7 @@ const components = {
 
 import { services } from 'lw-storefront/lib/core'
 
-const { brand, category, menu, pages, sections, settings } = services
+const { blogCategory, brand, category, menu, pages, sections, settings } = services
 
 const get = async (id: string) => {
   const result = await settings.getSettings()
@@ -18,7 +18,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await menu.getMenuList(['id', 'values'])
+      const result = await blogCategory.getBlogCategoryList()
       console.log(`result ${id}`, result)
     }
     get('header')

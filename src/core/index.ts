@@ -2,6 +2,7 @@ import stringHelper from './helpers/stringHelper'
 import styleHelper from './helpers/styleHelper'
 import viewportHelper from './helpers/viewportHelper'
 
+import { BlogCategoryService } from './modules/blog/category/BlogCategoryService' 
 import { BrandService } from './modules/brand/BrandService'
 import { CategoryService } from './modules/category/CategoryService'
 import { MenuService } from './modules/menu/MenuService'
@@ -18,6 +19,7 @@ export const helpers = {
 }
 
 export const services = {
+  blogCategory: BlogCategoryService,
   brand: BrandService,
   sections: SectionsService,
   settings: SettingsService,
