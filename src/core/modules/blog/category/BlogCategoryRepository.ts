@@ -21,8 +21,8 @@ export class BlogCategoryRepository {
         const blogCategoryFields = (fields || BLOG_CATEGORY_DEFAULT_FIELDS).join()
 
         const blogCategoryListQuery = `
-            query BlogCategories($filter: filterBlogCategory) {
-                blogCategories(filter: $filter) {
+            query BlogCategories {
+                blogCategories {
                     ${blogCategoryFields}
                 }
             }
