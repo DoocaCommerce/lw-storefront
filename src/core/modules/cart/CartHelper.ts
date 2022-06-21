@@ -48,7 +48,6 @@ const CART_ITEM_DEFAULT_FIELD = [
     "id",
     "variation_id",
     "quantity",
-    "zipcode",
     `customize {${CUSTOMIZE_DEFAULT_FIELDS.join()}}`,
     `components {${COMPONENTS_DEFAULT_FIELDS.join()}}`
 ]

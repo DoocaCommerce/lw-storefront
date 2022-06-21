@@ -27,7 +27,7 @@ function Header() {
     get('header')
   }, [])
   return <h1>Hello </h1>
-}
+} 
 
 function App() {
   const setting = useSettings()
