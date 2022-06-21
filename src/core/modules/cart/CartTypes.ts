@@ -1,4 +1,5 @@
-import { nullable } from "../../types/NullableTypes"
+import { Image } from 'src/core/types/ImageTypes'
+import { nullable } from '../../types/NullableTypes'
 
 export interface Cart {
     id?: nullable<String>
@@ -41,10 +42,25 @@ export interface CartCreditCard {
 }
 
 export interface CartItem {
-    id?: nullable<Number>
-    variation_id?: nullable<Number>
+    id
+    name?: nullable<String>
+    variation?: nullable<String>
+    is_virtual?: nullable<Boolean>
     quantity?: nullable<Number>
-    zipcode?: nullable<Number>
+    allowed_gift_wrapping?: nullable<Boolean>
+    total_cost?: nullable<Number>
+    total?: nullable<Number>
+    price?: nullable<Number>
+    price_cost?: nullable<Number>
+    stock_balance?: nullable<Number>
+    can_sell_out_of_stock?: nullable<Boolean>
+    variation_id?: nullable<Number>
+    additional_price?: nullable<Number>
+    price_gift_wrapping?: nullable<Number>
+    allowed_gift_wrapping_price?: nullable<Number>
+    discount?: nullable<Number>
+    price_compare?: nullable<Number>
+    image?: nullable<Image>
     customize?: nullable<CustomizationsItem>
     components?: nullable<ComponentItem> 
 }
@@ -156,60 +172,75 @@ export interface GetCartResponse {
 }
 
 export type CartFields = 
-| "id"
-| "token"
-| "customer"
-| "address"
-| "coupon"
-| "shipping_token"
-| "payment_token" 
-| "creditcard"
-| "items"
+| 'id'
+| 'token'
+| 'customer'
+| 'address'
+| 'coupon'
+| 'shipping_token'
+| 'payment_token'
+| 'creditcard'
+| 'items'
 
 export type CartCreditCartFields =
-| "cvv"
-| "exp"
-| "name"
-| "Int"
+| 'cvv'
+| 'exp'
+| 'name'
+| 'Int'
 
 export type CustomerCartField = 
-| "email"
-| "doc"
-| "newsletter"
-| "first_name"
-| "last_name"
-| "name"
-| "phone"
+| 'email'
+| 'doc'
+| 'newsletter'
+| 'first_name'
+| 'last_name'
+| 'name'
+| 'phone'
 
 export type AdressCartFields =
-| "receiver"
-| "zipcode" 
-| "street"
-| "Int"
-| "detail"
-| "district"
-| "city"
-| "state"
+| 'receiver'
+| 'zipcode'
+| 'street'
+| 'Int'
+| 'detail'
+| 'district'
+| 'city'
+| 'state'
 
 export type CartItemFields =
-| "id"
-| "variation_id"
-| "quantity"
-| "zipcode"
-| "customize" 
-| "components"
+| 'id'
+| 'name'
+| 'variation'
+| 'is_virtual'
+| 'quantity'
+| 'allowed_gift_wrapping'
+| 'total_cost'
+| 'total'
+| 'price'
+| 'price_cost'
+| 'stock_balance'
+| 'can_sell_out_of_stock'
+| 'variation_id'
+| 'additional_price'
+| 'price_gift_wrapping'
+| 'allowed_gift_wrapping_price'
+| 'discount'
+| 'price_compare'
+| 'image'
+| 'customize'
+| 'components'
 
 export type ComponentFields =
-| "variation_id"
-| "component_id"
+| 'variation_id'
+| 'component_id'
 
 export type CustomizeFields =
-| "id"
-| "name"
-| "content"
+| 'id'
+| 'name'
+| 'content'
 
 export type ContentFields =
-| "id" 
-| "field"
-| "value"
-| "price"
+| 'id'
+| 'field'
+| 'value'
+| 'price'
