@@ -6,7 +6,7 @@ import { BrandService } from './modules/brand/BrandService'
 import { CategoryService } from './modules/category/CategoryService'
 import { MenuService } from './modules/menu/MenuService'
 import { PagesService } from './modules/pages/PagesService'
-import { SectionsService }from './modules/sections/SectionsService'
+import { SectionsService } from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
 import { UserService } from './modules/user/UserService'
 
