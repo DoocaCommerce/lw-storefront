@@ -1,4 +1,4 @@
-import { nullable } from "src/core/types/NullableTypes"
+import { nullable } from '../../../types/NullableTypes'
 
 export interface BlogCategory {
     id?: nullable<Number>

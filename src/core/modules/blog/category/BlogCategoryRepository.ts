@@ -27,7 +27,7 @@ export class BlogCategoryRepository {
                 }
             }
             `
-        
+
         const { blogCategories }: BlogCategoryListResponse = await client.query(blogCategoryListQuery)
 
         return blogCategories
@@ -45,7 +45,7 @@ export class BlogCategoryRepository {
                 }
             }
             `
-        
+
         const { blogCategory }: BlogCategoryResponse = await client.query(blogCategoryQuery, filter && {filter: {...filter}})
 
         return blogCategory

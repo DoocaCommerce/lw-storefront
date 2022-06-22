@@ -1,5 +1,5 @@
 import { client } from '../../../services/GraphqlService'
-import { BlogPost, BlogPostFields, BlogPostListResponse, BlogPostResponse, OptionsGetBlogPost } from './BlogPostTypes'
+import { BlogPost, BlogPostFields, BlogPostList, BlogPostListResponse, BlogPostResponse, OptionsGetBlogPost, OptionsGetBlogPostList } from './BlogPostTypes'
 
 const BLOG_POST_CATEGORY_DEFAULT_FIELDS = [
     'id',
@@ -36,6 +36,15 @@ const BLOG_POST_DEFAULT_FIELDS = [
     CATEGORY_FIELD
 ]
 
+const PAGE_INFO_FIELDS = [
+    'hasNextPage',
+    'hasPreviousPage',
+    'startCursor',
+    'endCursor',
+    'first',
+    'total'
+]
+
 export class BlogPostRepository {
     private static replaceBlogPostCategoryFields(fields: Array<String>): Array<String> {
         const indexOfField = fields.indexOf('category')
@@ -45,26 +54,36 @@ export class BlogPostRepository {
         return fields
     }
 
-    static async getBlogPostList(fields?: Array<BlogPostFields>): Promise<Array<BlogPost>> {
-        const blogPostFields = (this.replaceBlogPostCategoryFields(fields) || BLOG_POST_DEFAULT_FIELDS).join()
+    static async getBlogPostList(optionsGetBlogPostList: OptionsGetBlogPostList): Promise<BlogPostList> {
+        const { fields, filter } = optionsGetBlogPostList
+
+        const blogPostFields = (fields ? this.replaceBlogPostCategoryFields(fields) : BLOG_POST_DEFAULT_FIELDS).join()
 
         const blogPostListQuery = `
-            query Query($filter: filterBlogPost) {
+            query BlogPosts($filter: filterBlogPosts) {
                 blogPosts(filter: $filter) {
-                    ${blogPostFields}
+                    edges {
+                        node {
+                            ${blogPostFields}
+                        }
+                        cursor
+                    }
+                    pageInfo {
+                        ${PAGE_INFO_FIELDS.join()}
+                    }
                 }
             }
             `
         
-        const { blogPosts }: BlogPostListResponse = await client.query(blogPostListQuery)
+        const { blogPosts }: BlogPostListResponse = await client.query(blogPostListQuery, filter && {filter: {...filter}})
 
         return blogPosts
     }
 
-    private static async getBlogPost(OptionsGetBlogCategory: OptionsGetBlogPost): Promise<BlogPost> {
-        const { fields, filter } = OptionsGetBlogCategory
+    private static async getBlogPost(optionsGetBlogCategory: OptionsGetBlogPost): Promise<BlogPost> {
+        const { fields, filter } = optionsGetBlogCategory
 
-        const blogPostFields = (this.replaceBlogPostCategoryFields(fields) || BLOG_POST_DEFAULT_FIELDS).join()
+        const blogPostFields = (fields ? this.replaceBlogPostCategoryFields(fields) : BLOG_POST_DEFAULT_FIELDS).join()
 
         const blogPostListQuery = `
             query BlogPost($filter: filterBlogPost) {
@@ -85,9 +104,5 @@ export class BlogPostRepository {
 
     static async getBlogPostBySlug(slug: String, fields?: Array<BlogPostFields>): Promise<BlogPost> {
         return this.getBlogPost({fields: fields || null, filter: {slug: slug}})
-    }
-
-    static async getBlogPostByPostCategoryId(postCategoryId: Number, fields?: Array<BlogPostFields>): Promise<BlogPost> {
-        return this.getBlogPost({fields: fields || null, filter: {post_category_id: postCategoryId}})
     }
 }

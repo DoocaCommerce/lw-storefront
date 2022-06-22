@@ -18,7 +18,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await blogPost.getBlogPostList()
+      const result = await blogCategory.getBlogCategoryList()
       console.log(`result ${id}`, result)
     }
     get('header')

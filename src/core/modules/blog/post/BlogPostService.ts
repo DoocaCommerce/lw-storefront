@@ -1,5 +1,5 @@
 import { BlogPostRepository } from './BlogPostRepository'
-import { BlogPost, BlogPostFields } from './BlogPostTypes'
+import { BlogPost, BlogPostFields, BlogPostList, BlogPostListFilter } from './BlogPostTypes'
 
 export class BlogPostService {
     static async getBlogPostById(id: Number, fields?: Array<BlogPostFields>): Promise<BlogPost> {
@@ -12,13 +12,8 @@ export class BlogPostService {
         return result
     }
 
-    static async getBlogPostByPostCategoryId(postCategoryId: Number, fields?: Array<BlogPostFields>): Promise<BlogPost> {
-        const result: BlogPost = await BlogPostRepository.getBlogPostByPostCategoryId(postCategoryId, fields)
-        return result
-    }
-
-    static async getBlogPostList(fields?: Array<BlogPostFields>): Promise<Array<BlogPost>> {
-        const result: Array<BlogPost> = await BlogPostRepository.getBlogPostList(fields)
+    static async getBlogPostList(paginationFilter: BlogPostListFilter, fields?: Array<BlogPostFields>): Promise<BlogPostList> {
+        const result: BlogPostList = await BlogPostRepository.getBlogPostList({fields: fields || null, filter: paginationFilter})
         return result
     }
 }

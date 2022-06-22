@@ -26,6 +26,7 @@ describe('Blog Category Module', () => {
 
     it('Should get blog category list with all fields', async () => {
         const blogCategoryListResult = await BlogCategoryService.getBlogCategoryList()
+        console.log(blogCategoryListResult)
         expect(blogCategoryListResult.length > 0).toBeTruthy()
     })
 })

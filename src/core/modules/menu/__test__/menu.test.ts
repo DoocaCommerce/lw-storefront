@@ -2,9 +2,9 @@ import { Menu, MenuFields } from '../MenuTypes'
 import { MenuService } from '../MenuService'
 import "isomorphic-fetch"
 
-const ID_FILTER = 47018
+const ID_FILTER = 47028
 const SELECTED_FIELDS: Array<MenuFields> = ['id', 'name', 'values']
-
+ 
 describe('Menu Module', () => {
     it('Should Get menu by id with all fields successfully', async () => {
         const menuResult: Menu = await MenuService.getMenuById(ID_FILTER)
