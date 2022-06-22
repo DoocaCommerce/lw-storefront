@@ -2,7 +2,7 @@ import { Menu, MenuFields } from '../MenuTypes'
 import { MenuService } from '../MenuService'
 import "isomorphic-fetch"
 
-const ID_FILTER = 47028
+const ID_FILTER = 47018
 const SELECTED_FIELDS: Array<MenuFields> = ['id', 'name', 'values']
  
 describe('Menu Module', () => {

@@ -1,6 +1,6 @@
 import { nullable } from '../../types/NullableTypes'
 import { Image } from '../../types/ImageTypes'
-import { PageableEdgeObject, PageableListObject, PaginationFilter } from '../../types/PaginationTypes'
+import { PageInfo, PaginationFilter } from '../../types/PaginationTypes'
 
 export interface Brand {
   id?: String
@@ -22,9 +22,15 @@ export interface Brand {
   updated_at?: String
 }
 
-export interface BrandEdges extends PageableEdgeObject<Brand> {}
+export interface BrandEdges {
+  node: Array<Brand>
+  cursor?: String
+}
 
-export interface BrandList extends PageableListObject<BrandEdges> {}
+export interface BrandList {
+  edges: BrandEdges
+  pageInfo: PageInfo
+}
 
 export interface BrandListResponse {
   brands: BrandList

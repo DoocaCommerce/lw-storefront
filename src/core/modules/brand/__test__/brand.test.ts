@@ -1,32 +1,89 @@
-import { BrandService } from '../BrandService'
-import { Brand, BrandFields, BrandList } from '../BrandTypes'
 import 'isomorphic-fetch'
+import { BrandService } from '../BrandService'
+import { Brand, BrandFields } from '../BrandTypes'
+import { buildBaseAsserts, buildGeneralModuleAsserts } from '../../../helpers/__test__/testHelper'
+import { PageInfo } from '../../../types/PaginationTypes'
 
-const SELECTED_FIELDS: Array<BrandFields> = ['id', 'name', 'slug']
+const refereceBrandAllFieldsObject: Brand = {
+  id: '',
+  hotsite_id: 0,
+  external_id: 0,
+  name: '',
+  slug: '',
+  description: '',
+  short_description: '',
+  image: { src: '' },
+  banner: { src: '' },
+  meta_title: '',
+  meta_keywords: '',
+  meta_description: '',
+  position: 0,
+  url: '',
+  active: false,
+  created_at: '',
+  updated_at: ''
+}
+
+const refereceBrandSelectedFieldsObject: Brand = {
+  id: '',
+  name: '',
+  slug: ''
+}
+
+const selectedFields: Array<BrandFields> = ['id', 'name', 'slug']
+
+const referencePageInfoObject: PageInfo = {
+  hasNextPage: false,
+  hasPreviousPage: false,
+  startCursor: '',
+  endCursor: '',
+  total: 0
+}
+
+async function buildBrandListAsserts(referenceObject: unknown, fields?: Array<BrandFields>) {
+  const NUMBER_OF_RECORDS = 3
+  const PAGINATION_FILTER = { page: 1, first: NUMBER_OF_RECORDS }
+  const brandResult: any = await BrandService.getBrandList(PAGINATION_FILTER, fields)
+  const brandList: Array<Brand> = brandResult.edges.map(edge => edge.node)
+  brandList.forEach(brand => buildGeneralModuleAsserts(brand, referenceObject))
+  buildBaseAsserts(brandResult.pageInfo, referencePageInfoObject)
+  expect(brandList.length).toEqual(NUMBER_OF_RECORDS)
+}
+
+async function buildGetBrandByIdAsserts(referenceObject: unknown, fields?: Array<BrandFields>) {
+  const ID_FILTER = 1070
+  const brandResult: Brand = await BrandService.getBrandById(ID_FILTER, fields)
+  buildGeneralModuleAsserts(brandResult, referenceObject, { id: ID_FILTER }, ID_FILTER)
+}
+
+async function buildGetBrandBySlugAsserts(referenceObject: unknown, fields?: Array<BrandFields>) {
+  const SLUG_FILTER = 'av-carteiras'
+  const brandResult: Brand = await BrandService.getBrandBySlug(SLUG_FILTER, fields)
+  buildGeneralModuleAsserts(brandResult, referenceObject, { slug: SLUG_FILTER }, SLUG_FILTER)
+}
 
 describe('Brand Module', () => {
-  it('Should get single brand by id with all fields successfully', async () => {
-    const ID_FILTER = 1260
-    const brandResult: Brand = await BrandService.getBrandById(ID_FILTER)
-    expect(brandResult.id == ID_FILTER.toString()).toBeTruthy()
+  it('Get brand by id with all fields', async () => {
+    await buildGetBrandByIdAsserts(refereceBrandAllFieldsObject)
   })
 
-  it('Should get single brand by id with selected fields successfully', async () => {
-    const ID_FILTER = 1260
-    const brandResult: Brand = await BrandService.getBrandById(ID_FILTER, SELECTED_FIELDS)
-    const brandResultFields = Object.keys(brandResult).filter(key => key != '__typename')
-    expect(brandResultFields).toEqual(SELECTED_FIELDS)
-    expect(brandResultFields.length).toEqual(SELECTED_FIELDS.length)
+  it('Get brand by slug with all fields', async () => {
+    await buildGetBrandBySlugAsserts(refereceBrandAllFieldsObject)
   })
 
-  it('Should get single brand by slug with all fields successfully', async () => {
-    const SLUG_FILTER = 'amd'
-    const brandResult: Brand = await BrandService.getBrandBySlug(SLUG_FILTER)
-    expect(brandResult.slug).toEqual(SLUG_FILTER)
+  it('Get brand by id with selected fields', async () => {
+    await buildGetBrandByIdAsserts(refereceBrandSelectedFieldsObject, selectedFields)
   })
 
-  it('Should get brand list with all fields successfully', async () => {
-    const brandListResult: BrandList = await BrandService.getBrandList({page: 1, first: 1})
-    expect(brandListResult.edges.length > 0).toBeTruthy()
+  it('Get brand by slug with selected fields', async () => {
+    await buildGetBrandBySlugAsserts(refereceBrandSelectedFieldsObject, selectedFields)
+  })
+
+  it('Get brand list with all fields', async () => {
+    await buildBrandListAsserts(refereceBrandAllFieldsObject)
+  })
+
+  it('Get brand list with selected fields', async () => {
+    await buildBrandListAsserts(refereceBrandSelectedFieldsObject, selectedFields)
   })
 })
