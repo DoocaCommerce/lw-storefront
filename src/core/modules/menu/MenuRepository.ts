@@ -2,18 +2,18 @@ import { client } from '../../services/GraphqlService'
 import { Menu, MenuFields, MenuListResponse, MenuResponse, OptionsGetMenu } from './MenuTypes'
 
 const MENU_ITEM_DEFAULT_FIELDS = [
-  'id', 
-  'menu_id', 
+  'id',
+  'menu_id',
   'brand_id',
   'name',
   'menu_type',
-  'slug', 
-  'menu_type_slug', 
-  'active', 
-  'created_at', 
-  'image {src, alt}', 
-  'parent_id', 
-  'page_id', 
+  'slug',
+  'menu_type_slug',
+  'active',
+  'created_at',
+  'image {src, alt}',
+  'parent_id',
+  'page_id',
   'hotsite_id',
   'category_id',
   'banner',
@@ -22,29 +22,19 @@ const MENU_ITEM_DEFAULT_FIELDS = [
   'link',
   'menu_type_link',
   'updated_at',
-  'position',
+  'position'
 ]
 
-const VALUES_DEFAULT_FIELDS = [
-  ...MENU_ITEM_DEFAULT_FIELDS,
-  `children {${MENU_ITEM_DEFAULT_FIELDS.join()}}`
-]
+const VALUES_DEFAULT_FIELDS = [...MENU_ITEM_DEFAULT_FIELDS, `children {${MENU_ITEM_DEFAULT_FIELDS.join()}}`]
 
 const VALUE_FIELD = `values {${VALUES_DEFAULT_FIELDS.join()}}`
 
-const MENU_QUERY_DEFAULT_FIELDS = [
-    'id',
-    'name',
-    'handle',
-    'createdAt',
-    'updatedAt',
-    VALUE_FIELD
-]
+const MENU_QUERY_DEFAULT_FIELDS = ['id', 'name', 'handle', 'createdAt', 'updatedAt', VALUE_FIELD]
 
 export class MenuRepository {
   private static replaceMenuValuesFields(fields: Array<String>): Array<String> {
     const indexOfField = fields.indexOf('values')
-    const isFieldSelected = indexOfField != -1 
+    const isFieldSelected = indexOfField != -1
     isFieldSelected && (fields[indexOfField] = VALUE_FIELD)
 
     return fields
@@ -62,9 +52,9 @@ export class MenuRepository {
         }
       }
     `
-    
-    const { menu }:MenuResponse = await client.query(menuQuery, filter && {filter: {...filter}})
-  
+
+    const { menu }: MenuResponse = await client.query(menuQuery, filter && { filter: { ...filter } })
+
     return menu
   }
 
@@ -78,13 +68,13 @@ export class MenuRepository {
         }
       }
     `
-    
-    const { menus }:MenuListResponse = await client.query(menuQuery)
-  
+
+    const { menus }: MenuListResponse = await client.query(menuQuery)
+
     return menus
   }
 
   static async getMenuById(id: Number, fields?: Array<MenuFields>): Promise<Menu> {
-    return this.getMenu({fields: fields || null, filter: {id: id}})
+    return this.getMenu({ fields: fields || null, filter: { id: id } })
   }
 }
