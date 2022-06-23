@@ -2,6 +2,8 @@ import stringHelper from './helpers/stringHelper'
 import styleHelper from './helpers/styleHelper'
 import viewportHelper from './helpers/viewportHelper'
 
+import { BlogCategoryService } from './modules/blog/category/BlogCategoryService'
+import { BlogPostService } from './modules/blog/post/BlogPostService'
 import { BrandService } from './modules/brand/BrandService'
 import { CategoryService } from './modules/category/CategoryService'
 import { LandingPagesService } from './modules/landing-pages/LandingPagesService'
@@ -19,6 +21,8 @@ export const helpers = {
 }
 
 export const services = {
+  blogCategory: BlogCategoryService,
+  blogPost: BlogPostService,
   brand: BrandService,
   sections: SectionsService,
   settings: SettingsService,
