@@ -7,7 +7,7 @@ import { CategoryService } from './modules/category/CategoryService'
 import { LandingPagesService } from './modules/landing-pages/LandingPagesService'
 import { MenuService } from './modules/menu/MenuService'
 import { PagesService } from './modules/pages/PagesService'
-import { SectionsService }from './modules/sections/SectionsService'
+import { SectionsService } from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
 
 import Socket from './socket'
@@ -25,7 +25,7 @@ export const services = {
   category: CategoryService,
   landingPages: LandingPagesService,
   menu: MenuService,
-  pages: PagesService,
+  pages: PagesService
 }
 
 export const socket = {
