@@ -1,42 +1,39 @@
 import { CartService } from '../CartService'
-import { AddItemInput, CartFields } from '../CartTypes'
-import { buildBaseAsserts } from '../../../helpers/__test__/testHelper'
-import { multipleItemsToBeAddedSample, refereceCartAllFieldsObject, refereceCartSelectedFieldsObject, selectedFields, singleItemToBeAddedSample } from './CartTestHelper'
-import "isomorphic-fetch"
+import { AddItemInput, CartFields, CartItemAddInput } from '../CartTypes'
+import 'isomorphic-fetch'
 
-async function buildCleanCartAsserts(itemsToBeAdded: AddItemInput, fields?: Array<CartFields>) {
-    const addedItemCart = await CartService.addItem(itemsToBeAdded)
-    const addedItems = addedItemCart.items!
+const SELECTED_FIELDS: Array<CartFields> = ['id', 'token', 'address', 'items']
+const SINGLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [{ variation_id: 1394682, quantity: 1 }]
 
-    const cleanCart = await CartService.cleanCart({
-        items: [ ...addedItems.map(item => ({id: item.id})) ],
-        cartToken: addedItemCart.token
-    })
-
-    const cartItems = cleanCart.items
-
-    buildBaseAsserts(cartItems, fields ? refereceCartSelectedFieldsObject : refereceCartAllFieldsObject)
-    expect(cartItems).toEqual(null)
-}
+let firstAddedItemsCart
 
 describe('Cart Module', () => {
-    it('Should add single item, clean and return cart with all fields successfully', async () => {
-        const itemsToBeAdded = {items: singleItemToBeAddedSample}
-        await buildCleanCartAsserts(itemsToBeAdded)
-    })
+  beforeEach(async () => {
+    firstAddedItemsCart = await CartService.addItem({ items: SINGLE_ITEM_TO_BE_ADDED_SAMPLE })
+    console.log(firstAddedItemsCart.token)
+  })
 
-    it('Should add single item, clean and return cart with selected fields successfully', async () => {
-        const itemsToBeAdded = {items: singleItemToBeAddedSample}
-        await buildCleanCartAsserts(itemsToBeAdded, selectedFields)
+  it('Should add single item, clean and return cart with all fields successfully', async () => {
+    const cleanCart = await CartService.cleanCart({
+      items: [...firstAddedItemsCart.map(item => ({ id: item.id }))],
+      cartToken: firstAddedItemsCart.token
     })
+    Object.keys(cleanCart)
+      .filter(key => key != '__typename')
+      .forEach(key => expect(cleanCart[key]).toBeNull())
+  })
 
-    it('Should add multiple items, clean and return cart with all fields successfully', async () => {
-        const itemsToBeAdded = {items: multipleItemsToBeAddedSample}
-        await buildCleanCartAsserts(itemsToBeAdded)
-    })
+  it('Should add single item, clean and return cart with selected fields successfully', async () => {
+    const cleanCart = await CartService.cleanCart(
+      {
+        items: [...firstAddedItemsCart.map(item => ({ id: item.id }))],
+        cartToken: firstAddedItemsCart.token
+      },
+      [...SELECTED_FIELDS]
+    )
 
-    it('Should add multiple items, clean and return cart with selected fields successfully', async () => {
-        const itemsToBeAdded = {items: multipleItemsToBeAddedSample}
-        await buildCleanCartAsserts(itemsToBeAdded, selectedFields)
-    })
+    const cartResultFields = Object.keys(cleanCart).filter(key => key != '__typename')
+    expect(cartResultFields).toEqual(SELECTED_FIELDS)
+    expect(cartResultFields.length).toEqual(SELECTED_FIELDS.length)
+  })
 })

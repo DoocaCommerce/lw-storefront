@@ -1,37 +1,36 @@
 import { CartService } from '../CartService'
-import { CartFields } from '../CartTypes'
-import { buildBaseAsserts } from '../../../helpers/__test__/testHelper'
-import { refereceCartAllFieldsObject, refereceCartSelectedFieldsObject, selectedFields, singleItemToBeAddedSample } from './CartTestHelper'
-import "isomorphic-fetch"
+import { CartFields, CartItemAddInput } from '../CartTypes'
+import 'isomorphic-fetch'
 
-async function buildGetCartAsserts(fields?: Array<CartFields>) {
-    const FIRST_ITEM_INDEX = 0
+const FIRST_ITEM_INDEX = 0
+const SELECTED_FIELDS: Array<CartFields> = ['id', 'token', 'address', 'items']
+const SINGLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [{ variation_id: 1394682, quantity: 1 }]
 
-    const addedItemCart = await CartService.addItem({items: singleItemToBeAddedSample})
+let firstAddedItemsCart
 
-    const cartResult = await CartService.getCart(addedItemCart.token, fields)
+describe('Cart Module', () => {
+  beforeAll(async () => {
+    firstAddedItemsCart = await CartService.addItem({ items: SINGLE_ITEM_TO_BE_ADDED_SAMPLE })
+  })
+
+  it('Should get cart with all fields successfully', async () => {
+    const cartResult = await CartService.getCart(firstAddedItemsCart.token)
 
     const cartItems = cartResult.items
 
-    buildBaseAsserts(cartResult, fields ? refereceCartSelectedFieldsObject : refereceCartAllFieldsObject)
-    
-    cartItems.forEach((cartItem, index) => {
-        expect(cartItem.variation_id).toEqual(cartResult.items[index].variation_id)
-        expect(cartItem.quantity).toEqual(cartResult.items[index].quantity)
-    })
+    expect(cartResult.items[FIRST_ITEM_INDEX].quantity).toEqual(firstAddedItemsCart.items[FIRST_ITEM_INDEX].quantity)
+    expect(cartResult.items[FIRST_ITEM_INDEX].variation_id).toEqual(
+      firstAddedItemsCart.items[FIRST_ITEM_INDEX].variation_id
+    )
+    expect(cartResult.token).toEqual(firstAddedItemsCart.token)
+    expect(cartItems.length).toEqual(firstAddedItemsCart.items.length)
+  })
 
-    expect(cartResult.items[FIRST_ITEM_INDEX].quantity).toEqual(addedItemCart.items[FIRST_ITEM_INDEX].quantity)
-    expect(cartResult.items[FIRST_ITEM_INDEX].variation_id).toEqual(addedItemCart.items[FIRST_ITEM_INDEX].variation_id)
-    expect(cartResult.token).toEqual(addedItemCart.token)
-    expect(cartItems.length).toEqual(addedItemCart.items.length)
-}
+  it('Should get cart with selected fields successfully', async () => {
+    const cartResult = await CartService.getCart(firstAddedItemsCart.token, [...SELECTED_FIELDS])
 
-describe('Cart Module', () => {
-    it('Should get cart with all fields successfully', async () => {
-        await buildGetCartAsserts()
-    })
-
-    it('Should get cart with selected fields successfully', async () => {
-        await buildGetCartAsserts(selectedFields)
-    })
+    const cartResultFields = Object.keys(cartResult).filter(key => key != '__typename')
+    expect(cartResultFields).toEqual(SELECTED_FIELDS)
+    expect(cartResultFields.length).toEqual(SELECTED_FIELDS.length)
+  })
 })
