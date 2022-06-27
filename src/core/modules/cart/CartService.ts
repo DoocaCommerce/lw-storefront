@@ -17,11 +17,6 @@ export class CartService {
     return result
   }
 
-  static async cleanCart(input: CleanCartInput, fields?: Array<CartFields>) {
-    const result = await CartRepository.cleanCart({ fields: fields || null, input: input })
-    return result
-  }
-
   static async getCart(cartToken: String, fields?: Array<CartFields>) {
     const result = await CartRepository.getCart({ fields: fields || null, filter: { cartToken: cartToken } })
     return result
