@@ -3,8 +3,8 @@ import { Client, createClient, defaultExchanges, gql } from '@urql/core'
 class GraphqlService {
   client: Client
 
-  constructor(api_url: string, token: string) {
-    if (!api_url && !token) console.error('api_url and token are required')
+  constructor(api_url: string, token: string, domain: string) {
+    if (!api_url && !token && !domain) console.error('api_url, token and domain are required')
 
     this.client = createClient({
       url: api_url,
@@ -12,7 +12,8 @@ class GraphqlService {
       exchanges: defaultExchanges,
       fetchOptions: {
         headers: {
-          token: token
+          token: token,
+          domain: domain
         }
       }
     })
@@ -29,8 +30,20 @@ class GraphqlService {
       console.error(error)
     }
   }
+
+  public async mutation<T>(query: string, variables: any): Promise<T> {
+    try {
+      const { data, error }: any = await this.client.mutation(query, variables).toPromise()
+
+      if (error) throw new Error(error)
+
+      return data
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
-//@ts-ignore
-const client = new GraphqlService(dc_config.api_url, dc_config.token)
+
+const client = new GraphqlService(dc_config.api_url, dc_config.token, dc_config.domain)
 
 export { client }
