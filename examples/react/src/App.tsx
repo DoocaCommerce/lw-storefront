@@ -8,7 +8,7 @@ const components = {
 
 import { services } from 'lw-storefront/lib/core'
 
-const { blogCategory, blogPost, brand, cart, category, menu, pages, sections, settings } = services
+const { blogCategory, blogPost, brand, cart, category, landingPages, menu, pages, sections, settings } = services
 
 const get = async (id: string) => {
   const result = await settings.getSettings()
