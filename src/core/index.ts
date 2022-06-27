@@ -7,6 +7,7 @@ import { BlogPostService } from './modules/blog/post/BlogPostService'
 import { BrandService } from './modules/brand/BrandService'
 import { CartService } from './modules/cart/CartService'
 import { CategoryService } from './modules/category/CategoryService'
+import { LandingPagesService } from './modules/landing-pages/LandingPagesService'
 import { MenuService } from './modules/menu/MenuService'
 import { PagesService } from './modules/pages/PagesService'
 import { SectionsService } from './modules/sections/SectionsService'
@@ -28,8 +29,9 @@ export const services = {
   category: CategoryService,
   sections: SectionsService,
   settings: SettingsService,
-  pages: PagesService,
-  menu: MenuService
+  landingPages: LandingPagesService,
+  menu: MenuService,
+  pages: PagesService
 }
 
 export const socket = {
