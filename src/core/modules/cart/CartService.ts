@@ -1,5 +1,5 @@
 import { CartRepository } from './CartRepository'
-import { AddItemInput, CartFields, DeleteItemInput, UpdateItemInput } from './CartTypes'
+import { AddItemInput, CartFields, CleanCartInput, DeleteItemInput, UpdateItemInput } from './CartTypes'
 
 export class CartService {
   static async addItem(input: AddItemInput, fields?: Array<CartFields>) {

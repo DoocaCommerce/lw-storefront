@@ -83,23 +83,28 @@ export interface ComponentItem {
   component_id?: nullable<Number>
 }
 
-export interface AddItemInput {
-  items: Array<CartItemAddInput>
+interface MutationInput {
   cartToken?: String
 }
 
-export interface UpdateItemInput {
+export interface AddItemInput extends MutationInput {
+  items: Array<CartItemAddInput>
+}
+
+export interface UpdateItemInput extends MutationInput {
   item: CartItemUpdateInput
-  cartToken: String
 }
 
 interface CartItemDeleteInput {
   id: nullable<Number>
 }
 
-export interface DeleteItemInput {
+export interface DeleteItemInput extends MutationInput {
   item: CartItemDeleteInput
-  cartToken: String
+}
+
+export interface CleanCartInput extends MutationInput {
+  items: Array<CartItemDeleteInput>
 }
 
 export interface CartItemAddInput {
@@ -146,6 +151,8 @@ export interface OptionsUpdateItemCart extends OptionsCartMutation<UpdateItemInp
 
 export interface OptionsDeleteItemCart extends OptionsCartMutation<DeleteItemInput> {}
 
+export interface OptionsCleanCart extends OptionsCartMutation<CleanCartInput> {}
+
 export interface OptionsGetCart {
   fields: nullable<Array<CartFields>>
   filter: CartFilter
@@ -165,6 +172,10 @@ export interface UpdateItemReponse {
 
 export interface DeleteItemReponse {
   deleteItem: Cart
+}
+
+export interface CleanCartReponse {
+  cleanCart: Cart
 }
 
 export interface GetCartResponse {

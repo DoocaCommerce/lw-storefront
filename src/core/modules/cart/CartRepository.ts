@@ -4,9 +4,11 @@ import {
   AddItemReponse,
   Cart,
   CartFields,
+  CleanCartReponse,
   DeleteItemReponse,
   GetCartResponse,
   OptionsAddItemCart,
+  OptionsCleanCart,
   OptionsDeleteItemCart,
   OptionsGetCart,
   OptionsUpdateItemCart,
@@ -71,8 +73,26 @@ export class CartRepository {
             }   
         } 
         `
+
     const { deleteItem }: DeleteItemReponse = await client.mutation(deleteItemMutation, input && { ...input })
     return deleteItem
+  }
+
+  static async cleanCart(optionsCleanCart: OptionsCleanCart): Promise<Cart> {
+    const { fields, input } = optionsCleanCart
+    const cartFields: String = this.buildJoinedCartFields(fields)
+
+    const cleanCartMutation = `
+        mutation CleanCart($cartToken: String!, $items: [deleteItemTypeInput]) {
+            cleanCart(cartToken: $cartToken, items: $items) {
+                ${cartFields}
+            }   
+        } 
+        `
+
+    const { cleanCart }: CleanCartReponse = await client.mutation(cleanCartMutation, input && { ...input })
+
+    return cleanCart
   }
 
   static async getCart(optionsGetCart: OptionsGetCart): Promise<Cart> {
@@ -88,7 +108,6 @@ export class CartRepository {
         `
 
     const { cart }: GetCartResponse = await client.query(getCartQuery, filter && { ...filter })
-
     return cart
   }
 }
