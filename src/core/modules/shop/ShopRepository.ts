@@ -66,7 +66,7 @@ const SHOP_DEFAULT_FIELDS = [
 ]
 
 export class ShopRepository {
-  private static async getShop(fields?: Array<ShopFields>): Promise<Shop> {
+  static async getShop(fields?: Array<ShopFields>): Promise<Shop> {
     const shopQueryFields = (fields || SHOP_DEFAULT_FIELDS).join()
 
     const shopPageQuery = `
