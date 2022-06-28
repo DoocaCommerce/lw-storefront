@@ -1,4 +1,4 @@
-import { FastSearch, ShowcaseFields } from '../ShowcaseTypes'
+import { FastSearch, ShowcaseFields, ShowcasePaginationFilter } from '../ShowcaseTypes'
 import { ShowcaseService } from '../ShowcaseService'
 import 'isomorphic-fetch'
 
@@ -27,11 +27,18 @@ describe('Showcase Module', () => {
     expect(showcaseResult.name).toEqual('Produtodeteste')
   })
 
-  it('Should get showcase and by fast search with all fields successfully', async () => {
+  it('Should get showcase by fast search with all fields successfully', async () => {
     const FILTER_FAST_SEARCH: FastSearch = { queryString: 'sdfsd', fields: ['slug'] }
     const showcaseResult = await ShowcaseService.getShowcaseByFastSearch(FILTER_FAST_SEARCH)
     expect(showcaseResult.slug).toEqual('sdfsd')
     expect(showcaseResult.name).toEqual('Produtodeteste')
     expect(showcaseResult.id).toEqual('64428')
+  })
+
+  it('Should get showcase list all fields successfully', async () => {
+    const FILTER_PAGINATION: ShowcasePaginationFilter = { page: 1, first: 1 }
+    const showcaseResult = await ShowcaseService.getShowcaseList(FILTER_PAGINATION)
+    expect(showcaseResult.edges.length).toEqual(1)
+    expect(showcaseResult.edges[0].node.id).toEqual('64428')
   })
 })
