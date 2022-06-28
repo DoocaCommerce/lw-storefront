@@ -1,3 +1,4 @@
+import { PageableEdgeObject, PageableListObject, PaginationFilter } from '../../types/PaginationTypes'
 import { nullable } from '../../types/NullableTypes'
 
 export interface Showcase {
@@ -63,6 +64,10 @@ export interface Showcase {
 
 export interface ShowcaseResponse {
   showcase: nullable<Showcase>
+}
+
+export interface ShowcaseListResponse {
+  showcases: nullable<ShowcaseList>
 }
 
 export interface ShowcaseBrand {
@@ -243,29 +248,36 @@ export interface ShowcaseVariation {
   attribute_secondary: nullable<ShowcaseAttribute>
 }
 
-export interface ShowcaseEdge {
-  node: nullable<Showcase>
-  cursor: nullable<String>
-}
+export interface ShowcaseEdge extends PageableEdgeObject<Showcase> {}
 
-export interface fastSearch {
+export interface ShowcaseList extends PageableListObject<ShowcaseEdge> {}
+
+export interface FastSearch {
   queryString: nullable<String>
-  fields: nullable<Array<String>>
+  fields: nullable<Array<ShowcaseFields>>
 }
 
-export interface filterShowcase {
-  id: nullable<Number>
-  slug: nullable<String>
-  fastSearch: nullable<fastSearch>
+export interface ShowcaseFilter {
+  id?: nullable<Number>
+  slug?: nullable<String>
+  fastSearch?: nullable<FastSearch>
 }
 
-export interface filterPaginationFilter {
-  page: nullable<Number>
-  first: nullable<Number>
-  fastSearch: nullable<fastSearch>
+export interface ShowcasePaginationFilter extends PaginationFilter {
+  fastSearch?: nullable<FastSearch>
 }
 
-export type ShocaseFields =
+export interface OptionsGetShowcase {
+  fields: nullable<Array<ShowcaseFields>>
+  filter: ShowcaseFilter
+}
+
+export interface OptionsGetShowcaseList {
+  fields: nullable<Array<ShowcaseFields>>
+  filter: ShowcasePaginationFilter
+}
+
+export type ShowcaseFields =
   | 'id'
   | 'name'
   | 'slug'
