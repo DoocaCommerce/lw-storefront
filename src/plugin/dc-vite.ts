@@ -13,6 +13,7 @@ export function doocaPlugin(dcConfig) {
         dc_config: {
           api_url: process.env.VITE_API_URL,
           token: dcConfig.token,
+          domain: dcConfig.domain,
           mock: dcConfig.mock || null
         }
       }
