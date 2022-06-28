@@ -19,7 +19,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await showcase.getShowcaseList({ page: 1, first: 1 })
+      const result = await showcase.getShowcaseBySlug('sdfsd')
       console.log(`result ${id}`, result)
     }
     get('header')

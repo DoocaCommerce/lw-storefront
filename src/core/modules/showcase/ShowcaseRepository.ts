@@ -131,12 +131,7 @@ const SHOWCASE_COMPONENT_GROUP_DEFAULT_FIELDS = ['id', 'shop_id', 'name', 'descr
 
 const SHOWCASE_COMPONENT_GROUPS_VALUE = `component_groups {${SHOWCASE_COMPONENT_GROUP_DEFAULT_FIELDS.join()}}`
 
-const SHOWCASE_COMPONENT_DEFAULT_FIELDS = [
-  'product_component_id',
-  'product_component_group_id',
-  'quantity',
-  'default',
-  'optional',
+const SHOWCASE_COMMON_FIELDS = [
   'id',
   'name',
   'slug',
@@ -196,9 +191,13 @@ const SHOWCASE_COMPONENT_DEFAULT_FIELDS = [
   SHOWCASE_COMPONENT_GROUPS_VALUE
 ]
 
-const SHOWCASE_COMPONENT_FULL_FIELDS = [
-  ...SHOWCASE_COMPONENT_DEFAULT_FIELDS,
-  `components {${SHOWCASE_COMPONENT_DEFAULT_FIELDS.join()}}`
+const SHOWCASE_COMPONENT_DEFAULT_FIELDS = [
+  ...SHOWCASE_COMMON_FIELDS,
+  'product_component_id',
+  'product_component_group_id',
+  'quantity',
+  'default',
+  'optional'
 ]
 
 const SHOWCASE_COMPLEX_FIELDS = {
@@ -213,70 +212,11 @@ const SHOWCASE_COMPLEX_FIELDS = {
   attribute: SHOWCASE_ATTRIBUTE_VALUE,
   attribute_secondary: SHOWCASE_ATTRIBUTE_SECONDARY_VALUE,
   variations: SHOWCASE_VARIATIONS_VALUE,
-  components: `components {${SHOWCASE_COMPONENT_FULL_FIELDS.join()}}`,
+  components: `components {${SHOWCASE_COMPONENT_DEFAULT_FIELDS.join()}}`,
   component_groups: SHOWCASE_COMPONENT_GROUPS_VALUE
 }
 
-const SHOWCASE_DEFAULT_FIELDS = [
-  'id',
-  'name',
-  'slug',
-  'url',
-  SHOWCASE_COMPLEX_FIELDS.payments,
-  'gtin',
-  'mpn',
-  'additional_shipping_time',
-  'external_id',
-  'category_default_id',
-  'hotsite_id',
-  'description',
-  'short_description',
-  'relevance',
-  'tags',
-  'min_quantity',
-  'max_quantity',
-  'sell_in_kit_only',
-  'meta_title',
-  'meta_description',
-  'meta_keywords',
-  'kit',
-  'kit_markup',
-  'is_virtual',
-  'is_pre_sale',
-  SHOWCASE_COMPLEX_FIELDS.images,
-  'video',
-  'weight',
-  'depth',
-  'width',
-  'height',
-  'sell_out_of_stock',
-  'additional_time_out_of_stock',
-  'balance',
-  'price',
-  'min_price_range',
-  'max_price_range',
-  'has_price_range',
-  'price_compare',
-  'discount',
-  'billet_discount',
-  'payments_reason',
-  'warranty',
-  'model',
-  'gender',
-  'age_group',
-  SHOWCASE_COMPLEX_FIELDS.brand,
-  SHOWCASE_COMPLEX_FIELDS.category,
-  SHOWCASE_COMPLEX_FIELDS.categories,
-  SHOWCASE_COMPLEX_FIELDS.color,
-  SHOWCASE_COMPLEX_FIELDS.colors,
-  SHOWCASE_COMPLEX_FIELDS.attribute,
-  SHOWCASE_COMPLEX_FIELDS.attribute_secondary,
-  SHOWCASE_COMPLEX_FIELDS.features,
-  'variation_id',
-  SHOWCASE_VARIATIONS_VALUE,
-  SHOWCASE_COMPLEX_FIELDS.components,
-  SHOWCASE_COMPLEX_FIELDS.component_groups
-]
+const SHOWCASE_DEFAULT_FIELDS = [...SHOWCASE_COMMON_FIELDS, SHOWCASE_COMPLEX_FIELDS.components]
 
 export class ShowcaseRepository {
   private static replaceShowcaseComplexFields(fields: Array<String>): Array<String> {

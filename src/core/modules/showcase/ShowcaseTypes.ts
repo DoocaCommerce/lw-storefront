@@ -146,70 +146,13 @@ export interface ShowcaseComponentGroup {
   optional: nullable<Boolean>
 }
 
-export interface ShowcaseComponent {
+export interface ShowcaseComponent extends Omit<Showcase, 'id' | 'components'> {
+  id?: nullable<Number>
   product_component_id: nullable<Number>
   product_component_group_id: nullable<Number>
   quantity: nullable<Number>
   default: nullable<Boolean>
   optional: nullable<Boolean>
-  id: nullable<Number>
-  name: nullable<String>
-  slug: nullable<String>
-  url: nullable<String>
-  payments: nullable<ShowcasePayment>
-  gtin: nullable<String>
-  mpn: nullable<String>
-  additional_shipping_time: nullable<Number>
-  external_id: nullable<String>
-  category_default_id: nullable<Number>
-  hotsite_id: nullable<Number>
-  description: nullable<String>
-  short_description: nullable<String>
-  relevance: nullable<Number>
-  tags: nullable<String>
-  min_quantity: nullable<Number>
-  max_quantity: nullable<Number>
-  sell_in_kit_only: nullable<Boolean>
-  meta_title: nullable<String>
-  meta_description: nullable<String>
-  meta_keywords: nullable<String>
-  kit: nullable<Boolean>
-  kit_markup: nullable<Number>
-  is_virtual: nullable<Boolean>
-  is_pre_sale: nullable<Boolean>
-  images: nullable<Array<ShowcaseImage>>
-  video: nullable<String>
-  weight: nullable<Number>
-  depth: nullable<Number>
-  width: nullable<Number>
-  height: nullable<Number>
-  sell_out_of_stock: nullable<Boolean>
-  additional_time_out_of_stock: nullable<Number>
-  balance: nullable<Number>
-  price: nullable<Number>
-  min_price_range: nullable<Number>
-  max_price_range: nullable<Number>
-  has_price_range: nullable<Boolean>
-  price_compare: nullable<Number>
-  discount: nullable<Number>
-  billet_discount: nullable<Number>
-  payments_reason: nullable<String>
-  warranty: nullable<String>
-  model: nullable<String>
-  gender: nullable<String>
-  age_group: nullable<String>
-  brand: nullable<ShowcaseBrand>
-  category: nullable<ShowcaseCategory>
-  categories: nullable<Array<ShowcaseCategory>>
-  color: nullable<ShowcaseColor>
-  colors: nullable<Array<ShowcaseColor>>
-  attribute: nullable<ShowcaseAttribute>
-  attribute_secondary: nullable<ShowcaseAttribute>
-  features: nullable<Array<ShowcaseFeature>>
-  variation_id: nullable<Number>
-  variations: nullable<Array<ShowcaseVariation>>
-  components: nullable<Array<ShowcaseComponent>>
-  component_groups: nullable<Array<ShowcaseComponentGroup>>
 }
 
 export interface ShowcaseAttributeValue {
