@@ -11,7 +11,7 @@ import {
   ShowcaseResponse
 } from './ShowcaseTypes'
 
-export class ShowcaseRepository {
+export class ShowcaseRepositoryGql {
   static async getShowcaseList({ fields, filter }: OptionsGetShowcaseList): Promise<ShowcaseList> {
     const showcaseQuery = new ShowcaseQueries(fields)
     const showcaseListQuery: string = showcaseQuery.listFullQuery()
