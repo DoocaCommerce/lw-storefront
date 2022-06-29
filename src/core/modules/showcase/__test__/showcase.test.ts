@@ -2,7 +2,7 @@ import { FastSearch, ShowcaseFields } from '../ShowcaseTypes'
 import { ShowcaseService } from '../ShowcaseService'
 import 'isomorphic-fetch'
 
-const SELECTED_FIELDS: Array<ShowcaseFields> = ['id', 'slug', 'payments', 'components']
+const SELECTED_FIELDS: Array<ShowcaseFields> = ['id', 'slug']
 
 describe('Showcase Module', () => {
   it('Should get showcase and by id with all fields successfully', async () => {
