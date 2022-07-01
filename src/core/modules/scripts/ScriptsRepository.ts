@@ -1,5 +1,5 @@
 import { client } from '../../services/GraphqlService'
-import { OptionsGetScripts, Script, ScriptsResponse } from './ScriptsTypes'
+import { OptionsGetScripts, Script, ScriptFields, ScriptsResponse } from './ScriptsTypes'
 
 const SCRIPTS_DEFAULT_FIELDS = [
   'id',
@@ -16,7 +16,7 @@ const SCRIPTS_DEFAULT_FIELDS = [
 ]
 
 export class ScriptsRepository {
-  static async getScripts(optionsGetScripts: OptionsGetScripts): Promise<Array<Script>> {
+  private static async getScripts(optionsGetScripts: OptionsGetScripts): Promise<Array<Script>> {
     const { fields, filter } = optionsGetScripts
 
     const queryFields: String = (fields || SCRIPTS_DEFAULT_FIELDS).join()
@@ -32,5 +32,17 @@ export class ScriptsRepository {
     const { scripts }: ScriptsResponse = await client.query(scriptsQuery, filter && { filter: { ...filter } })
 
     return scripts
+  }
+
+  static async getAllScripts(fields?: Array<ScriptFields>): Promise<Array<Script>> {
+    return this.getScripts({fields: fields || null})
+  }
+
+  static async getScriptsByPage(page: String, fields?: Array<ScriptFields>): Promise<Array<Script>> {
+    return this.getScripts({filter: {page: page}, fields: fields || null})
+  }
+
+  static async getScriptsByLocation(location: String, fields?: Array<ScriptFields>): Promise<Array<Script>> {
+    return this.getScripts({filter: {location: location}, fields: fields || null})
   }
 }
