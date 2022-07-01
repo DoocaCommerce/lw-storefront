@@ -54,9 +54,9 @@ const SHOP_DEFAULT_FIELDS = [
   'phone',
   'checkout_note_label',
   'gift_wrapping_price',
-  'tracker_google_analytics',
-  'tracker_google_conversion',
-  'tracker_facebook_pixel',
+  'tracker_google_analytics {id}',
+  'tracker_google_conversion {id, label}',
+  'tracker_facebook_pixel {id}',
   'organization',
   'suspended_at',
   'canceled_at',
@@ -66,7 +66,7 @@ const SHOP_DEFAULT_FIELDS = [
 ]
 
 export class ShopRepository {
-  private static async getShop(fields?: Array<ShopFields>): Promise<Shop> {
+  static async getShop(fields?: Array<ShopFields>): Promise<Shop> {
     const shopQueryFields = (fields || SHOP_DEFAULT_FIELDS).join()
 
     const shopPageQuery = `
