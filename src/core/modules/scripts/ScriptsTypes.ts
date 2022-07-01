@@ -9,7 +9,7 @@ export interface Script {
   load_method?: nullable<String>
   content?: nullable<String>
   category?: nullable<String>
-  active: nullable<Boolean>
+  active?: nullable<Boolean>
   description?: nullable<String>
   url?: nullable<String>
 }
