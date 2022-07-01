@@ -53,15 +53,28 @@ export interface Shop {
   phone?: nullable<String>
   checkout_note_label?: nullable<String>
   gift_wrapping_price?: nullable<String>
-  tracker_google_analytics?: nullable<String>
-  tracker_google_conversion?: nullable<String>
-  tracker_facebook_pixel?: nullable<String>
+  tracker_google_analytics?: nullable<ShopGoogleAnalytics>
+  tracker_google_conversion?: nullable<ShopGoogleConversion>
+  tracker_facebook_pixel?: nullable<ShopFacebookPixel>
   organization?: nullable<String>
   suspended_at?: nullable<String>
   canceled_at?: nullable<String>
   deleted_at?: nullable<String>
   trial?: nullable<String>
   plan?: nullable<String>
+}
+
+export interface ShopGoogleAnalytics {
+  id: String
+}
+
+export interface ShopGoogleConversion {
+  id: String
+  label: String
+}
+
+export interface ShopFacebookPixel {
+  id: String
 }
 
 export interface ShopResponse {
