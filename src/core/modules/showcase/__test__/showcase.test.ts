@@ -39,4 +39,9 @@ describe('Showcase Module', () => {
     const showcaseResult = await ShowcaseService.getShowcaseList({ page: 1, first: 1 })
     expect(showcaseResult.edges.length).toEqual(1)
   })
+
+  it('Should try to get showcase by inexistant id and it should throw error', async () => {
+    const FILTER_ID = 6
+    expect(async () => await ShowcaseService.getShowcaseById(FILTER_ID)).rejects.toThrow()
+  })
 })
