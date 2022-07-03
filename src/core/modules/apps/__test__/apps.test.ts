@@ -19,6 +19,6 @@ describe('Apps Module', () => {
   })
 
   it('Should get apps by not existant id and should throw error', async () => {
-    expect(async () => await AppsService.getAppsById(12)).toThrowError()
+    expect(async () => await AppsService.getAppsById(12)).rejects.toThrow()
   })
 })
