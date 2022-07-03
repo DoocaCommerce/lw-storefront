@@ -7,7 +7,7 @@ export class ScriptsService {
     return result
   }
 
-  static async getSctiptsByPage(page: String, fields?: Array<ScriptFields>): Promise<Array<Script>> {
+  static async getScriptsByPage(page: String, fields?: Array<ScriptFields>): Promise<Array<Script>> {
     const result: Array<Script> = await ScriptsRepository.getScriptsByPage(page, fields)
     return result
   }

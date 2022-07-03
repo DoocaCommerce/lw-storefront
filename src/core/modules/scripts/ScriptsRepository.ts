@@ -35,14 +35,14 @@ export class ScriptsRepository {
   }
 
   static async getAllScripts(fields?: Array<ScriptFields>): Promise<Array<Script>> {
-    return this.getScripts({fields: fields || null})
+    return this.getScripts({ fields: fields || null })
   }
 
   static async getScriptsByPage(page: String, fields?: Array<ScriptFields>): Promise<Array<Script>> {
-    return this.getScripts({filter: {page: page}, fields: fields || null})
+    return this.getScripts({ filter: { page: page }, fields: fields || null })
   }
 
   static async getScriptsByLocation(location: String, fields?: Array<ScriptFields>): Promise<Array<Script>> {
-    return this.getScripts({filter: {location: location}, fields: fields || null})
+    return this.getScripts({ filter: { location: location }, fields: fields || null })
   }
 }
