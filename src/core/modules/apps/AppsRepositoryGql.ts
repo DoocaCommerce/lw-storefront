@@ -2,7 +2,7 @@ import { client } from '../../services/GraphqlService'
 import { AppsQueries } from './AppsQueries'
 import { Apps, AppsFields, AppsResponse } from './AppsTypes'
 
-export class AppsRepository {
+export class AppsRepositoryGql {
   static async getAppsById(id: Number, fields?: Array<AppsFields>): Promise<Apps> {
     const appsQuery = new AppsQueries(fields)
     const getOneAppsQuery: string = appsQuery.getOnefullQuery()
