@@ -13,7 +13,7 @@ export class AppsQueries {
     return ['id', 'slug', 'price', 'shop_id', 'store_app_id', 'content', 'user_id', 'bridge_package_id']
   }
 
-  getOnefullQuery() {
+  getApps() {
     return `query Apps($filter: filterApps) {
         apps(filter: $filter) {
           ${this.getFields()}
