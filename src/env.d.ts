@@ -5,6 +5,7 @@ interface dc_config {
   mock?: {
     sections?: any
     settings?: any
+    shop?: any
     showcase?: any
   }
 }
