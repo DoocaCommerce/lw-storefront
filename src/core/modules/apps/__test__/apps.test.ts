@@ -2,7 +2,7 @@ import { AppsService } from '../AppsService'
 import 'isomorphic-fetch'
 import { AppsFields } from '../AppsTypes'
 
-const ID_FILTER = 0
+const ID_FILTER = 1041
 
 describe('Apps Module', () => {
   it('Should get apps by id with all fields suceffully', async () => {
