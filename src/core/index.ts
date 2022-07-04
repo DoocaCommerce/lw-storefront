@@ -11,6 +11,7 @@ import { CategoryService } from './modules/category/CategoryService'
 import { LandingPagesService } from './modules/landing-pages/LandingPagesService'
 import { MenuService } from './modules/menu/MenuService'
 import { PagesService } from './modules/pages/PagesService'
+import { ScriptsService } from './modules/scripts/ScriptsService'
 import { SectionsService } from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
 import { ShopService } from './modules/shop/ShopService'
@@ -34,6 +35,7 @@ export const services = {
   landingPages: LandingPagesService,
   menu: MenuService,
   pages: PagesService,
+  scripts: ScriptsService,
   sections: SectionsService,
   settings: SettingsService,
   shop: ShopService,
