@@ -12,6 +12,7 @@ import { MenuService } from './modules/menu/MenuService'
 import { PagesService } from './modules/pages/PagesService'
 import { SectionsService } from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
+import { ShopService } from './modules/shop/ShopService'
 
 import Socket from './socket'
 
@@ -27,11 +28,12 @@ export const services = {
   brand: BrandService,
   cart: CartService,
   category: CategoryService,
-  sections: SectionsService,
-  settings: SettingsService,
   landingPages: LandingPagesService,
   menu: MenuService,
-  pages: PagesService
+  pages: PagesService,
+  sections: SectionsService,
+  settings: SettingsService,
+  shop: ShopService
 }
 
 export const socket = {
