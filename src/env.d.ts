@@ -6,6 +6,8 @@ interface dc_config {
     sections?: any
     settings?: any
     scripts?: any
+    shop?: any
+    showcase?: any
   }
 }
 
