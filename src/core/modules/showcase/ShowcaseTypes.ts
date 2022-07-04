@@ -206,7 +206,8 @@ export interface ShowcaseFilter {
   fastSearch?: nullable<FastSearch>
 }
 
-export interface ShowcasePaginationFilter extends PaginationFilter {
+export interface ShowcasePaginationFilter extends Pick<PaginationFilter, 'first'> {
+  page?: Number
   fastSearch?: nullable<FastSearch>
 }
 

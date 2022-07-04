@@ -19,7 +19,9 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await showcase.getShowcaseBySlug('sdfsd')
+      const result = await showcase.getShowcaseList({
+        fastSearch: { fields: ['slug'], queryString: 'sdfsd' }
+      })
       console.log(`result ${id}`, result)
     }
     get('header')
