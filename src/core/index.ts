@@ -34,8 +34,8 @@ export const services = {
   pages: PagesService,
   sections: SectionsService,
   settings: SettingsService,
-  shop: ShopService
-  showcase: ShowcaseService,
+  shop: ShopService,
+  showcase: ShowcaseService
 }
 
 export const socket = {
