@@ -8,7 +8,8 @@ const components = {
 
 import { services } from 'lw-storefront/lib/core'
 
-const { blogCategory, blogPost, brand, cart, category, landingPages, menu, pages, sections, settings } = services
+const { blogCategory, blogPost, brand, cart, category, landingPages, menu, pages, sections, settings, showcase } =
+  services
 
 const get = async (id: string) => {
   const result = await settings.getSettings()
@@ -18,35 +19,8 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const resultAdd = await cart.addItem(
-        {
-          items: [
-            { variation_id: 1394682, quantity: 1 },
-            { variation_id: 75053, quantity: 1 }
-          ]
-        },
-        ['id', 'token', 'address', 'items']
-      )
-      const items = resultAdd.items!
-      const token = resultAdd.token!
-      console.log('Add', resultAdd)
-      const resultUpdate = await cart.updateItem({
-        item: {
-          id: items[0].id,
-          quantity: 4
-        },
-        cartToken: token
-      })
-      console.log('Update', resultUpdate)
-      const resultGet = await cart.getCart(token)
-      console.log('Get', resultGet)
-      const deleteUpdate = await cart.deleteItem({
-        item: {
-          id: items[0].id
-        },
-        cartToken: token
-      })
-      console.log('Delete', deleteUpdate)
+      const result = await showcase.getShowcaseBySlug('sdfsd')
+      console.log(`result ${id}`, result)
     }
     get('header')
   }, [])
