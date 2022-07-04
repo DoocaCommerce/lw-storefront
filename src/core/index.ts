@@ -13,6 +13,7 @@ import { PagesService } from './modules/pages/PagesService'
 import { SectionsService } from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
 import { ShopService } from './modules/shop/ShopService'
+import { ShowcaseService } from './modules/showcase/ShowcaseService'
 
 import Socket from './socket'
 
@@ -34,6 +35,7 @@ export const services = {
   sections: SectionsService,
   settings: SettingsService,
   shop: ShopService
+  showcase: ShowcaseService,
 }
 
 export const socket = {
