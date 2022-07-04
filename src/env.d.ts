@@ -3,6 +3,7 @@ interface dc_config {
   api_url: string
   domain: string
   mock?: {
+    apps?: any
     sections?: any
     settings?: any
     scripts?: any
