@@ -1,10 +1,11 @@
 interface dc_config {
-  token: string,
-  api_url: string,
-  domain: string,
+  token: string
+  api_url: string
+  domain: string
   mock?: {
     sections?: any
     settings?: any
+    scripts?: any
   }
 }
 
