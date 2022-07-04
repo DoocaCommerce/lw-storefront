@@ -8,7 +8,8 @@ const components = {
 
 import { services } from 'lw-storefront/lib/core'
 
-const { blogCategory, blogPost, brand, cart, category, landingPages, menu, pages, sections, settings, showcase } =
+
+const { blogCategory, blogPost, brand, cart, category, landingPages, menu, pages, sections, settings, shop, showcase } =
   services
 
 const get = async (id: string) => {
@@ -19,10 +20,8 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await showcase.getShowcaseList({
-        fastSearch: { fields: ['slug'], queryString: 'sdfsd' }
-      })
-      console.log(`result ${id}`, result)
+      const result = await shop.getShop(['shop_id'])
+      console.log('result', result)
     }
     get('header')
   }, [])
