@@ -9,6 +9,7 @@ interface dc_config {
     scripts?: any
     shop?: any
     showcase?: any
+    user?: any
   }
 }
 
