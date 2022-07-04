@@ -1,37 +1,19 @@
 import { client } from '../../services/GraphqlService'
+import { ScriptsQueries } from './ScriptsQueries'
 import { OptionsGetScripts, Script, ScriptFields, ScriptsResponse } from './ScriptsTypes'
 
-const SCRIPTS_DEFAULT_FIELDS = [
-  'id',
-  'position',
-  'name',
-  'location',
-  'page',
-  'load_method',
-  'content',
-  'category',
-  'active',
-  'description',
-  'url'
-]
-
-export class ScriptsRepository {
+export class ScriptsRepositoryGql {
   private static async getScripts(optionsGetScripts: OptionsGetScripts): Promise<Array<Script>> {
     const { fields, filter } = optionsGetScripts
+    const scriptsQuery = new ScriptsQueries(fields)
+    const getScriptsQuery: string = scriptsQuery.listFullQuery()
+    try {
+      const { scripts }: ScriptsResponse = await client.query(getScriptsQuery, filter && { filter: { ...filter } })
 
-    const queryFields: String = (fields || SCRIPTS_DEFAULT_FIELDS).join()
-
-    const scriptsQuery = `
-        query Scripts($filter: filterScript) {
-            scripts(filter: $filter) {
-                ${queryFields}
-            }
-        }
-      `
-
-    const { scripts }: ScriptsResponse = await client.query(scriptsQuery, filter && { filter: { ...filter } })
-
-    return scripts
+      return scripts
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 
   static async getAllScripts(fields?: Array<ScriptFields>): Promise<Array<Script>> {
