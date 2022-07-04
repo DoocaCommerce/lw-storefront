@@ -10,6 +10,7 @@ import { CategoryService } from './modules/category/CategoryService'
 import { LandingPagesService } from './modules/landing-pages/LandingPagesService'
 import { MenuService } from './modules/menu/MenuService'
 import { PagesService } from './modules/pages/PagesService'
+import { ScriptsService } from './modules/scripts/ScriptsService'
 import { SectionsService } from './modules/sections/SectionsService'
 import { SettingsService } from './modules/settings/SettingsService'
 
@@ -27,6 +28,7 @@ export const services = {
   brand: BrandService,
   cart: CartService,
   category: CategoryService,
+  scripts: ScriptsService,
   sections: SectionsService,
   settings: SettingsService,
   landingPages: LandingPagesService,
