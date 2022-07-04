@@ -30,7 +30,7 @@ export const services = {
   brand: BrandService,
   cart: CartService,
   category: CategoryService,
-landingPages: LandingPagesService,
+  landingPages: LandingPagesService,
   menu: MenuService,
   pages: PagesService,
   scripts: ScriptsService,
