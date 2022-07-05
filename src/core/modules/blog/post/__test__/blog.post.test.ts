@@ -13,9 +13,9 @@ describe('Blog Post Module', () => {
     const ID_FILTER = 3566
     const SELECTED_FIELDS: Array<BlogPostFields> = ['id', 'name']
     const blogPostResult = await BlogPostService.getById(ID_FILTER, SELECTED_FIELDS)
-    const blogPostResultResultKeys = Object.keys(blogPostResult).filter(key => key != '__typename')
-    expect(blogPostResultResultKeys).toEqual(SELECTED_FIELDS)
-    expect(blogPostResultResultKeys.length).toEqual(SELECTED_FIELDS.length)
+    const blogPostResultKeys = Object.keys(blogPostResult).filter(key => key != '__typename')
+    expect(blogPostResultKeys).toEqual(SELECTED_FIELDS)
+    expect(blogPostResultKeys.length).toEqual(SELECTED_FIELDS.length)
   })
 
   it('Should get blog post by slug with all fields succeffully', async () => {
