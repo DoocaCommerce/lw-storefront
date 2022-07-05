@@ -10,7 +10,7 @@ import {
 import { BlogCategoryQueries } from './BlogCategoryQueries'
 
 export class BlogCategoryRepositoryGql {
-  static async getBlogCategoryList(fields?: Array<BlogCategoryFields>): Promise<Array<BlogCategory>> {
+  static async getList(fields?: Array<BlogCategoryFields>): Promise<Array<BlogCategory>> {
     const blogCategoryQuery = new BlogCategoryQueries(fields)
     const blogCategoryListQuery: string = blogCategoryQuery.listFullQuery()
     try {
@@ -22,7 +22,7 @@ export class BlogCategoryRepositoryGql {
     }
   }
 
-  private static async getBlogCategory(OptionsGetBlogCategory: OptionsGetBlogCategory): Promise<BlogCategory> {
+  private static async getOne(OptionsGetBlogCategory: OptionsGetBlogCategory): Promise<BlogCategory> {
     const { fields, filter } = OptionsGetBlogCategory
 
     const blogCategoryQuery = new BlogCategoryQueries(fields)
@@ -39,11 +39,11 @@ export class BlogCategoryRepositoryGql {
     }
   }
 
-  static async getBlogCategoryById(id: Number, fields?: Array<BlogCategoryFields>): Promise<BlogCategory> {
-    return this.getBlogCategory({ fields: fields || null, filter: { id: id } })
+  static async getById(id: Number, fields?: Array<BlogCategoryFields>): Promise<BlogCategory> {
+    return this.getOne({ fields: fields || null, filter: { id: id } })
   }
 
-  static async getBlogCategoryBySlug(slug: String, fields?: Array<BlogCategoryFields>): Promise<BlogCategory> {
-    return this.getBlogCategory({ fields: fields || null, filter: { slug: slug } })
+  static async getBySlug(slug: String, fields?: Array<BlogCategoryFields>): Promise<BlogCategory> {
+    return this.getOne({ fields: fields || null, filter: { slug: slug } })
   }
 }
