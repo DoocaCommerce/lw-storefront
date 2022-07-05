@@ -1,70 +1,35 @@
-import { buildGeneralModuleAsserts } from '../../../helpers/__test__/testHelper'
 import { PagesService } from '../PagesService'
-import { Page, PageFields } from '../PageTypes'
-import "isomorphic-fetch"
-
-const referencePageObjectAllFields = {
-  id: 0,
-  name: '',
-  slug: '',
-  template: '',
-  url: '',
-  active: false,
-  faq: {},
-  created_at: '',
-  updated_at: '',
-  description: '',
-  meta_title: '',
-  meta_description: '',
-  meta_keywords: ''
-}
-
-const selectedFIelds: Array<PageFields> = ['id', 'slug', 'name', 'active', 'faq']
-
-const referencePageObjectSelectedFields = {
-  id: 0,
-  slug: '',
-  name: '',
-  active: false,
-  faq: {}
-}
-
-async function buildGetPageByIdAsserts(referenceObject: any, fields?: Array<PageFields>) {
-  const ID_FILTER = 320
-  const pageResult: Page = await PagesService.getPageById(ID_FILTER, fields)
-  buildGeneralModuleAsserts(pageResult, referenceObject, { id: ID_FILTER }, ID_FILTER)
-}
-
-async function buildGetPageBySlugAsserts(referenceObject: any, fields?: Array<PageFields>) {
-  const SLUG_FILTER = 'sobre-a-dc-gamer'
-  const pageResult: Page = await PagesService.getPageBySlug(SLUG_FILTER, fields)
-  buildGeneralModuleAsserts(pageResult, referenceObject, { slug: SLUG_FILTER }, SLUG_FILTER)
-}
+import 'isomorphic-fetch'
+import { PageFields } from '../PageTypes'
 
 describe('Pages Module', () => {
-  it('Should get page by id with all fields', async () => {
-    await buildGetPageByIdAsserts(referencePageObjectAllFields)
+  it('Should get page by id with all fields succeffully', async () => {
+    const ID_FILTER = 320
+    const pagesResult = await PagesService.getById(320)
+    expect(pagesResult.id).toEqual(ID_FILTER)
   })
 
-  it('Should get page by slug with all fields', async () => {
-    await buildGetPageBySlugAsserts(referencePageObjectAllFields)
+  it('Should get page by id with selected fields succeffully', async () => {
+    const SELECTED_FIELDS: Array<PageFields> = ['id', 'slug']
+    const ID_FILTER = 320
+    const pagesResult = await PagesService.getById(320, [...SELECTED_FIELDS])
+    const pagesResultKeys = Object.keys(pagesResult).filter(key => key != '__typename')
+    expect(pagesResultKeys).toEqual(SELECTED_FIELDS)
+    expect(pagesResultKeys.length).toEqual(SELECTED_FIELDS.length)
   })
 
-  it('Should get page by id with selected fields when passing array of fields as parameter', async () => {
-    await buildGetPageByIdAsserts(referencePageObjectSelectedFields, selectedFIelds)
+  it('Should get page slug id with all fields succeffully', async () => {
+    const SLUG_FILTER = 'sobre-a-dc-gamer'
+    const pagesResult = await PagesService.getBySlug(SLUG_FILTER)
+    expect(pagesResult.slug).toEqual(SLUG_FILTER)
   })
 
-  it('Should get page by slug with selected fields when passing array of fields as parameter', async () => {
-    await buildGetPageBySlugAsserts(referencePageObjectSelectedFields, selectedFIelds)
+  it('Should get page list with all fields succeffully', async () => {
+    const pagesListResult = await PagesService.getList()
+    expect(pagesListResult.length > 0).toBeTruthy()
   })
 
-  it('Should get page list with all fields', async () => {
-    const result: Array<Page> = await PagesService.getPageList()
-    result.forEach(page => buildGeneralModuleAsserts(page, referencePageObjectAllFields))
-  })
-
-  it('Should get page list with selected fields', async () => {
-    const result: Array<Page> = await PagesService.getPageList(selectedFIelds)
-    result.forEach(page => buildGeneralModuleAsserts(page, referencePageObjectSelectedFields))
+  it('Should try to get page by inexistant id and it should throw error', async () => {
+    expect(async () => await PagesService.getById(1)).rejects.toThrow()
   })
 })
