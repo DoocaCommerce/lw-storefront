@@ -4,6 +4,8 @@ interface dc_config {
   domain: string
   mock?: {
     apps?: any
+    category?: any
+    categoryTree?: any
     sections?: any
     settings?: any
     scripts?: any
