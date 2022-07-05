@@ -4,7 +4,7 @@ import 'isomorphic-fetch'
 
 const FIRST_ITEM_INDEX = 0
 const SECOND_ITEM_INDEX = 1
-const SELECTED_FIELDS: Array<CartFields> = ['id', 'token', 'address', 'items']
+const SELECTED_FIELDS: Array<CartFields> = ['id', 'token']
 const MULTIPLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [
   { variation_id: 1394682, quantity: 1 },
   { variation_id: 75053, quantity: 1 }
@@ -46,5 +46,30 @@ describe('Cart Module', () => {
     expect(cartResultFields).toEqual(SELECTED_FIELDS)
     expect(cartResultFields.length).toEqual(SELECTED_FIELDS.length)
     expect(deleteItemCartWithSelectedFields.items).toBeNull()
+  })
+
+  it('Should try to delete item with invalid cart token and it should throw error', async () => {
+    const INVALID_TOKEN = 'invalid_token'
+    expect(
+      async () =>
+        await CartService.deleteItem({
+          item: {
+            id: firstAddedItemsCart.items[SECOND_ITEM_INDEX].id
+          },
+          cartToken: INVALID_TOKEN
+        })
+    ).rejects.toThrow()
+  })
+
+  it('Should try to delete item with invalid item id it should throw error', async () => {
+    expect(
+      async () =>
+        await CartService.deleteItem({
+          item: {
+            id: 999
+          },
+          cartToken: firstAddedItemsCart.token
+        })
+    ).rejects.toThrow()
   })
 })
