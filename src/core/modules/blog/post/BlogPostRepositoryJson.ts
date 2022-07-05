@@ -1,14 +1,4 @@
-import { client } from '../../../services/GraphqlService'
-import { BlogPostQueries } from './BlogPostQueries'
-import {
-  BlogPost,
-  BlogPostFields,
-  BlogPostList,
-  BlogPostListResponse,
-  BlogPostResponse,
-  OptionsGetBlogPost,
-  OptionsGetBlogPostList
-} from './BlogPostTypes'
+import { BlogPostFields, OptionsGetBlogPostList } from './BlogPostTypes'
 
 export class BlogPostRepositoryJson {
   static async getList({ fields, filter }: OptionsGetBlogPostList) {
