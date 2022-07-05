@@ -12,7 +12,7 @@ import {
 } from './ShowcaseTypes'
 
 export class ShowcaseRepositoryGql {
-  static async getShowcaseList({ fields, filter }: OptionsGetShowcaseList): Promise<ShowcaseList> {
+  static async getList({ fields, filter }: OptionsGetShowcaseList): Promise<ShowcaseList> {
     const showcaseQuery = new ShowcaseQueries(fields)
     const showcaseListQuery: string = showcaseQuery.listFullQuery()
 
@@ -28,7 +28,7 @@ export class ShowcaseRepositoryGql {
     }
   }
 
-  private static async getShowcase({ fields, filter }: OptionsGetShowcase): Promise<Showcase> {
+  private static async getOne({ fields, filter }: OptionsGetShowcase): Promise<Showcase> {
     const showcaseQuery = new ShowcaseQueries(fields)
     const showcaseGetOneQuery: string = showcaseQuery.getOnefullQuery()
 
@@ -44,15 +44,15 @@ export class ShowcaseRepositoryGql {
     }
   }
 
-  static async getShowcaseById(id: Number, fields?: Array<ShowcaseFields>): Promise<Showcase> {
-    return this.getShowcase({ fields: fields || null, filter: { id: id } })
+  static async getById(id: Number, fields?: Array<ShowcaseFields>): Promise<Showcase> {
+    return this.getOne({ fields: fields || null, filter: { id: id } })
   }
 
-  static async getShowcaseBySlug(slug: String, fields?: Array<ShowcaseFields>): Promise<Showcase> {
-    return this.getShowcase({ fields: fields || null, filter: { slug: slug } })
+  static async getBySlug(slug: String, fields?: Array<ShowcaseFields>): Promise<Showcase> {
+    return this.getOne({ fields: fields || null, filter: { slug: slug } })
   }
 
-  static async getShowcaseByFastSearch(fastSearch: FastSearch, fields?: Array<ShowcaseFields>): Promise<Showcase> {
-    return this.getShowcase({ fields: fields || null, filter: { fastSearch: fastSearch } })
+  static async getByFastSearch(fastSearch: FastSearch, fields?: Array<ShowcaseFields>): Promise<Showcase> {
+    return this.getOne({ fields: fields || null, filter: { fastSearch: fastSearch } })
   }
 }
