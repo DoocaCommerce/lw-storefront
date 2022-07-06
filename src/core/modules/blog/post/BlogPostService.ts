@@ -1,22 +1,22 @@
-import { BlogPostRepository } from './BlogPostRepository'
+import { BlogPostRepositoryGql } from './BlogPostRepositoryGql'
+import { BlogPostRepositoryJson } from './BlogPostRepositoryJson'
 import { BlogPost, BlogPostFields, BlogPostList, BlogPostListFilter } from './BlogPostTypes'
 
+const Repository = dc_config.mock?.blogPost ? BlogPostRepositoryJson : BlogPostRepositoryGql
+
 export class BlogPostService {
-  static async getBlogPostById(id: Number, fields?: Array<BlogPostFields>): Promise<BlogPost> {
-    const result: BlogPost = await BlogPostRepository.getBlogPostById(id, fields)
+  static async getById(id: Number, fields?: Array<BlogPostFields>): Promise<BlogPost> {
+    const result: BlogPost = await Repository.getById(id, fields)
     return result
   }
 
-  static async getBlogPostBySlug(slug: String, fields?: Array<BlogPostFields>): Promise<BlogPost> {
-    const result: BlogPost = await BlogPostRepository.getBlogPostBySlug(slug, fields)
+  static async getBySlug(slug: String, fields?: Array<BlogPostFields>): Promise<BlogPost> {
+    const result: BlogPost = await Repository.getBySlug(slug, fields)
     return result
   }
 
-  static async getBlogPostList(
-    paginationFilter: BlogPostListFilter,
-    fields?: Array<BlogPostFields>
-  ): Promise<BlogPostList> {
-    const result: BlogPostList = await BlogPostRepository.getBlogPostList({
+  static async getList(paginationFilter: BlogPostListFilter, fields?: Array<BlogPostFields>): Promise<BlogPostList> {
+    const result: BlogPostList = await Repository.getList({
       fields: fields || null,
       filter: paginationFilter
     })
