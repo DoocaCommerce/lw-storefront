@@ -49,6 +49,7 @@ export class BrandQueries {
             hasPreviousPage
             startCursor
             endCursor
+            first
             total
           }
         }
