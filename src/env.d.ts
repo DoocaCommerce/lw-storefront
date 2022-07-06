@@ -4,6 +4,9 @@ interface dc_config {
   domain: string
   mock?: {
     apps?: any
+    landing_pages?: any
+    menu?: any
+    pages?: any
     sections?: any
     settings?: any
     scripts?: any
