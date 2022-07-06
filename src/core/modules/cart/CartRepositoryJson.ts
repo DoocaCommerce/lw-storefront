@@ -1,17 +1,9 @@
-import { client } from '../../services/GraphqlService'
-import { CartQueries } from './CartQueries'
 import {
-  AddItemResponse,
-  Cart,
-  CleanCartResponse,
-  DeleteItemResponse,
-  GetCartResponse,
   OptionsAddItemCart,
   OptionsCleanCart,
   OptionsDeleteItemCart,
   OptionsGetCart,
-  OptionsUpdateItemCart,
-  UpdateItemResponse
+  OptionsUpdateItemCart
 } from './CartTypes'
 
 export class CartRepositoryJson {

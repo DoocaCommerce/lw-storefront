@@ -18,9 +18,8 @@ export class CartRepositoryGql {
   static async addItem({ fields, input }: OptionsAddItemCart): Promise<Cart> {
     const cartQuery = new CartQueries(fields)
     const addItemQuery: string = cartQuery.addItemQuery()
-    console.log(addItemQuery, input)
     try {
-      const { addItem }: AddItemResponse = await client.mutation(addItemQuery, input && { input: { ...input } })
+      const { addItem }: AddItemResponse = await client.mutation(addItemQuery, input && { ...input })
 
       return addItem
     } catch (error) {
@@ -32,10 +31,7 @@ export class CartRepositoryGql {
     const cartQuery = new CartQueries(fields)
     const updateItemQuery: string = cartQuery.updateItemQuery()
     try {
-      const { updateItem }: UpdateItemResponse = await client.mutation(
-        updateItemQuery,
-        input && { input: { ...input } }
-      )
+      const { updateItem }: UpdateItemResponse = await client.mutation(updateItemQuery, input && { ...input })
 
       return updateItem
     } catch (error) {
@@ -47,10 +43,7 @@ export class CartRepositoryGql {
     const cartQuery = new CartQueries(fields)
     const deleteItemQuery: string = cartQuery.deleteItemQuery()
     try {
-      const { deleteItem }: DeleteItemResponse = await client.mutation(
-        deleteItemQuery,
-        input && { input: { ...input } }
-      )
+      const { deleteItem }: DeleteItemResponse = await client.mutation(deleteItemQuery, input && { ...input })
 
       return deleteItem
     } catch (error) {
@@ -62,7 +55,7 @@ export class CartRepositoryGql {
     const cartQuery = new CartQueries(fields)
     const cleanCartQuery: string = cartQuery.cleanCartQuery()
     try {
-      const { cleanCart }: CleanCartResponse = await client.mutation(cleanCartQuery, input && { input: { ...input } })
+      const { cleanCart }: CleanCartResponse = await client.mutation(cleanCartQuery, input && { ...input })
 
       return cleanCart
     } catch (error) {
@@ -74,7 +67,7 @@ export class CartRepositoryGql {
     const cartQuery = new CartQueries(fields)
     const getCartQuery: string = cartQuery.getCartQuery()
     try {
-      const { cart }: GetCartResponse = await client.query(getCartQuery, filter && { filter: { ...filter } })
+      const { cart }: GetCartResponse = await client.query(getCartQuery, filter && { ...filter })
 
       return cart
     } catch (error) {

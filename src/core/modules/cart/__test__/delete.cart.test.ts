@@ -6,8 +6,8 @@ const FIRST_ITEM_INDEX = 0
 const SECOND_ITEM_INDEX = 1
 const SELECTED_FIELDS: Array<CartFields> = ['id', 'token']
 const MULTIPLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [
-  { variation_id: 1394682, quantity: 1 },
-  { variation_id: 75053, quantity: 1 }
+  { variation_id: 9466819, quantity: 1 },
+  { variation_id: 9466818, quantity: 1 }
 ]
 
 let firstAddedItemsCart
@@ -45,7 +45,6 @@ describe('Cart Module', () => {
     const cartResultFields = Object.keys(deleteItemCartWithSelectedFields).filter(key => key != '__typename')
     expect(cartResultFields).toEqual(SELECTED_FIELDS)
     expect(cartResultFields.length).toEqual(SELECTED_FIELDS.length)
-    expect(deleteItemCartWithSelectedFields.items).toBeNull()
   })
 
   it('Should try to delete item with invalid cart token and it should throw error', async () => {

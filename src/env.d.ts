@@ -4,16 +4,16 @@ interface dc_config {
   domain: string
   mock?: {
     apps?: any
-    cart?: any
     blogCategory?: any
     blogPost?: any
     brand?: any
+    cart?: any
     landing_pages?: any
     menu?: any
     pages?: any
+    scripts?: any
     sections?: any
     settings?: any
-    scripts?: any
     shop?: any
     showcase?: any
   }

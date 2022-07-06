@@ -4,10 +4,10 @@ import 'isomorphic-fetch'
 
 const SELECTED_FIELDS: Array<CartFields> = ['id', 'token']
 
-const SINGLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [{ variation_id: 75053, quantity: 1 }]
+const SINGLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [{ variation_id: 9466819, quantity: 1 }]
 const MULTIPLE_ITEMS_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [
   ...SINGLE_ITEM_TO_BE_ADDED_SAMPLE,
-  { variation_id: 1394682, quantity: 1 }
+  { variation_id: 9466818, quantity: 1 }
 ]
 
 describe('Cart Module', () => {

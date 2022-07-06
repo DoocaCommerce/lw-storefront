@@ -1,6 +1,6 @@
 import { CartRepositoryGql } from './CartRepositoryGql'
 import { CartRepositoryJson } from './CartRepositoryJson'
-import { AddItemInput, CartFields, DeleteItemInput, UpdateItemInput } from './CartTypes'
+import { AddItemInput, CartFields, CleanCartInput, DeleteItemInput, UpdateItemInput } from './CartTypes'
 
 const Repository = dc_config.mock?.cart ? CartRepositoryJson : CartRepositoryGql
 
