@@ -26,8 +26,8 @@ export class ShowcaseService {
     return result
   }
 
-  static async getByFastSearch(fastSearch: FastSearch, fields?: Array<ShowcaseFields>): Promise<Showcase> {
-    const result: Showcase = await Repository.getByFastSearch(fastSearch, fields)
+  static async search(fastSearch: FastSearch, fields?: Array<ShowcaseFields>): Promise<Showcase> {
+    const result: Showcase = await Repository.search(fastSearch, fields)
     return result
   }
 }

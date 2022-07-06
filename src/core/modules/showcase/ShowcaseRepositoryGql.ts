@@ -52,7 +52,7 @@ export class ShowcaseRepositoryGql {
     return this.getOne({ fields: fields || null, filter: { slug: slug } })
   }
 
-  static async getByFastSearch(fastSearch: FastSearch, fields?: Array<ShowcaseFields>): Promise<Showcase> {
+  static async search(fastSearch: FastSearch, fields?: Array<ShowcaseFields>): Promise<Showcase> {
     return this.getOne({ fields: fields || null, filter: { fastSearch: fastSearch } })
   }
 }
