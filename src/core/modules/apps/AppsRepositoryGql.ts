@@ -3,11 +3,11 @@ import { AppsQueries } from './AppsQueries'
 import { Apps, AppsFields, AppsResponse } from './AppsTypes'
 
 export class AppsRepositoryGql {
-  static async getAppsById(id: Number, fields?: Array<AppsFields>): Promise<Apps> {
+  static async getById(id: Number, fields?: Array<AppsFields>): Promise<Apps> {
     const appsQuery = new AppsQueries(fields)
-    const getOneAppsQuery: string = appsQuery.getApps()
+    const getAppsQuery: string = appsQuery.getApps()
     try {
-      const { apps }: AppsResponse = await client.query(getOneAppsQuery, { filter: { id: id } })
+      const { apps }: AppsResponse = await client.query(getAppsQuery, { filter: { id: id } })
 
       return apps
     } catch (error) {
