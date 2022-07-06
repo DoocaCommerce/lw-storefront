@@ -5,6 +5,9 @@ interface dc_config {
   mock?: {
     apps?: any
     brand?: any
+    landing_pages?: any
+    menu?: any
+    pages?: any
     sections?: any
     settings?: any
     scripts?: any
