@@ -1,7 +1,7 @@
 import { ScriptFields } from './ScriptsTypes'
 
 export class ScriptsRepositoryJson {
-  static async getFullList(fields?: Array<ScriptFields>) {
+  static async getList(fields?: Array<ScriptFields>) {
     const result = dc_config.mock?.scripts
     return result || {}
   }

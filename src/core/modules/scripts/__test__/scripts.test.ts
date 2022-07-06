@@ -8,7 +8,7 @@ const SELECTED_FIELDS: Array<ScriptFields> = ['id', 'name']
 
 describe('Script Module', () => {
   it('Should get all scripts with all fields successfully', async () => {
-    const scriptResult: Array<Script> = await ScriptsService.getFullList()
+    const scriptResult: Array<Script> = await ScriptsService.getList()
     expect(scriptResult.length).toBeGreaterThan(0)
   })
 
@@ -25,7 +25,7 @@ describe('Script Module', () => {
   })
 
   it('Should get all scripts with selected fields successfully', async () => {
-    const scriptResult: Array<Script> = await ScriptsService.getFullList([...SELECTED_FIELDS])
+    const scriptResult: Array<Script> = await ScriptsService.getList([...SELECTED_FIELDS])
     scriptResult.forEach(script => {
       const scriptKeys = Object.keys(script).filter(key => key != '__typename')
       expect(scriptKeys).toEqual(SELECTED_FIELDS)

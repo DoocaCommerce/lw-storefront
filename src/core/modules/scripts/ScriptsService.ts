@@ -5,8 +5,8 @@ import { Script, ScriptFields } from './ScriptsTypes'
 const Repository = dc_config.mock?.scripts ? ScriptsRepositoryJson : ScriptsRepositoryGql
 
 export class ScriptsService {
-  static async getFullList(fields?: Array<ScriptFields>): Promise<Array<Script>> {
-    const result: Array<Script> = await Repository.getFullList(fields)
+  static async getList(fields?: Array<ScriptFields>): Promise<Array<Script>> {
+    const result: Array<Script> = await Repository.getList(fields)
     return result
   }
 

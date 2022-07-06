@@ -16,7 +16,7 @@ export class ScriptsRepositoryGql {
     }
   }
 
-  static async getFullList(fields?: Array<ScriptFields>): Promise<Array<Script>> {
+  static async getList(fields?: Array<ScriptFields>): Promise<Array<Script>> {
     return this.get({ fields: fields || null })
   }
 
