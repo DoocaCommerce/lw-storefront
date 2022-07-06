@@ -1,14 +1,17 @@
-import { MenuRepository } from "./MenuRepository"
-import { Menu, MenuFields } from "./MenuTypes"
+import { MenuRepositoryGql } from './MenuRepositoryGql'
+import { MenuRepositoryJson } from './MenuRepositoryJson'
+import { Menu, MenuFields } from './MenuTypes'
+
+const Repository = dc_config.mock?.menu ? MenuRepositoryJson : MenuRepositoryGql
 
 export class MenuService {
-  static async getMenuById(id: Number, fields?: Array<MenuFields>): Promise<Menu> {
-    const result: Menu = await MenuRepository.getMenuById(id, fields)
+  static async getById(id: Number, fields?: Array<MenuFields>): Promise<Menu> {
+    const result: Menu = await Repository.getById(id, fields)
     return result
   }
 
-  static async getMenuList(fields?: Array<MenuFields>): Promise<Array<Menu>> {
-    const result: Array<Menu> = await MenuRepository.getMenuList(fields)
+  static async getList(fields?: Array<MenuFields>): Promise<Array<Menu>> {
+    const result: Array<Menu> = await Repository.getList(fields)
     return result
   }
 }
