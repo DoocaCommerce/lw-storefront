@@ -10,8 +10,8 @@ import {
   OptionsGetBrandList
 } from './BrandTypes'
 
-export class BrandRepository {
-  static async getBrandList({ fields, filter }: OptionsGetBrandList): Promise<BrandList> {
+export class BrandRepositoryGql {
+  static async getList({ fields, filter }: OptionsGetBrandList): Promise<BrandList> {
     const brandQuery = new BrandQueries(fields)
     const brandListQuery: string = brandQuery.listFullQuery()
     try {
@@ -23,7 +23,7 @@ export class BrandRepository {
     }
   }
 
-  private static async getBrand({ fields, filter }: OptionsGetBrand): Promise<Brand> {
+  private static async getOne({ fields, filter }: OptionsGetBrand): Promise<Brand> {
     const brandQuery = new BrandQueries(fields)
     const brandGetOneQuery: string = brandQuery.getOnefullQuery()
 
@@ -36,11 +36,11 @@ export class BrandRepository {
     }
   }
 
-  static async getBrandById(id: Number, fields?: Array<BrandFields>): Promise<Brand> {
-    return this.getBrand({ fields: fields || null, filter: { id: id } })
+  static async getById(id: Number, fields?: Array<BrandFields>): Promise<Brand> {
+    return this.getOne({ fields: fields || null, filter: { id: id } })
   }
 
-  static async getBrandBySlug(slug: String, fields?: Array<BrandFields>): Promise<Brand> {
-    return this.getBrand({ fields: fields || null, filter: { slug: slug } })
+  static async getBySlug(slug: String, fields?: Array<BrandFields>): Promise<Brand> {
+    return this.getOne({ fields: fields || null, filter: { slug: slug } })
   }
 }
