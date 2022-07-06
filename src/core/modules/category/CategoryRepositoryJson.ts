@@ -12,4 +12,16 @@ export class CategoryRepositoryJson {
     const result = categories && categories.filter(category => category.slug == slug)
     return result || {}
   }
+
+  static async getTreeById(id: Number, fields?: Array<CategoryTreeFields>) {
+    const categoryTrees = dc_config.mock?.categoryTree
+    const result = categoryTrees && categoryTrees.filter(categoryTree => categoryTree.id == id)
+    return result || {}
+  }
+
+  static async getTreeBySlug(slug: String, fields?: Array<CategoryTreeFields>) {
+    const categoryTrees = dc_config.mock?.categoryTree
+    const result = categoryTrees && categoryTrees.filter(categoryTree => categoryTree.slug == slug)
+    return result || {}
+  }
 }

@@ -1,10 +1,9 @@
 import { CategoryRepositoryGql } from './CategoryRepositoryGql'
 import { CategoryRepositoryJson } from './CategoryRepositoryJson'
-import { CategoryTreeRepositoryJson } from './CategoryTreeRepositoryJson'
 import { Category, CategoryFields, CategoryTree, CategoryTreeFields } from './CategoryTypes'
 
-const Repository = dc_config.mock?.category ? CategoryRepositoryJson : CategoryRepositoryGql
-const TreeRepository = dc_config.mock?.categoryTree ? CategoryTreeRepositoryJson : CategoryRepositoryGql
+const Repository =
+  dc_config.mock?.category && dc_config.mock?.categoryTree ? CategoryRepositoryJson : CategoryRepositoryGql
 
 export class CategoryService {
   static async getById(id: Number, fields?: Array<CategoryFields>) {
@@ -18,12 +17,12 @@ export class CategoryService {
   }
 
   static async getTreeById(id: Number, fields?: Array<CategoryTreeFields>) {
-    const result: Array<CategoryTree> = await TreeRepository.getTreeById(id, fields)
+    const result: Array<CategoryTree> = await Repository.getTreeById(id, fields)
     return result
   }
 
   static async getTreeBySlug(slug: String, fields?: Array<CategoryTreeFields>) {
-    const result: Array<CategoryTree> = await TreeRepository.getTreeBySlug(slug, fields)
+    const result: Array<CategoryTree> = await Repository.getTreeBySlug(slug, fields)
     return result
   }
 }
