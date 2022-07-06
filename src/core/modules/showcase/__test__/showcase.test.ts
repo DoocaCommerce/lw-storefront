@@ -29,7 +29,7 @@ describe('Showcase Module', () => {
 
   it('Should get showcase by fast search with all fields successfully', async () => {
     const FILTER_FAST_SEARCH: FastSearch = { queryString: 'sdfsd', fields: ['slug'] }
-    const showcaseResult = await ShowcaseService.getByFastSearch(FILTER_FAST_SEARCH)
+    const showcaseResult = await ShowcaseService.search(FILTER_FAST_SEARCH)
     expect(showcaseResult.slug).toEqual('sdfsd')
     expect(showcaseResult.name).toEqual('Produtodeteste')
     expect(showcaseResult.id).toEqual('64428')
