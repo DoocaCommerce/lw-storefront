@@ -1,6 +1,6 @@
 import { nullable } from '../../types/NullableTypes'
 import { Image } from '../../types/ImageTypes'
-import { PageableEdgeObject, PageableListObject, PageInfo, PaginationFilter } from '../../types/PaginationTypes'
+import { PageableEdgeObject, PageableListObject, PaginationFilter } from '../../types/PaginationTypes'
 
 export interface Brand {
   id?: String
