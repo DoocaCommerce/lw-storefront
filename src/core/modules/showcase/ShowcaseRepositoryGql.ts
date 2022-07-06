@@ -1,7 +1,6 @@
 import { client } from '../../services/GraphqlService'
 import { ShowcaseQueries } from './ShowcaseQueries'
 import {
-  FastSearch,
   OptionsGetShowcase,
   OptionsGetShowcaseList,
   Showcase,
@@ -15,11 +14,13 @@ export class ShowcaseRepositoryGql {
   static async getList({ fields, filter }: OptionsGetShowcaseList): Promise<ShowcaseList> {
     const showcaseQuery = new ShowcaseQueries(fields)
     const showcaseListQuery: string = showcaseQuery.listFullQuery()
+    const fastSearchFilter = filter?.queryString && { queryString: filter.queryString }
+    const { queryString, ...paginationFilter } = filter
 
     try {
       const { showcases }: ShowcaseListResponse = await client.query(
         showcaseListQuery,
-        filter && { filter: { ...filter } }
+        filter && { filter: { ...paginationFilter, fastSearch: fastSearchFilter || null } }
       )
 
       return showcases
@@ -52,7 +53,7 @@ export class ShowcaseRepositoryGql {
     return this.getOne({ fields: fields || null, filter: { slug: slug } })
   }
 
-  static async search(fastSearch: FastSearch, fields?: Array<ShowcaseFields>): Promise<Showcase> {
-    return this.getOne({ fields: fields || null, filter: { fastSearch: fastSearch } })
+  static async search(queryString: String, fields?: Array<ShowcaseFields>): Promise<Showcase> {
+    return this.getOne({ fields: fields || null, filter: { fastSearch: { queryString: queryString } } })
   }
 }

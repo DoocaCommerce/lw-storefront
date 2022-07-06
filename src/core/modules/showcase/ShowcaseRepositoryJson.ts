@@ -16,7 +16,7 @@ export class ShowcaseRepositoryJson {
     return { ...result, edges: result.edges.find(edge => edge.node.slug == slug) } || {}
   }
 
-  static async search(fastSearch: FastSearch, fields?: Array<ShowcaseFields>) {
+  static async search(queryString: String, fields?: Array<ShowcaseFields>) {
     const result = dc_config.mock?.showcase
     return { ...result, edges: result.edges[0] } || {}
   }
