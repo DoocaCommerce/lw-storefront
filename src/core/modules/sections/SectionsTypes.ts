@@ -1,18 +1,18 @@
 export interface Section<T> {
-    shop_id: number
-    theme_id: number
-    version: string
-    page: string
-    data: T
+  shop_id: Number
+  theme_id: Number
+  version: String
+  page: String
+  data: T
 }
 
 export interface SectionResponse {
-    section: Section<string>
+  section: Section<string>
 }
 
 export interface SectionFilter {
-    section_type?: string
-    theme_id?: number
-    version?: string
-    page?: string
+  section_type?: String
+  theme_id?: Number
+  version?: String
+  page?: String
 }
