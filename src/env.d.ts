@@ -5,6 +5,11 @@ interface dc_config {
   mock?: {
     apps?: any
     blogCategory?: any
+    blogPost?: any
+    brand?: any
+    landing_pages?: any
+    menu?: any
+    pages?: any
     sections?: any
     settings?: any
     scripts?: any
