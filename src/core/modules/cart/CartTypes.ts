@@ -162,19 +162,19 @@ export interface CartFilter {
   cartToken: String
 }
 
-export interface AddItemReponse {
+export interface AddItemResponse {
   addItem: Cart
 }
 
-export interface UpdateItemReponse {
+export interface UpdateItemResponse {
   updateItem: Cart
 }
 
-export interface DeleteItemReponse {
+export interface DeleteItemResponse {
   deleteItem: Cart
 }
 
-export interface CleanCartReponse {
+export interface CleanCartResponse {
   cleanCart: Cart
 }
 

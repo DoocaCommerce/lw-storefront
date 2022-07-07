@@ -3,13 +3,13 @@ import { CartFields, CartItemAddInput } from '../CartTypes'
 import 'isomorphic-fetch'
 
 const FIRST_ITEM_INDEX = 0
-const SELECTED_FIELDS: Array<CartFields> = ['id', 'token', 'address', 'items']
-const SINGLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [{ variation_id: 1394682, quantity: 1 }]
+const SELECTED_FIELDS: Array<CartFields> = ['id', 'token']
+const SINGLE_ITEM_TO_BE_ADDED_SAMPLE: Array<CartItemAddInput> = [{ variation_id: 9466819, quantity: 1 }]
 
 let firstAddedItemsCart
 
 describe('Cart Module', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     firstAddedItemsCart = await CartService.addItem({ items: SINGLE_ITEM_TO_BE_ADDED_SAMPLE })
   })
 
@@ -32,5 +32,10 @@ describe('Cart Module', () => {
     const cartResultFields = Object.keys(cartResult).filter(key => key != '__typename')
     expect(cartResultFields).toEqual(SELECTED_FIELDS)
     expect(cartResultFields.length).toEqual(SELECTED_FIELDS.length)
+  })
+
+  it('Should try to get cart with invalid token and it should throw error', async () => {
+    const INVALID_TOKEN = 'invalid_token'
+    expect(async () => await CartService.getCart(firstAddedItemsCart.token)).rejects.toThrow()
   })
 })

@@ -18,7 +18,7 @@ const refereceSettingObject: Setting<object> = {
 
 describe('Settings Module', () => {
   it('Get settings', async () => {
-    const settingResult: Setting<any> = await SettingsService.getSettings()
+    const settingResult: Setting<any> = await SettingsService.getOne()
     const normalizedMock = normalizeMockData(settingMock, Module.setting)
     buildBaseAsserts(settingResult, refereceSettingObject, normalizedMock)
   })
