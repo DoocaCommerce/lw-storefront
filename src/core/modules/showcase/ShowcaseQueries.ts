@@ -235,6 +235,7 @@ export class ShowcaseQueries {
               hasPreviousPage
               startCursor
               endCursor
+              first
               total
             }
           }
