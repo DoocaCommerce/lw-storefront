@@ -31,7 +31,7 @@ function getMock(filter?: { filter: SectionFilter }) {
 }
 
 async function buildSectionAsserts(filter?: unknown, filterValue?: any) {
-  const sectionResult: Section<any> = await SectionsService.getSections(filter)
+  const sectionResult: Section<any> = await SectionsService.getOne(filter)
   const mock = getMock(filter && { filter: filter })
   const normalizedMock = normalizeMockData(mock, Module.section)
 

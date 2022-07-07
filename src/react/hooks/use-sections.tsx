@@ -7,7 +7,7 @@ export function useSections(): any {
   const [sections, setSections] = useState<any>()
 
   async function getSections() {
-    const result = await services.sections.getSections()
+    const result = await services.sections.getOne()
 
     setSections(result.data)
   }

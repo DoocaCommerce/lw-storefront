@@ -5,8 +5,8 @@ import { Setting } from './SettingsTypes'
 const Repository = dc_config.mock?.settings ? SettingsRepositoryJson : SettingsRepositoryGql
 
 export class SettingsService {
-  static async getSettings() {
-    const result: Setting<unknown> = await Repository.fetchSettings()
+  static async getOne() {
+    const result: Setting<unknown> = await Repository.getOne()
     return result
   }
 }

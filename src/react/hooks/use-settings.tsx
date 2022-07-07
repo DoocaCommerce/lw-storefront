@@ -7,7 +7,7 @@ export function useSettings(): any {
   const [settings, setSettings] = useState<any>()
 
   async function getSettings() {
-    const result = await services.settings.getSettings()
+    const result = await services.settings.getOne()
 
     setSettings(result.data)
   }
