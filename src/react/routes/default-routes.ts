@@ -1,5 +1,6 @@
 const defautRoutes = {
   home: {
+    path: null,
     component: 'home'
   },
   category: {
