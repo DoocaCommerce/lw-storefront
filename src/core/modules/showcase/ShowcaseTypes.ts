@@ -197,7 +197,7 @@ export interface ShowcaseList extends PageableListObject<ShowcaseEdge> {}
 
 export interface FastSearch {
   queryString: nullable<String>
-  fields: nullable<Array<ShowcaseFields>>
+  fields?: nullable<Array<ShowcaseFields>>
 }
 
 export interface ShowcaseFilter {
@@ -208,7 +208,7 @@ export interface ShowcaseFilter {
 
 export interface ShowcasePaginationFilter extends Pick<PaginationFilter, 'first'> {
   page?: Number
-  fastSearch?: nullable<FastSearch>
+  queryString?: String
 }
 
 export interface OptionsGetShowcase {
