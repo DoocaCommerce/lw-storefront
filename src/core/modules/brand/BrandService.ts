@@ -6,9 +6,12 @@ import { Brand, BrandFields, BrandList } from './BrandTypes'
 const Repository = dc_config.mock?.brand ? BrandRepositoryJson : BrandRepositoryGql
 
 export class BrandService {
-  static async getList(pagenationFilter: PaginationFilter, fields?: Array<BrandFields>): Promise<BrandList> {
+  static async getList(paginationFilter: PaginationFilter, fields?: Array<BrandFields>): Promise<BrandList> {
     try {
-      const result: BrandList = await Repository.getList({ fields: fields || null, filter: pagenationFilter })
+      const result: BrandList = await Repository.getList({
+        fields: fields || null,
+        filter: paginationFilter || { page: 1 }
+      })
       return result
     } catch (error) {
       throw new Error(error)

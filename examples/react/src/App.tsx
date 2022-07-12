@@ -43,13 +43,15 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const brands = useBrands({ id: '1260' })
+  const brands = useBrands({})
+
+  console.log(brands)
 
   return (
     <div className="App">
       <h1>Settings {setting && setting.contactEmail}</h1>
       <h1>Sections {sections && sections.data}</h1>
-      <h1>Brands {brands && brands.slug}</h1>
+      <h1>Brands {brands && JSON.stringify(brands.edges[0].node.id)}</h1>
       <Sections components={components} />
     </div>
   )
