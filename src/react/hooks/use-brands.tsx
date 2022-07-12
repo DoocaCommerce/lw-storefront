@@ -20,13 +20,13 @@ export function useBrands({ id, slug, pagination }: BrandHookParams, fields?: Ar
   async function getOne({ id, slug }: GetOneParams, fields?: Array<BrandFields>) {
     const service = id ? services.brand.getById : services.brand.getBySlug
     const param = id ?? slug
-    const brand = await service(param, fields)
-    setBrands(brand)
+    const result = await service(param, fields)
+    setBrands(result)
   }
 
   async function getList(pagination?: PaginationFilter, fields?: Array<BrandFields>) {
-    const brandList = await services.brand.getList(pagination, fields)
-    setBrands(brandList)
+    const result = await services.brand.getList(pagination, fields)
+    setBrands(result)
   }
 
   useEffect(() => {
