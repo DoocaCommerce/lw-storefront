@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { BrandFields } from 'src/core/modules/brand/BrandTypes'
-import { PaginationFilter } from 'src/core/types/PaginationTypes'
+import { BrandFields } from '../../core/modules/brand/BrandTypes'
+import { PaginationFilter } from '../../core/types/PaginationTypes'
 import { services } from '../../core'
 
 interface BrandHookParams {
