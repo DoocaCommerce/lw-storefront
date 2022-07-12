@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { MenuFields } from 'src/core/modules/menu/MenuTypes'
-import { services, socket } from '../../core'
+import { MenuFields } from '../../core/modules/menu/MenuTypes'
+import { services } from '../../core'
 
 interface MenuHookParams {
   id?: string
