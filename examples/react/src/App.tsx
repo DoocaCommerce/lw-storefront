@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useScripts } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -8,9 +8,21 @@ const components = {
 
 import { services } from 'lw-storefront/lib/core'
 
-
-const { apps, blogCategory, blogPost, brand, cart, category, landingPages, menu, pages, scripts, sections, settings, showcase } =
-  services
+const {
+  apps,
+  blogCategory,
+  blogPost,
+  brand,
+  cart,
+  category,
+  landingPages,
+  menu,
+  pages,
+  scripts,
+  sections,
+  settings,
+  showcase
+} = services
 
 const get = async (id: string) => {
   const result = await settings.getSettings()
@@ -20,7 +32,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await scripts.getScriptsByLocation('header')
+      const result = await scripts.getListByLocation('header')
       console.log(result)
     }
     get('header')
@@ -31,12 +43,13 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
+  const scripts = useScripts({})
 
   return (
     <div className="App">
-      <Header />
-      {/* <h1>Teste {setting && setting.contactEmail}</h1>
-      <Sections components={components} /> */}
+      <h1>Setting {setting && setting.contactEmail}</h1>
+      <h1>Scripts {scripts && scripts[0].id}</h1>
+      <Sections components={components} />
     </div>
   )
 }
