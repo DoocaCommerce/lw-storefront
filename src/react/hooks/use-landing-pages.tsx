@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { LandingPageFields } from 'src/core/modules/landing-pages/LandingPagesTypes'
+import { LandingPageFields } from '../../core/modules/landing-pages/LandingPagesTypes'
 import { services, socket } from '../../core'
 
 interface LandingPagesHooksParams {
