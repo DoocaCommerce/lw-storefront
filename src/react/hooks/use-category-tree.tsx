@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CategoryTreeFields } from 'src/core/modules/category/CategoryTypes'
+import { CategoryTreeFields } from '../../core/modules/category/CategoryTypes'
 import { services } from '../../core'
 
 interface CategoryTreeHookParams {

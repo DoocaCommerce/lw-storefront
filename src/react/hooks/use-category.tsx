@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CategoryFields } from 'src/core/modules/category/CategoryTypes'
+import { CategoryFields } from '../../core/modules/category/CategoryTypes'
 import { services } from '../../core'
 
 interface CategoryHookParams {
