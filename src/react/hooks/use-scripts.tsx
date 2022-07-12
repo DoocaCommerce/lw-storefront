@@ -14,13 +14,13 @@ export function useScripts({ page, location }: ScriptsHookParam, fields?: Array<
     const service = page ? services.scripts.getListByPage : services.scripts.getListByLocation
     const param = page ?? location
 
-    const scripts = await service(param, fields)
-    setScripts(scripts)
+    const result = await service(param, fields)
+    setScripts(result)
   }
 
   async function getAllScripts(fields?: Array<ScriptFields>) {
-    const scripts = await services.scripts.getList(fields)
-    setScripts(scripts)
+    const result = await services.scripts.getList(fields)
+    setScripts(result)
   }
 
   useEffect(() => {
