@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ScriptFields } from 'src/core/modules/scripts/ScriptsTypes'
+import { ScriptFields } from '../../core/modules/scripts/ScriptsTypes'
 import { services } from '../../core'
 
 interface ScriptsHookParam {
