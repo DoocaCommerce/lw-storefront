@@ -15,16 +15,16 @@ export class BrandService {
     }
   }
 
-  static async getById(id: Number, fields?: Array<BrandFields>): Promise<Brand> {
+  static async getById(id: string, fields?: Array<BrandFields>): Promise<Brand> {
     try {
-      const result: Brand = await Repository.getById(id, fields)
+      const result: Brand = await Repository.getById(Number(id), fields)
       return result
     } catch (error) {
       throw new Error(error)
     }
   }
 
-  static async getBySlug(slug: String, fields?: Array<BrandFields>): Promise<Brand> {
+  static async getBySlug(slug: string, fields?: Array<BrandFields>): Promise<Brand> {
     try {
       const result: Brand = await Repository.getBySlug(slug, fields)
       return result
