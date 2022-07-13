@@ -11,17 +11,17 @@ export class ShowcaseService {
   ): Promise<ShowcaseList> {
     const result: ShowcaseList = await Repository.getList({
       fields: fields || null,
-      filter: showcasePaginationFilter
+      filter: showcasePaginationFilter || { page: 1 }
     })
     return result
   }
 
-  static async getById(id: Number, fields?: Array<ShowcaseFields>): Promise<Showcase> {
-    const result: Showcase = await Repository.getById(id, fields)
+  static async getById(id: string, fields?: Array<ShowcaseFields>): Promise<Showcase> {
+    const result: Showcase = await Repository.getById(Number(id), fields)
     return result
   }
 
-  static async getBySlug(slug: String, fields?: Array<ShowcaseFields>): Promise<Showcase> {
+  static async getBySlug(slug: string, fields?: Array<ShowcaseFields>): Promise<Showcase> {
     const result: Showcase = await Repository.getBySlug(slug, fields)
     return result
   }
