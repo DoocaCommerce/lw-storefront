@@ -95,7 +95,7 @@ export interface UpdateItemInput extends MutationInput {
   item: CartItemUpdateInput
 }
 
-interface CartItemDeleteInput {
+export interface CartItemDeleteInput {
   id: nullable<Number>
 }
 
