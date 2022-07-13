@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AppsFields } from '../../core/modules/apps/AppsTypes'
-import { services, socket } from '../../core'
+import { services } from '../../core'
 
 interface AppHookParams {
   id: string
