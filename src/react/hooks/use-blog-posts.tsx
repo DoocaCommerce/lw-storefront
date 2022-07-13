@@ -3,16 +3,16 @@ import { BlogPostFields } from '../../core/modules/blog/post/BlogPostTypes'
 import { PaginationFilter } from '../../core/types/PaginationTypes'
 import { services } from '../../core'
 
-interface BlogPostHookInterface {
+interface BlogPostHookParams {
   id?: string
   slug?: string
   pagination?: PaginationFilter
 }
 
-export function useBlogPosts({ id, slug, pagination }: BlogPostHookInterface, fields?: Array<BlogPostFields>): any {
+export function useBlogPosts({ id, slug, pagination }: BlogPostHookParams, fields?: Array<BlogPostFields>): any {
   const [blogPosts, setBlogPosts] = useState<any>()
 
-  async function getOne({ id, slug }: BlogPostHookInterface, fields?: Array<BlogPostFields>) {
+  async function getOne({ id, slug }: BlogPostHookParams, fields?: Array<BlogPostFields>) {
     const service = id ? services.blogPost.getById : services.blogPost.getBySlug
     const param = id ?? slug
     const result = await service(param, fields)
