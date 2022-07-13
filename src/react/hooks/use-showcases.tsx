@@ -8,12 +8,12 @@ interface ShowcaseHookParams {
   pagination?: ShowcasePaginationFilter
 }
 
-interface ShowcaseGetOneHookParams extends Omit<ShowcaseHookParams, 'pagination'> {}
+interface GetOneParams extends Omit<ShowcaseHookParams, 'pagination'> {}
 
 export function useShowcases({ id, slug, pagination }: ShowcaseHookParams, fields?: Array<ShowcaseFields>): any {
   const [showcases, setShowcases] = useState<any>()
 
-  async function getOne({ id, slug }: ShowcaseGetOneHookParams, fields?: Array<ShowcaseFields>) {
+  async function getOne({ id, slug }: GetOneParams, fields?: Array<ShowcaseFields>) {
     const service = id ? services.showcase.getById : services.showcase.getBySlug
     const param = id ?? slug
     const result = await service(param, fields)
