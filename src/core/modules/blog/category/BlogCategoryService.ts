@@ -5,12 +5,12 @@ import { BlogCategory, BlogCategoryFields } from './BlogCategoryTypes'
 const Repository = dc_config.mock?.blogCategory ? BlogCategoryRepositoryJson : BlogCategoryRepositoryGql
 
 export class BlogCategoryService {
-  static async getById(id: Number, fields?: Array<BlogCategoryFields>): Promise<BlogCategory> {
-    const result: BlogCategory = await Repository.getById(id, fields)
+  static async getById(id: string, fields?: Array<BlogCategoryFields>): Promise<BlogCategory> {
+    const result: BlogCategory = await Repository.getById(Number(id), fields)
     return result
   }
 
-  static async getBySlug(slug: String, fields?: Array<BlogCategoryFields>): Promise<BlogCategory> {
+  static async getBySlug(slug: string, fields?: Array<BlogCategoryFields>): Promise<BlogCategory> {
     const result: BlogCategory = await Repository.getBySlug(slug, fields)
     return result
   }
