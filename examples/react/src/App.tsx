@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, useBrands } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useLandingPages } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -43,15 +43,16 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const brands = useBrands({})
+  const landingPages = useLandingPages({ slug: 'test01' }, ['content', 'slug'])
 
-  console.log(brands)
+  console.log(landingPages)
 
   return (
     <div className="App">
       <h1>Settings {setting && setting.contactEmail}</h1>
-      <h1>Sections {sections && sections.data}</h1>
-      <h1>Brands {brands && JSON.stringify(brands.edges[0].node.id)}</h1>
+      <h1>
+        Landing Pages <pre>{landingPages && JSON.stringify(landingPages.content)}</pre>
+      </h1>
       <Sections components={components} />
     </div>
   )
