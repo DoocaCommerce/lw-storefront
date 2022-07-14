@@ -1,4 +1,4 @@
-import { nullable } from 'src/core/types/NullableTypes'
+import { nullable } from '../../../core/types/NullableTypes'
 
 export interface Apps {
   id?: nullable<String>
