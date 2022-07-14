@@ -32,7 +32,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await scripts.getScriptsByLocation('header')
+      const result = await brand.getById(136395)
       console.log(result)
     }
     get('header')
