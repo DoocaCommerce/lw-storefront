@@ -2,7 +2,7 @@ import { Menu, MenuFields } from '../MenuTypes'
 import { MenuService } from '../MenuService'
 import 'isomorphic-fetch'
 
-const ID_FILTER = 47028
+const ID_FILTER = '47028'
 const SELECTED_FIELDS: Array<MenuFields> = ['id', 'name']
 
 describe('Menu Module', () => {
@@ -33,6 +33,6 @@ describe('Menu Module', () => {
   })
 
   it('Should try to get menu with inexistant id and it should throw error', async () => {
-    expect(async () => await MenuService.getById(1)).rejects.toThrow()
+    expect(async () => await MenuService.getById('1')).rejects.toThrow()
   })
 })
