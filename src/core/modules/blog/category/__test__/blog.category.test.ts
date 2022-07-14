@@ -4,13 +4,13 @@ import 'isomorphic-fetch'
 
 describe('Blog Category Module', () => {
   it('Should get blog category by id with all fields succeffully', async () => {
-    const ID_FILTER = 1057
+    const ID_FILTER = '1057'
     const blogCategoryResult = await BlogCategoryService.getById(ID_FILTER)
-    expect(blogCategoryResult.id).toEqual(ID_FILTER)
+    expect(blogCategoryResult.id.toString()).toEqual(ID_FILTER)
   })
 
   it('Should get blog category by id with selected fields succeffully', async () => {
-    const ID_FILTER = 1057
+    const ID_FILTER = '1057'
     const SELECTED_FIELDS: Array<BlogCategoryFields> = ['id', 'name']
     const blogCategoryResult = await BlogCategoryService.getById(ID_FILTER, SELECTED_FIELDS)
     const blogCategoryResultFields = Object.keys(blogCategoryResult).filter(key => key != '__typename')
@@ -30,7 +30,7 @@ describe('Blog Category Module', () => {
   })
 
   it('Should try to get blog category by inexistant id and it should throw error', async () => {
-    const ID_FILTER = 11
+    const ID_FILTER = '11'
     expect(async () => await BlogCategoryService.getById(ID_FILTER)).rejects.toThrow()
   })
 })
