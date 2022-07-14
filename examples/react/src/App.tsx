@@ -25,7 +25,7 @@ const {
 } = services
 
 const get = async (id: string) => {
-  const result = await settings.getSettings()
+  const result = await settings.getOne()
   console.log(`result ${id}`, result)
 }
 
