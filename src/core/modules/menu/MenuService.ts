@@ -5,8 +5,8 @@ import { Menu, MenuFields } from './MenuTypes'
 const Repository = dc_config.mock?.menu ? MenuRepositoryJson : MenuRepositoryGql
 
 export class MenuService {
-  static async getById(id: Number, fields?: Array<MenuFields>): Promise<Menu> {
-    const result: Menu = await Repository.getById(id, fields)
+  static async getById(id: string, fields?: Array<MenuFields>): Promise<Menu> {
+    const result: Menu = await Repository.getById(Number(id), fields)
     return result
   }
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, useScripts } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useMenus } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -43,12 +43,12 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const scripts = useScripts({})
+  const menus = useMenus({})
 
   return (
     <div className="App">
       <h1>Setting {setting && setting.contactEmail}</h1>
-      <h1>Scripts {scripts && scripts[0].id}</h1>
+      <h1>Menu {menus && menus[1].name}</h1>
       <Sections components={components} />
     </div>
   )
