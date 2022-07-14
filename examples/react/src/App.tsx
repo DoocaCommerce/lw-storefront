@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, useCategory, useCategoryTree } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useScripts } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -32,7 +32,7 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await brand.getById(136395)
+      const result = await scripts.getListByLocation('header')
       console.log(result)
     }
     get('header')
@@ -43,14 +43,12 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const category = useCategory({ slug: 'disco-rigido-hdd' })
-  const categoryTree = useCategoryTree({ id: '1649' })
+  const scripts = useScripts({})
 
   return (
     <div className="App">
-      <h1>Settings {setting && setting.contactEmail}</h1>
-      <h1>Category {category && category.id}</h1>
-      <h1>Category Tree {categoryTree && categoryTree[0].slug}</h1>
+      <h1>Setting {setting && setting.contactEmail}</h1>
+      <h1>Scripts {scripts && scripts[0].id}</h1>
       <Sections components={components} />
     </div>
   )
