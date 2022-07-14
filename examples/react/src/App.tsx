@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, usePages } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useShowcases } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -43,12 +43,12 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const pages = usePages({ slug: 'sobre-a-dc-gamer' })
+  const showcases = useShowcases({ pagination: { page: 1 } })
 
   return (
     <div className="App">
       <h1>Teste {setting && setting.contactEmail}</h1>
-      <h1>Pages {pages && pages.slug}</h1>
+      <h1>Teste {showcases && showcases.edges[0].node.name}</h1>
       <Sections components={components} />
     </div>
   )
