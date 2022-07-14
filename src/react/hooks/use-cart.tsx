@@ -6,7 +6,7 @@ import { Cart, CartItemAddInput, CartItemDeleteInput, CartItemUpdateInput } from
 type CartMutation<T> = (input: T) => Promise<any>
 
 interface CartHook {
-  data: Cart | {}
+  data: Cart
   addItem: CartMutation<Array<CartItemAddInput>>
   updateItem: CartMutation<CartItemUpdateInput>
   deleteItem: CartMutation<CartItemDeleteInput>
@@ -18,58 +18,69 @@ export function useCart(): CartHook {
   const [cart, setCart] = useState<Cart | {}>({})
   const [cartToken, setCartToken] = useState<string>('')
 
+  function setToken(token: string) {
+    if (token) {
+      setCartToken(token)
+      CookieService.setCookie(COOKIE_CART, token, 7)
+    }
+  }
+
+  function eraseToken() {
+    setCartToken('')
+    CookieService.eraseCookie(COOKIE_CART)
+  }
+
+  function sanitizeCart() {
+    setCart({})
+    eraseToken()
+  }
+
   async function addItem(input: Array<CartItemAddInput>): Promise<any> {
     try {
       const updatedCart = await services.cart.addItem({ items: input, ...(cartToken ? { cartToken: cartToken } : {}) })
-      if (updatedCart) setCart(updatedCart)
-    } catch (error) {
-      setCart({})
-    }
+      updatedCart && setCart(updatedCart)
+      !cartToken && setToken(updatedCart.token)
+    } catch (error) {}
   }
 
   async function updateItem(input: CartItemUpdateInput): Promise<any> {
     try {
+      if (!cartToken) throw new Error('')
       const updatedCart: Cart = await services.cart.updateItem({
         item: input,
-        ...(cartToken ? { cartToken: cartToken } : {})
+        cartToken: cartToken
       })
       updatedCart && setCart(updatedCart)
-    } catch (error) {
-      setCart({})
-    }
+    } catch (error) {}
   }
 
   async function deleteItem(input: CartItemDeleteInput): Promise<any> {
     try {
+      if (!cartToken) throw new Error('')
       const updatedCart = await services.cart.deleteItem({
         item: input,
-        ...(cartToken ? { cartToken: cartToken } : {})
+        cartToken: cartToken
       })
 
-      if (updatedCart) {
-        const isCartEmpty = !updatedCart.token
-        setCart(isCartEmpty ? {} : updatedCart)
-        isCartEmpty && setCartToken('')
-      }
-    } catch (error) {
-      setCart({})
-    }
+      !updatedCart.items ? sanitizeCart() : setCart(updatedCart)
+    } catch (error) {}
   }
 
-  async function getCart(token: string) {
+  async function getCart() {
     try {
-      const result = await services.cart.getCart(token)
-      return result
+      if (!cartToken) throw new Error('')
+      const result = await services.cart.getCart(cartToken)
+      setCart(result)
     } catch (error) {
-      setCart({})
-      return {}
+      sanitizeCart()
     }
   }
 
   useEffect(() => {
-    const token = cartToken || CookieService.getCookie(COOKIE_CART)
+    const token = CookieService.getCookie(COOKIE_CART)
     if (token) {
-      getCart(token).then(cartResponse => setCart(cartResponse))
+      setToken(token)
+      getCart()
     }
   }, [])
 

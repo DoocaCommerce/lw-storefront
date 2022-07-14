@@ -41,20 +41,44 @@ function Header() {
 }
 
 function App() {
-  useEffect(() => console.log('salve'))
-
   const cart = useCart()
 
-  cart.addItem([
-    {
-      variation_id: 9467663,
-      quantity: 1
-    }
-  ])
+  function addItem() {
+    cart.addItem([
+      {
+        variation_id: 9467663,
+        quantity: 1
+      }
+    ])
 
-  console.log(cart.data)
+    console.log(cart.data)
+  }
 
-  return <div className="App"></div>
+  function updateItem() {
+    cart.updateItem({
+      id: cart.data!.items![0].id,
+      quantity: 4
+    })
+
+    console.log(cart.data)
+  }
+
+  function deleteItem() {
+    cart.deleteItem({
+      id: cart.data!.items![0].id
+    })
+
+    console.log(cart.data)
+  }
+
+  return (
+    <div className="App">
+      <button onClick={addItem}>Adicionar</button>
+      <button onClick={updateItem}>Atualizar</button>
+      <button onClick={deleteItem}>Deletar</button>
+      <button onClick={() => console.log(cart.data)}>Consultar</button>
+    </div>
+  )
 }
 
 export default App

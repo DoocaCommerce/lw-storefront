@@ -14,4 +14,8 @@ export class CookieService {
     const maxAge = lifetime ? 60 * 60 * 24 * lifetime : 0
     document.cookie = `${name}=${value};max-age= ${maxAge}; Secure`
   }
+
+  static eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999;'
+  }
 }
