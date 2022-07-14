@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, useMenus } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useBlogPosts } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -43,12 +43,14 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const menus = useMenus({})
+  const blogPosts = useBlogPosts({ id: '3566', slug: 'post-sem-imagem' }, ['id', 'slug'])
+
+  console.log(blogPosts)
 
   return (
     <div className="App">
-      <h1>Setting {setting && setting.contactEmail}</h1>
-      <h1>Menu {menus && menus[1].name}</h1>
+      <h1>Teste {setting && setting.contactEmail}</h1>
+      <h1>Blog Post {blogPosts && blogPosts.slug}</h1>
       <Sections components={components} />
     </div>
   )
