@@ -4,13 +4,13 @@ import 'isomorphic-fetch'
 
 describe('Blog Post Module', () => {
   it('Should get blog post by id with all fields succeffully', async () => {
-    const ID_FILTER = 3566
+    const ID_FILTER = '3566'
     const blogPostResult = await BlogPostService.getById(ID_FILTER)
-    expect(blogPostResult.id == ID_FILTER).toBeTruthy()
+    expect(blogPostResult.id == Number(ID_FILTER)).toBeTruthy()
   })
 
   it('Should get blog post by id with selected fields succeffully', async () => {
-    const ID_FILTER = 3566
+    const ID_FILTER = '3566'
     const SELECTED_FIELDS: Array<BlogPostFields> = ['id', 'name']
     const blogPostResult = await BlogPostService.getById(ID_FILTER, SELECTED_FIELDS)
     const blogPostResultKeys = Object.keys(blogPostResult).filter(key => key != '__typename')
@@ -30,7 +30,7 @@ describe('Blog Post Module', () => {
   })
 
   it('Should try to get blog post by inexistant id and it should throw error', async () => {
-    const ID_FILTER = 3200
+    const ID_FILTER = '3200'
     expect(async () => await BlogPostService.getById(ID_FILTER)).rejects.toThrow()
   })
 })

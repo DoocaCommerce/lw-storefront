@@ -4,7 +4,7 @@ import { buildBaseAsserts, buildGeneralModuleAsserts } from '../../../helpers/__
 import { PageInfo } from '../../../types/PaginationTypes'
 import 'isomorphic-fetch'
 
-const ID_FILTER = 1260
+const ID_FILTER = '1260'
 
 describe('Brand Module', () => {
   it('Should get brand by id with all fields succeffully', async () => {
@@ -33,6 +33,10 @@ describe('Brand Module', () => {
   })
 
   it('Should try get brand by inexistant id and it should throw error', async () => {
-    expect(async () => await BrandService.getById(1234)).rejects.toThrow()
+    expect(async () => await BrandService.getById('1234')).rejects.toThrow()
+  })
+
+  it('Should try get brand by inexistant id and it should throw error', async () => {
+    console.log(await BrandService.getList(undefined, ['id']))
   })
 })
