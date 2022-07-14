@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, useShop } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useCategory, useCategoryTree } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -43,12 +43,14 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const shop = useShop()
+  const category = useCategory({ slug: 'disco-rigido-hdd' })
+  const categoryTree = useCategoryTree({ id: '1649' })
 
   return (
     <div className="App">
       <h1>Settings {setting && setting.contactEmail}</h1>
-      <h1>Shop {shop && shop.name}</h1>
+      <h1>Category {category && category.id}</h1>
+      <h1>Category Tree {categoryTree && categoryTree[0].slug}</h1>
       <Sections components={components} />
     </div>
   )
