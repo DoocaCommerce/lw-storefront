@@ -25,14 +25,14 @@ const {
 } = services
 
 const get = async (id: string) => {
-  const result = await settings.getSettings()
+  const result = await settings.getOne()
   console.log(`result ${id}`, result)
 }
 
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await scripts.getScriptsByLocation('header')
+      const result = await brand.getById(136395)
       console.log(result)
     }
     get('header')
@@ -50,8 +50,7 @@ function App() {
   return (
     <div className="App">
       <h1>Settings {setting && setting.contactEmail}</h1>
-      <h1>
-        Landing Pages <pre>{landingPages && JSON.stringify(landingPages.content)}</pre>
+      <h1>Landing Pages <pre>{landingPages && JSON.stringify(landingPages.content)}</pre>
       </h1>
       <Sections components={components} />
     </div>
