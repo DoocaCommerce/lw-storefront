@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, useBlogPosts } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useBlogCategories } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -43,14 +43,14 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const blogPosts = useBlogPosts({ id: '3566', slug: 'post-sem-imagem' }, ['id', 'slug'])
+  const blogCategories = useBlogCategories({ slug: 'categoria-teste-2' }, ['id', 'slug'])
 
-  console.log(blogPosts)
+  console.log(blogCategories)
 
   return (
     <div className="App">
       <h1>Teste {setting && setting.contactEmail}</h1>
-      <h1>Blog Post {blogPosts && blogPosts.slug}</h1>
+      <h1>Blog Categories {blogCategories && blogCategories.slug}</h1>
       <Sections components={components} />
     </div>
   )
