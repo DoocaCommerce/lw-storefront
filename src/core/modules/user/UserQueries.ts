@@ -41,7 +41,7 @@ export class UserQueries {
   }
 
   doLogin() {
-    return `query Login($credentials: Credentials) {
+    return `mutation Login($credentials: Credentials) {
         login(credentials: $credentials) {
           ${this.getFields()}
         }
