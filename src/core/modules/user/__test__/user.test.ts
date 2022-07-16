@@ -22,4 +22,17 @@ describe('User Module', () => {
     const LOGIN_CREDENTIALS = { email: 'diovani.dooca@gmail.com', password: 'Teste' }
     expect(async () => await UserService.doLogin(LOGIN_CREDENTIALS)).rejects.toThrow()
   })
+
+  it('Should do login and try to get User using token with all fields successfully', async () => {
+    const LOGIN_CREDENTIALS = { email: 'diovani.dooca@gmail.com', password: 'Teste123' }
+    const loginResult: User = await UserService.doLogin(LOGIN_CREDENTIALS)
+    const userResult: User = await UserService.getUser(loginResult?.token)
+    expect(userResult.active).toEqual(loginResult.active)
+    expect(userResult.email).toEqual(loginResult.email)
+    expect(userResult.phone).toEqual(loginResult.phone)
+  })
+
+  it('Should try to get User using invalid token and an error should be thrown', async () => {
+    expect(async () => await UserService.getUser('invalid_token')).rejects.toThrow()
+  })
 })

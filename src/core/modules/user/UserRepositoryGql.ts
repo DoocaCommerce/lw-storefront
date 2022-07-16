@@ -17,4 +17,16 @@ export class UserRepositoryGql {
       throw new Error(error)
     }
   }
+
+  static async getUser({ token, fields }: OptionsGetUser): Promise<User> {
+    const userQuery = new UserQueries(fields)
+    const getUserQuery: string = userQuery.getUser()
+    try {
+      const { user }: UserResponse = await client.mutation(getUserQuery, { filter: { token: token } })
+
+      return user
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 }

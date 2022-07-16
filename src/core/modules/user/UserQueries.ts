@@ -47,4 +47,11 @@ export class UserQueries {
         }
       }`
   }
+  getUser() {
+    return `query User($filter: filterUser) {
+        user(filter: $filter) {
+          ${this.getFields()}
+        }
+      }`
+  }
 }
