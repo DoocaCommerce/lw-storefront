@@ -1,105 +1,48 @@
-import 'isomorphic-fetch'
-import { buildGeneralModuleAsserts } from '../../../helpers/__test__/testHelper'
 import { CategoryService } from '../CategoryService'
-import { Category, CategoryFields, CategoryTree, CategoryTreeFields } from '../CategoryTypes'
-
-const referenceCategoryAllFieldsObject: Category = {
-  id: 0,
-  name: '',
-  slug: '',
-  position: 0,
-  depth: 0,
-  breadcrumb: '',
-  url: '',
-  active: false,
-  created_at: '',
-  updated_at: '',
-  parent_id: 0,
-  hotsite_id: 0,
-  external_id: 0,
-  description: '',
-  image: '',
-  banner: '',
-  banner_link: '',
-  google_taxonomy_id: 0,
-  meta_title: '',
-  meta_keywords: '',
-  meta_description: ''
-}
-
-const referenceCategoryTreeAllFieldsObject: CategoryTree = { ...referenceCategoryAllFieldsObject, children: [] }
-
-const categorySelectedFields: Array<CategoryFields> = ['id', 'name', 'slug']
-
-const referenceCategorySelectedFieldsObject: Category = {
-  id: 0,
-  name: '',
-  slug: ''
-}
-
-const categoryTreeSelectedFields: Array<CategoryTreeFields> = ['id', 'name', 'slug', 'children']
-
-const referenceCategoryTreeSelectedFieldsObject: CategoryTree = {
-  ...referenceCategorySelectedFieldsObject,
-  children: []
-}
-
-async function buildGetCategoryByIdAsserts(referenceObject: any, fields?: Array<CategoryFields>) {
-  const ID_FILTER = 3
-  const categoryResult: Category = await CategoryService.getCategoryById(ID_FILTER, fields)
-  buildGeneralModuleAsserts(categoryResult, referenceObject, { id: ID_FILTER }, ID_FILTER)
-}
-
-async function buildGetCategoryBySlugAsserts(referenceObject: any, fields?: Array<CategoryFields>) {
-  const SLUG_FILTER = 'bolsas-femininas'
-  const categoryResult: Category = await CategoryService.getCategoryBySlug(SLUG_FILTER, fields)
-  buildGeneralModuleAsserts(categoryResult, referenceObject, { slug: SLUG_FILTER }, SLUG_FILTER)
-}
-
-async function buildGetCategoryTreeByIdAsserts(referenceObject: any, fields?: Array<CategoryTreeFields>) {
-  const ID_FILTER = 1104
-  const categoryResult: Array<CategoryTree> = await CategoryService.getCategoryTreeById(ID_FILTER, fields)
-  categoryResult.forEach(category => buildGeneralModuleAsserts(category, referenceObject, { id: ID_FILTER }, ID_FILTER))
-}
-
-async function buildGetCategoryTreeBySlugAsserts(referenceObject: any, fields?: Array<CategoryTreeFields>) {
-  const SLUG_FILTER = 'produtos-masculinos'
-  const categoryResult: Array<CategoryTree> = await CategoryService.getCategoryTreeBySlug(SLUG_FILTER, fields)
-  categoryResult.forEach(category =>
-    buildGeneralModuleAsserts(category, referenceObject, { slug: SLUG_FILTER }, SLUG_FILTER)
-  )
-}
+import { CategoryFields } from '../CategoryTypes'
+import 'isomorphic-fetch'
 
 describe('Category Module', () => {
-  it('Get category by id with all fields', async () => {
-    await buildGetCategoryByIdAsserts(referenceCategoryAllFieldsObject)
+  it('Should get category by id with all fields succeffully', async () => {
+    const ID_FILTER = 1642
+    const categoryResult = await CategoryService.getById(ID_FILTER)
+    expect(categoryResult.id).toEqual(ID_FILTER)
   })
 
-  it('Get category by slug with all fields', async () => {
-    await buildGetCategoryBySlugAsserts(referenceCategoryAllFieldsObject)
+  it('Should get category by id with selected fields succeffully', async () => {
+    const SELECTED_FIELDS: Array<CategoryFields> = ['id', 'name', 'position', 'depth', 'breadcrumb']
+    const ID_FILTER = 1642
+    const categoryResult = await CategoryService.getById(ID_FILTER, [...SELECTED_FIELDS])
+    const categoryResultKeys = Object.keys(categoryResult).filter(key => key != '__typename')
+    expect(categoryResultKeys).toEqual(SELECTED_FIELDS)
+    expect(categoryResultKeys.length).toEqual(SELECTED_FIELDS.length)
   })
 
-  it('Get category by id with selected fields', async () => {
-    await buildGetCategoryByIdAsserts(referenceCategorySelectedFieldsObject, categorySelectedFields)
+  it('Should get category by slug with all fields succeffully', async () => {
+    const SLUG_FILTER = 'disco-rigido-hdd'
+    const categoryResult = await CategoryService.getBySlug(SLUG_FILTER)
+    expect(categoryResult.slug).toEqual(SLUG_FILTER)
   })
 
-  it('Get category by slug with selected fields', async () => {
-    await buildGetCategoryBySlugAsserts(referenceCategorySelectedFieldsObject, categorySelectedFields)
+  it('Should get categoryTree by id with selected fields succeffully', async () => {
+    const ID_FILTER = 1649
+    const categoryTreeResult = await CategoryService.getTreeById(ID_FILTER)
+    expect(categoryTreeResult[0].id).toEqual(ID_FILTER)
   })
 
-  it('Get categoryTree by id with all fields', async () => {
-    await buildGetCategoryTreeByIdAsserts(referenceCategoryTreeAllFieldsObject)
+  it('Should get categoryTree by slug with selected fields succeffully', async () => {
+    const SLUG_FILTER = 'perifericos'
+    const categoryTreeResult = await CategoryService.getTreeBySlug(SLUG_FILTER)
+    expect(categoryTreeResult[0].slug).toEqual(SLUG_FILTER)
   })
 
-  it('Get categoryTree by slug with all fields', async () => {
-    await buildGetCategoryTreeBySlugAsserts(referenceCategoryTreeAllFieldsObject)
+  it('Should try get category by inexistant id and it should throw error', async () => {
+    const ID_FILTER = 16
+    expect(async () => await CategoryService.getById(ID_FILTER)).rejects.toThrow()
   })
 
-  it('Get categoryTree by id with selected fields', async () => {
-    await buildGetCategoryTreeByIdAsserts(referenceCategoryTreeSelectedFieldsObject, categoryTreeSelectedFields)
-  })
-
-  it('Get categoryTree by slug with selected fields', async () => {
-    await buildGetCategoryTreeBySlugAsserts(referenceCategoryTreeSelectedFieldsObject, categoryTreeSelectedFields)
+  it('Should try get categoryTree by inexistant id and it should throw error', async () => {
+    const ID_FILTER = 16
+    expect(async () => await CategoryService.getTreeById(ID_FILTER)).rejects.toThrow()
   })
 })

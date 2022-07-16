@@ -10,23 +10,22 @@ function parseRootVars(variables) {
 }
 
 function fontLoader(font: any) {
-  if (!font) return ''
+  if (font && font.family && font.fontWeight) {
+    const { family, category, fontWeight } = font
+    const fontLoad = family && fontWeight ? family + ':' + fontWeight : null
+    const fontFamily = `${family}, ${category}`
 
-  const { family, category, font_weight } = font
-  const fontLoad = `${family}:${font_weight}`
-  const fontFamily = `${family}, ${category}`
+    if (fonts[fontLoad]) return fontFamily
 
-  if (fonts[fontLoad]) return fontFamily
+    WebFont.load({
+      google: {
+        families: [fontLoad]
+      }
+    })
+    fonts[fontLoad] = true
 
-  WebFont.load({
-    google: {
-      families: [fontLoad]
-    }
-  })
-
-  fonts[fontLoad] = true
-
-  return fontFamily
+    return fontFamily
+  }
 }
 
 export default { parseRootVars, fontLoader }
