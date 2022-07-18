@@ -22,7 +22,7 @@ export class UserRepositoryGql {
     const userQuery = new UserQueries(fields)
     const getUserQuery: string = userQuery.getUser()
     try {
-      const { user }: UserResponse = await client.mutation(getUserQuery, { filter: { token: token } })
+      const { user }: UserResponse = await client.query(getUserQuery, { filter: { user_token: token } })
 
       return user
     } catch (error) {
