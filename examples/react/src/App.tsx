@@ -26,15 +26,15 @@ const {
 } = services
 
 const get = async (id: string) => {
-  const result = await settings.getSettings()
+  const result = await settings.getOne()
   console.log(`result ${id}`, result)
 }
 
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await user.doLogin({ email: 'diovani.dooca@gmail.com', password: 'Teste123' })
-      console.log(`result ${id}`, result)
+      const result = await scripts.getListByLocation('header')
+      console.log(result)
     }
     get('header')
   }, [])

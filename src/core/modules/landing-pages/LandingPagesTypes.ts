@@ -1,10 +1,10 @@
 import { nullable } from '../../types/NullableTypes'
 
-export interface LandingPage {
+export interface LandingPage<T> {
   shop_id?: nullable<Number>
   id?: nullable<String>
   name?: nullable<String>
-  content?: nullable<String>
+  content?: nullable<T>
   slug?: nullable<String>
   not_index?: nullable<Boolean>
   active?: nullable<Boolean>
@@ -17,7 +17,7 @@ export interface LandingPage {
 }
 
 export interface LandingPageResponse {
-  landingPage: LandingPage
+  landingPage: LandingPage<string>
 }
 
 export interface OptionsGetLandingPage {
