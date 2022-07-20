@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, useApps } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useUser } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -44,12 +44,11 @@ function Header() {
 function App() {
   const setting = useSettings()
   const sections = useSections()
-  const apps = useApps({ id: '1041' }, ['slug'])
+  const user = useUser({ email: 'diovani@dooca.com.br', password: 'Teste123' })
 
   return (
     <div className="App">
-      <h1>Teste {setting && setting.contactEmail}</h1>
-      <h1>Apps {apps && apps.slug}</h1>
+      <h1>Teste {user && user.data.email}</h1>
       <Sections components={components} />
     </div>
   )

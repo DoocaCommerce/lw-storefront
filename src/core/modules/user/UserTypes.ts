@@ -9,7 +9,7 @@ export interface User {
   gender?: nullable<String>
   newsletter?: nullable<Boolean>
   marketplace?: nullable<Boolean>
-  customer_group_id: nullable<Number>
+  customer_group_id?: nullable<Number>
   external_id?: nullable<Number>
   entity?: nullable<String>
   company?: nullable<String>
