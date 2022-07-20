@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, Sections, useSections, useShowcases } from 'lw-storefront/lib/react'
+import { useSettings, useSections, useCart } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -42,15 +42,40 @@ function Header() {
 }
 
 function App() {
-  const setting = useSettings()
-  const sections = useSections()
-  const showcases = useShowcases({ pagination: { page: 1 } })
+  const cart = useCart()
+
+  function addItem() {
+    cart.addItem([
+      {
+        variation_id: 9467663,
+        quantity: 1
+      }
+    ])
+
+    console.log(cart.data)
+  }
+
+  function updateItem() {
+    cart.updateItem({
+      id: cart.data!.items![0].id,
+      quantity: 4
+    })
+
+    console.log(cart.data)
+  }
+
+  function deleteItem() {
+    cart.deleteItem({
+      id: cart.data!.items![0].id
+    })
+  }
 
   return (
     <div className="App">
-      <h1>Teste {setting && setting.contactEmail}</h1>
-      <h1>Teste {showcases && showcases.edges[0].node.name}</h1>
-      <Sections components={components} />
+      <button onClick={addItem}>Adicionar</button>
+      <button onClick={updateItem}>Atualizar</button>
+      <button onClick={deleteItem}>Deletar</button>
+      <button onClick={() => console.log(cart.data, cart.errors)}>Consultar</button>
     </div>
   )
 }
