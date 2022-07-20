@@ -5,7 +5,7 @@ import { LoginCredentials, User, UserFields } from '../../core/modules/user/User
 
 interface UserHook {
   data: User
-  doLogin: (credentials: LoginCredentials) => Promise<any>
+  auth: (credentials: LoginCredentials) => Promise<any>
 }
 
 const COOKIE_USER = '_dc_token'
@@ -38,16 +38,16 @@ export function useUser(credentials: LoginCredentials): UserHook {
 
   async function getUser(token: string) {
     try {
-      const user = await services.user.getUser(token)
+      const user = await services.user.get(token)
       user && setUserData(user)
     } catch (error) {
       cleanUserData()
     }
   }
 
-  async function doLogin(credentials: LoginCredentials, fields?: Array<UserFields>): Promise<any> {
+  async function auth(credentials: LoginCredentials, fields?: Array<UserFields>): Promise<any> {
     try {
-      const user = await services.user.doLogin(credentials)
+      const user = await services.user.auth(credentials)
       user && setUserData(user)
     } catch (error) {
       cleanUserData()
@@ -60,12 +60,12 @@ export function useUser(credentials: LoginCredentials): UserHook {
       setToken(token)
       getUser(token)
     } else {
-      credentials && doLogin(credentials)
+      credentials && auth(credentials)
     }
   }, [])
 
   return {
     data: user,
-    doLogin: doLogin
+    auth: auth
   }
 }
