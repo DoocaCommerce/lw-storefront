@@ -16,7 +16,7 @@ export interface User {
   ie?: nullable<String>
   birthday?: nullable<String>
   phone?: nullable<String>
-  token?: nullable<String>
+  token?: nullable<string>
   reset_token?: nullable<String>
   note?: nullable<String>
   facebook_id?: nullable<String>
@@ -32,6 +32,10 @@ export interface User {
 
 export interface LoginRespose {
   login: User
+}
+
+export interface UserResponse {
+  user: User
 }
 
 export interface UserGroup {
@@ -53,6 +57,11 @@ export interface UserAddress {
 export interface OptionsDoLogin {
   fields: nullable<Array<UserFields>>
   credentials: LoginCredentials
+}
+
+export interface OptionsGetUser {
+  token: string
+  fields: nullable<Array<UserFields>>
 }
 
 export interface LoginCredentials {
