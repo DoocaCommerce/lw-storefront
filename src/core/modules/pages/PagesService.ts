@@ -10,12 +10,12 @@ export class PagesService {
     return result
   }
 
-  static async getById(id: Number, fields?: Array<PageFields>): Promise<Page> {
-    const result: Page = await Repository.getById(id, fields)
+  static async getById(id: string, fields?: Array<PageFields>): Promise<Page> {
+    const result: Page = await Repository.getById(Number(id), fields)
     return result
   }
 
-  static async getBySlug(slug: String, fields?: Array<PageFields>): Promise<Page> {
+  static async getBySlug(slug: string, fields?: Array<PageFields>): Promise<Page> {
     const result: Page = await Repository.getBySlug(slug, fields)
     return result
   }

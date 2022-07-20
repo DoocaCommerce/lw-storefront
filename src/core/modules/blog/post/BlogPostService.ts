@@ -5,12 +5,12 @@ import { BlogPost, BlogPostFields, BlogPostList, BlogPostListFilter } from './Bl
 const Repository = dc_config.mock?.blogPost ? BlogPostRepositoryJson : BlogPostRepositoryGql
 
 export class BlogPostService {
-  static async getById(id: Number, fields?: Array<BlogPostFields>): Promise<BlogPost> {
-    const result: BlogPost = await Repository.getById(id, fields)
+  static async getById(id: string, fields?: Array<BlogPostFields>): Promise<BlogPost> {
+    const result: BlogPost = await Repository.getById(Number(id), fields)
     return result
   }
 
-  static async getBySlug(slug: String, fields?: Array<BlogPostFields>): Promise<BlogPost> {
+  static async getBySlug(slug: string, fields?: Array<BlogPostFields>): Promise<BlogPost> {
     const result: BlogPost = await Repository.getBySlug(slug, fields)
     return result
   }
@@ -18,7 +18,7 @@ export class BlogPostService {
   static async getList(paginationFilter: BlogPostListFilter, fields?: Array<BlogPostFields>): Promise<BlogPostList> {
     const result: BlogPostList = await Repository.getList({
       fields: fields || null,
-      filter: paginationFilter
+      filter: paginationFilter || { page: 1 }
     })
     return result
   }
