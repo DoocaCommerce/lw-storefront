@@ -36,7 +36,7 @@ export function useUser(credentials: LoginCredentials): UserHook {
     setUser({})
   }
 
-  async function getUser(token: string) {
+  async function get(token: string) {
     try {
       const user = await services.user.get(token)
       user && setUserData(user)
@@ -58,7 +58,7 @@ export function useUser(credentials: LoginCredentials): UserHook {
     const token = CookieService.getCookie(COOKIE_USER)
     if (token) {
       setToken(token)
-      getUser(token)
+      get(token)
     } else {
       credentials && auth(credentials)
     }
