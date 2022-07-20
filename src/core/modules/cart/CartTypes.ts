@@ -159,7 +159,7 @@ export interface OptionsGetCart {
 }
 
 export interface CartFilter {
-  cartToken: String
+  cart_token: String
 }
 
 export interface AddItemResponse {

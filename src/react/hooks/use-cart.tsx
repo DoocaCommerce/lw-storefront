@@ -42,13 +42,14 @@ export function useCart(): CartHook {
   }
 
   function updateCartErrors(error) {
-    const updatedCartErrors: CartErrors = { messages: [error, ...(cartErrors.messages || [])] }
+    console.log(error.toString())
+    const updatedCartErrors: CartErrors = { messages: [error.toString(), ...(cartErrors.messages || [])] }
     setCartErrors(updatedCartErrors)
   }
 
   async function addItem(input: Array<CartItemAddInput>): Promise<any> {
     try {
-      const updatedCart = await services.cart.addItem({ items: input, ...(cartToken ? { cartToken: cartToken } : {}) })
+      const updatedCart = await services.cart.addItem({ items: input, ...(cartToken ? { cart_token: cartToken } : {}) })
       updatedCart && setCart(updatedCart)
       !cartToken && setToken(updatedCart.token)
     } catch (error) {

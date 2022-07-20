@@ -67,8 +67,6 @@ function App() {
     cart.deleteItem({
       id: cart.data!.items![0].id
     })
-
-    console.log(cart.data)
   }
 
   return (
@@ -76,7 +74,7 @@ function App() {
       <button onClick={addItem}>Adicionar</button>
       <button onClick={updateItem}>Atualizar</button>
       <button onClick={deleteItem}>Deletar</button>
-      <button onClick={() => console.log(cart.data)}>Consultar</button>
+      <button onClick={() => console.log(cart.data, cart.errors)}>Consultar</button>
     </div>
   )
 }
