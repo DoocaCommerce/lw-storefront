@@ -3,12 +3,11 @@ import { UserQueries } from './UserQueries'
 import { LoginRespose, OptionsDoLogin, User } from './UserTypes'
 
 export class UserRepositoryGql {
-  static async doLogin(optionsDoLogin: OptionsDoLogin): Promise<User> {
-    const { fields, credentials } = optionsDoLogin
+  static async doLogin({ fields, credentials }: OptionsDoLogin): Promise<User> {
     const userQuery = new UserQueries(fields)
     const doLoginQuery: string = userQuery.doLogin()
     try {
-      const { login }: LoginRespose = await client.query(
+      const { login }: LoginRespose = await client.mutation(
         doLoginQuery,
         credentials && { credentials: { ...credentials } }
       )
