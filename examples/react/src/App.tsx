@@ -21,7 +21,8 @@ const {
   scripts,
   sections,
   settings,
-  showcase
+  showcase,
+  user
 } = services
 
 const get = async (id: string) => {
