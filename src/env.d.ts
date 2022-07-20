@@ -18,6 +18,7 @@ interface dc_config {
     settings?: any
     shop?: any
     showcase?: any
+    user?: any
   }
 }
 

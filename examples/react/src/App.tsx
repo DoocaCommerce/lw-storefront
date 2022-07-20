@@ -8,9 +8,22 @@ const components = {
 
 import { services } from 'lw-storefront/lib/core'
 
-
-const { apps, blogCategory, blogPost, brand, cart, category, landingPages, menu, pages, scripts, sections, settings, showcase } =
-  services
+const {
+  apps,
+  blogCategory,
+  blogPost,
+  brand,
+  cart,
+  category,
+  landingPages,
+  menu,
+  pages,
+  scripts,
+  sections,
+  settings,
+  showcase,
+  user
+} = services
 
 const get = async (id: string) => {
   const result = await settings.getSettings()
@@ -20,8 +33,8 @@ const get = async (id: string) => {
 function Header() {
   useEffect(() => {
     const get = async (id: string) => {
-      const result = await scripts.getScriptsByLocation('header')
-      console.log(result)
+      const result = await user.doLogin({ email: 'diovani.dooca@gmail.com', password: 'Teste123' })
+      console.log(`result ${id}`, result)
     }
     get('header')
   }, [])
