@@ -5,11 +5,16 @@ import { Cart, CartItemAddInput, CartItemDeleteInput, CartItemUpdateInput } from
 
 type CartMutation<T> = (input: T) => Promise<any>
 
+interface CartErrors {
+  messages?: Array<string>
+}
+
 interface CartHook {
   data: Cart
   addItem: CartMutation<Array<CartItemAddInput>>
   updateItem: CartMutation<CartItemUpdateInput>
   deleteItem: CartMutation<CartItemDeleteInput>
+  errors: CartErrors
 }
 
 const COOKIE_CART = '_dc_cart'
@@ -17,6 +22,7 @@ const COOKIE_CART = '_dc_cart'
 export function useCart(): CartHook {
   const [cart, setCart] = useState<Cart | {}>({})
   const [cartToken, setCartToken] = useState<string>('')
+  const [cartErrors, setCartErrors] = useState<CartErrors>({})
 
   function setToken(token: string) {
     if (token) {
@@ -35,12 +41,19 @@ export function useCart(): CartHook {
     eraseToken()
   }
 
+  function updateCartErrors(error) {
+    const updatedCartErrors: CartErrors = { messages: [error, ...(cartErrors.messages || [])] }
+    setCartErrors(updatedCartErrors)
+  }
+
   async function addItem(input: Array<CartItemAddInput>): Promise<any> {
     try {
       const updatedCart = await services.cart.addItem({ items: input, ...(cartToken ? { cartToken: cartToken } : {}) })
       updatedCart && setCart(updatedCart)
       !cartToken && setToken(updatedCart.token)
-    } catch (error) {}
+    } catch (error) {
+      updateCartErrors(error)
+    }
   }
 
   async function updateItem(input: CartItemUpdateInput): Promise<any> {
@@ -51,7 +64,9 @@ export function useCart(): CartHook {
         cartToken: cartToken
       })
       updatedCart && setCart(updatedCart)
-    } catch (error) {}
+    } catch (error) {
+      updateCartErrors(error)
+    }
   }
 
   async function deleteItem(input: CartItemDeleteInput): Promise<any> {
@@ -63,7 +78,9 @@ export function useCart(): CartHook {
       })
 
       !updatedCart.items ? sanitizeCart() : setCart(updatedCart)
-    } catch (error) {}
+    } catch (error) {
+      updateCartErrors(error)
+    }
   }
 
   async function getCart() {
@@ -73,6 +90,7 @@ export function useCart(): CartHook {
       setCart(result)
     } catch (error) {
       sanitizeCart()
+      updateCartErrors(error)
     }
   }
 
@@ -88,6 +106,7 @@ export function useCart(): CartHook {
     data: cart,
     addItem: addItem,
     updateItem: updateItem,
-    deleteItem: deleteItem
+    deleteItem: deleteItem,
+    errors: cartErrors
   }
 }
