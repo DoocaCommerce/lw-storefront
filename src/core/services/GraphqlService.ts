@@ -27,7 +27,7 @@ class GraphqlService {
 
       return data
     } catch (error) {
-      console.error(error)
+      throw new Error(error)
     }
   }
 
@@ -43,7 +43,6 @@ class GraphqlService {
     }
   }
 }
-
 const client = new GraphqlService(dc_config.api_url, dc_config.token, dc_config.domain)
 
 export { client }
