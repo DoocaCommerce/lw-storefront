@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettings, useSections, useCart } from 'lw-storefront/lib/react'
+import { useSettings, Sections, useSections, useApps } from 'lw-storefront/lib/react'
 import Html from './components/html'
 
 const components = {
@@ -42,40 +42,15 @@ function Header() {
 }
 
 function App() {
-  const cart = useCart()
-
-  function addItem() {
-    cart.addItem([
-      {
-        variation_id: 9467663,
-        quantity: 1
-      }
-    ])
-
-    console.log(cart.data)
-  }
-
-  function updateItem() {
-    cart.updateItem({
-      id: cart.data!.items![0].id,
-      quantity: 4
-    })
-
-    console.log(cart.data)
-  }
-
-  function deleteItem() {
-    cart.deleteItem({
-      id: cart.data!.items![0].id
-    })
-  }
+  const setting = useSettings()
+  const sections = useSections()
+  const apps = useApps({ id: '1041' }, ['slug'])
 
   return (
     <div className="App">
-      <button onClick={addItem}>Adicionar</button>
-      <button onClick={updateItem}>Atualizar</button>
-      <button onClick={deleteItem}>Deletar</button>
-      <button onClick={() => console.log(cart.data, cart.errors)}>Consultar</button>
+      <h1>Teste {setting && setting.contactEmail}</h1>
+      <h1>Apps {apps && apps.slug}</h1>
+      <Sections components={components} />
     </div>
   )
 }

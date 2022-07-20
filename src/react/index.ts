@@ -1,6 +1,7 @@
 export { useVariable } from './hooks/use-variables'
 export { useSettings } from './hooks/use-settings'
 export { useSections } from './hooks/use-sections'
+export { useApps } from './hooks/use-apps'
 export { useCart } from './hooks/use-cart'
 export { useShowcases } from './hooks/use-showcases'
 export { usePages } from './hooks/use-pages'
