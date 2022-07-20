@@ -1,6 +1,6 @@
 import { client } from '../../services/GraphqlService'
 import { UserQueries } from './UserQueries'
-import { LoginRespose, OptionsDoLogin, OptionsGetUser, User, UserResponse } from './UserTypes'
+import { LoginRespose, OptionsDoLogin, User } from './UserTypes'
 
 export class UserRepositoryGql {
   static async auth({ fields, credentials }: OptionsDoLogin): Promise<User> {
