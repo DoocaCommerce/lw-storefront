@@ -3,9 +3,9 @@ import { UserQueries } from './UserQueries'
 import { LoginRespose, OptionsDoLogin, OptionsGetUser, User, UserResponse } from './UserTypes'
 
 export class UserRepositoryGql {
-  static async doLogin({ fields, credentials }: OptionsDoLogin): Promise<User> {
+  static async auth({ fields, credentials }: OptionsDoLogin): Promise<User> {
     const userQuery = new UserQueries(fields)
-    const doLoginQuery: string = userQuery.doLogin()
+    const doLoginQuery: string = userQuery.auth()
     try {
       const { login }: LoginRespose = await client.mutation(
         doLoginQuery,
@@ -18,9 +18,9 @@ export class UserRepositoryGql {
     }
   }
 
-  static async getUser({ token, fields }: OptionsGetUser): Promise<User> {
+  static async get({ token, fields }: OptionsGetUser): Promise<User> {
     const userQuery = new UserQueries(fields)
-    const getUserQuery: string = userQuery.getUser()
+    const getUserQuery: string = userQuery.get()
     try {
       const { user }: UserResponse = await client.query(getUserQuery, { filter: { user_token: token } })
 

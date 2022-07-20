@@ -40,14 +40,14 @@ export class UserQueries {
     ]
   }
 
-  doLogin() {
+  auth() {
     return `mutation Login($credentials: Credentials) {
         login(credentials: $credentials) {
           ${this.getFields()}
         }
       }`
   }
-  getUser() {
+  get() {
     return `query User($filter: filterUser) {
         user(filter: $filter) {
           ${this.getFields()}

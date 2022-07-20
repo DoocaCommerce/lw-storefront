@@ -73,7 +73,7 @@ export class CartQueries {
 
   getCartQuery() {
     return `query Query($cartToken: String) {
-        cart(cartToken: $cartToken) {
+        cart(cart_token: $cartToken) {
           ${this.getFields()}
         }
       }`
@@ -81,7 +81,7 @@ export class CartQueries {
 
   addItemQuery() {
     return `mutation Mutation($cartToken: String, $items: [CartItemAddInput]) {
-        addItem(cartToken: $cartToken, items: $items) {
+        addItem(cart_token: $cartToken, items: $items) {
           ${this.getFields()}
         }
       }`
@@ -89,7 +89,7 @@ export class CartQueries {
 
   updateItemQuery() {
     return `mutation Mutation($cartToken: String!, $item: updateItemTypeInput) {
-        updateItem(cartToken: $cartToken, item: $item) {
+        updateItem(cart_token: $cartToken, item: $item) {
           ${this.getFields()}
         }
       }`
@@ -97,7 +97,7 @@ export class CartQueries {
 
   deleteItemQuery() {
     return `mutation DeleteItem($cartToken: String!, $item: deleteItemTypeInput) {
-        deleteItem(cartToken: $cartToken, item: $item) {
+        deleteItem(cart_token: $cartToken, item: $item) {
           ${this.getFields()}
         }
       }`
